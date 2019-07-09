@@ -13,28 +13,36 @@ use Illuminate\Http\Request;
 |
 */
 
-/**
-* Buyers
-*/
-Route::resource('buyers','Buyer\BuyerController', ['only' => ['index','show']]);
-/**
-* Categories
-*/
-Route::resource('categories','Category\CategoryController', ['except' => ['create','edit']]);
-/**
-* transaction
-*/
-Route::resource('product','Product\ProductController', ['only' => ['index','show']]);
-/**
-* transaction
-*/
-Route::resource('transactions','Transaction\TransactionController');
-/**
-* Seller
-*/
-Route::resource('sellers','Seller\SellerController', ['only' => ['index','show']]);
-/**
-* User
-*/
-Route::resource('users','User\UserController', ['except' => ['create','edit']]);
+Route::resource('users', 'User\UserController', ['except' => ['create', 'edit']]);
 
+Route::post('login', 'PassportController@login');
+Route::post('register', 'PassportController@register');
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('user', 'PassportController@details');
+
+
+    /**
+     * Buyers
+     */
+    Route::resource('buyers', 'Buyer\BuyerController', ['only' => ['index', 'show']]);
+    /**
+     * Categories
+     */
+    Route::resource('categories', 'Category\CategoryController', ['except' => ['create', 'edit']]);
+    /**
+     * transaction
+     */
+    Route::resource('product', 'Product\ProductController', ['only' => ['index', 'show']]);
+    /**
+     * transaction
+     */
+    Route::resource('transactions', 'Transaction\TransactionController');
+    /**
+     * Seller
+     */
+    Route::resource('sellers', 'Seller\SellerController', ['only' => ['index', 'show']]);
+    /**
+     * User
+     */
+});

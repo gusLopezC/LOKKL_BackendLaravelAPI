@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $usuarios = User::all();
 
-        return response()->json(['data' => $usuarios,200]);
+        return response()->json(['data' => $usuarios, 200]);
     }
 
     /**
@@ -40,21 +40,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6'
-        ];
-
-       $this->validate($request,$rules);
-
-        $datos = $request->all();
-         $datos['password'] = bcrypt($request->password);
-         $datos['verified'] = false;
-         $datos['verification_token'] = User::generarToken();
-        $usuario = User::create($datos);
-
-        return response()->json(['data' => $usuario,200]);
+       
     }
 
     /**
@@ -65,22 +51,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        
+
         $usuarios = User::findOrFail($id);
 
-        return response()->json(['data' => $usuarios,200]);
+        return response()->json(['data' => $usuarios, 200]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -91,7 +67,35 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $rules = [
+
+            'email' => 'email|unique:users,email' . $user->id,
+            'password' => 'min:6'
+        ];
+
+        $this->validate($request, $rules);
+
+        if ($request->has('name')) {
+            $user->name = $request->name;
+        }
+
+
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->password);
+        }
+
+
+        if (!$user->isDirty()) {
+            error_log('Some message here.');
+
+            return response()->json(['error' => 
+            'Se debe especificar un campo al menos para actualizar', 'code' =>422],422);
+        }
+        $user->save();
+
+        return response()->json(['data' => $user, 200]);
     }
 
     /**
@@ -103,5 +107,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        return response()->json(['data' => $user, 200]);
+
     }
 }
