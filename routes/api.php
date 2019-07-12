@@ -13,14 +13,20 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::resource('users', 'User\UserController', ['except' => ['create', 'edit']]);
-
+/**
+ * User
+ * Route::resource('users', 'User\UserController', ['except' => ['create', 'edit']]);
+ */
 Route::post('login', 'PassportController@login');
 Route::post('register', 'PassportController@register');
 
-Route::middleware('auth:api')->group(function () {
-    Route::get('user', 'PassportController@details');
 
+Route::middleware('auth:api')->group(function () {
+
+    Route::resource('users', 'PassportController');
+    // Route::get('users', 'PassportController@index');
+    // Route::put('users', 'PassportController@update');
+    // Route::delete('users', 'PassportController@update');
 
     /**
      * Buyers
@@ -42,7 +48,4 @@ Route::middleware('auth:api')->group(function () {
      * Seller
      */
     Route::resource('sellers', 'Seller\SellerController', ['only' => ['index', 'show']]);
-    /**
-     * User
-     */
 });
