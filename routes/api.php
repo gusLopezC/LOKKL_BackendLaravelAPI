@@ -23,11 +23,15 @@ Route::post('register', 'PassportController@register');
 
 Route::middleware('auth:api')->group(function () {
 
+    /**
+     * Users
+     */
     Route::resource('users', 'PassportController');
-    // Route::get('users', 'PassportController@index');
-    // Route::put('users', 'PassportController@update');
-    // Route::delete('users', 'PassportController@update');
 
+    /**
+     * Prospectos
+     */
+    Route::resource('prospectos', 'Prospectos\ProspectosGuideController');
     /**
      * Buyers
      */
