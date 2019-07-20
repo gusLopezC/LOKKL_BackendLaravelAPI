@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Administracion de usuarios</div>
 
                 <div class="card-body">
                     <table id="myTable" class="table">
@@ -12,21 +12,20 @@
                         <tr>
                             <td>Nombre</td>
                             <td>Email</td>
-                            <td>Edad</td>
-                            <td>Cuidad Tour</td>
-                            <td>Es guia</td>
+                            <td>Telefomo</td>
+                            <td>Role</td>
                             <td>Opciones</td>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($prospectos as $prospecto)
+                        @foreach ($usuarios as $usuario)
                         <tr>
-                            <td>{{$prospecto->name}}</td>
-                            <td>{{$prospecto->email}}</td>
-                            <td>{{$prospecto->edad}}</td>
-                            <td>{{$prospecto->cuidad_origin}}</td>
-                            <td>{{$prospecto->eres_guia}}</td>
-                            <td><a href="{{route('eliminarprospecto',$prospecto->id)}}"class="button is-danger"
+                            <td>{{$usuario->name}}</td>
+                            <td>{{$usuario->email}}</td>
+                            <td>{{$usuario->telefono}}</td>
+                            <td>{{$usuario->role}}</td>
+                           
+                            <td><a href="{{route('eliminarusuario',$usuario->id)}}"class="button is-danger"
                                 onclick="return confirm('Esta seguro que desea eliminar este registro');">Eliminar</a></td>
                     
                         </tr>

@@ -27,7 +27,7 @@ Route::middleware('auth:api')->group(function () {
      * Users
      */
     Route::resource('users', 'PassportController');
-
+    Route::post('users/perfil/foto', 'PassportController@updatePhoto')->name('users.updatePhoto');
     /**
      * Prospectos
      */

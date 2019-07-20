@@ -22,8 +22,9 @@ class PassportController extends Controller
         $datos = $request->all();
         $datos['password'] = bcrypt($request->password);
         $datos['verified'] = false;
+        $datos['img'] = 'avatar3.png';
         $datos['verification_token'] = User::generarToken();
- 
+
         $usuario = User::create($datos);
 
 
@@ -55,7 +56,7 @@ class PassportController extends Controller
     {
         $usuarios = User::all();
 
-        return response()->json(['data' => $usuarios, 200]);
+        return view('usuarios.verusuarios', compact('usuarios'));
     }
 
     public function show($id)
@@ -92,7 +93,7 @@ class PassportController extends Controller
         $user->telephone = $request->telephone;
         $user->infopersonal = $request->infopersonal;
         $user->email = $request->email;
-        
+
         if (!$user->isDirty()) {
 
             return response()->json(['error' =>
@@ -101,9 +102,31 @@ class PassportController extends Controller
         $user->save();
 
         $token = auth()->user()->createToken('dadirugesedevalclkkol')->accessToken;
-        return response()->json(['token' => $token,'user' => $user, 200]);
+        return response()->json(['token' => $token, 'user' => $user, 200]);
     }
 
+    public function updatePhoto(Request $request)
+    {
+
+        $this->validate($request, [
+            'photo' => 'required|image'
+        ]);
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $name = time() . $file->getClientOriginalName();
+            $file->move(public_path() . '/images/profile', $name);
+        }
+
+        // Image::make($file)->fit(144, 144)->save($path);
+
+        $user = auth()->user();
+        $user->img = $name;
+        $user->save();
+
+        $token = auth()->user()->createToken('dadirugesedevalclkkol')->accessToken;
+        return response()->json(['token' => $token, 'user' => $user, 200]);
+    }
 
     /**
      * Remove the specified resource from storage.

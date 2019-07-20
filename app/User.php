@@ -17,15 +17,15 @@ class User extends Authenticatable
      *
      * @var array
      */
-    
-     const USUARIO_VERIFICADO = true;
+
+    const USUARIO_VERIFICADO = true;
 
 
     protected $table = 'users';
 
     protected $fillable = [
-        'name', 'email', 'password','img','infopersonal','telephone',
-        'verified', 'verification_token','role'
+        'name', 'email', 'password', 'img', 'infopersonal', 'telephone',
+        'verified', 'verification_token', 'role'
     ];
 
     /**
@@ -34,7 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','verification_token'
+        'password', 'remember_token', 'verification_token'
     ];
 
     /**
@@ -46,11 +46,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function esVerificado(){
+    public function esVerificado()
+    {
         return $this->verified == User::USUARIO_VERIFICADO;
     }
 
-    public static function generarToken(){
+    public static function generarToken()
+    {
         return str_random(40);
+    }
+    public function getAvatarUrl()
+    {
+        if ($this->photo_extension)
+            return asset('images/users/' . $this->id . '.' . $this->photo_extension);
+
+        return asset('images/users/default.jpg');
     }
 }

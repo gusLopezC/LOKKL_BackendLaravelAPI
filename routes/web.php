@@ -18,4 +18,10 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::get('/prospectos', 'Prospectos\ProspectosGuideController@index')->name('prospectos');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/usuarios', 'PassportController@index')->name('usuarios');
+Route::get('/usuarios/{post}/delete', 'PassportController@destroy')->name('eliminarusuario')->middleware('auth');     //DELETE
+
+
+Route::get('/prospectos', 'Prospectos\ProspectosGuideController@index')->middleware('auth');
+Route::get('/prospectos/{post}/delete', 'Prospectos\ProspectosGuideController@destroy')->name('eliminarprospecto')->middleware('auth');     //DELETE

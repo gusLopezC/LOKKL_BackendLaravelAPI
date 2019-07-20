@@ -58,6 +58,6 @@ class ProspectosGuideController extends Controller
 
         $prospecto->delete();
 
-        return response()->json(['data' => $prospecto, 200]);
+        return redirect('/prospectos');
     }
 }
