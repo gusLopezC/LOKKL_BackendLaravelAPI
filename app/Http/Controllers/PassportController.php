@@ -46,7 +46,6 @@ class PassportController extends Controller
             $token = auth()->user()->createToken('dadirugesedevalclkkol')->accessToken;
             return response()->json(['token' => $token, 'user' => auth()->user()], 200);
         } else {
-            error_log('Some message here.');
             return response()->json(['error' => 'UnAuthorised'], 401);
         }
     }
@@ -136,11 +135,13 @@ class PassportController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $user = User::findOrFail($id);
 
-        $user->delete();
-
-        return response()->json(['data' => $user, 200]);
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return response()->json(['data' => $user, 200]);
+        } catch (PDOException $e) {
+            return 'existe un error' + $e;
+        }
     }
 }

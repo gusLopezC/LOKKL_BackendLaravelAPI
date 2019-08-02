@@ -14,19 +14,19 @@
                             <td>Email</td>
                             <td>Edad</td>
                             <td>Cuidad Tour</td>
-                            <td>Es guia</td>
-                            <td>Opciones</td>
+                            <td>Archivos de verificación</td>
+                            <td>Fecha registro</td>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($prospectos as $prospecto)
                         <tr>
-                            <td>{{$prospecto->name}}</td>
+                            <td><a href="{{route('detallesprospecto',$prospecto->id)}}">{{$prospecto->name}}</a></td>
                             <td>{{$prospecto->email}}</td>
                             <td>{{$prospecto->edad}}</td>
                             <td>{{$prospecto->cuidad_origin}}</td>
-                            <td>{{$prospecto->eres_guia}}</td>
-                            <td><a href="{{route('eliminarprospecto',$prospecto->id)}}"class="button is-danger"
+                            <td>{{$prospecto->created_at}}</td>
+                            <td><a href="{{route('eliminarprospecto',$prospecto->id)}}" class="button is-danger"
                                 onclick="return confirm('Esta seguro que desea eliminar este registro');">Eliminar</a></td>
                     
                         </tr>

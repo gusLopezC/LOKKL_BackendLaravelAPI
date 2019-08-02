@@ -24,4 +24,6 @@ Route::get('/usuarios/{post}/delete', 'PassportController@destroy')->name('elimi
 
 
 Route::get('/prospectos', 'Prospectos\ProspectosGuideController@index')->middleware('auth');
+Route::get('/prospectos/{id}', 'Prospectos\ProspectosGuideController@show')->name('detallesprospecto')->middleware('auth');
+
 Route::get('/prospectos/{post}/delete', 'Prospectos\ProspectosGuideController@destroy')->name('eliminarprospecto')->middleware('auth');     //DELETE

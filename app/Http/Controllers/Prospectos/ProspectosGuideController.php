@@ -16,7 +16,7 @@ class ProspectosGuideController extends Controller
     {
         $prospectos = ProspectosGuide::all();
         //return $prospecto;
-        return view('prospectos', compact('prospectos'));
+        return view('prospectos.verprospectos', compact('prospectos'));
     }
 
 
@@ -24,14 +24,17 @@ class ProspectosGuideController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
         ];$this->validate($request,$rules);
 
-        $data = $request->all();
+        $waypoints = implode(",", $request->idiomas);
 
+
+        $data = $request->all();
+        $data['idiomas'] = $waypoints;
         $prospecto = ProspectosGuide::create($data);
 
-        return response()->json(['data'=> $prospecto],201);
+         return response()->json(['data'=> $prospecto],201);
     }
 
     /**
@@ -43,7 +46,8 @@ class ProspectosGuideController extends Controller
     public function show($id)
     {
         $prospecto = ProspectosGuide::findOrFail($id);
-        return response()->json(['data'=> $prospecto],201);
+       
+        return view('prospectos.detallesprospecto', compact('prospecto'));
 
     }   
     /**
