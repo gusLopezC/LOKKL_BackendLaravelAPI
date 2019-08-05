@@ -67,13 +67,11 @@
                     <div class="col-12">
                         <h2>Documentación:</h2>
                     </div>
-                    <div-col-sm-4></div-col-sm-4>
-                    <div-col-sm-4></div-col-sm-4>
-                    <div-col-sm-4></div-col-sm-4>
-
-                    <button type="submit" class="btn btn-success">Validar prospecto</button>
-                    <button type="submit" class="btn btn-warning">Solicitar documentos</button>
-                    <button type="submit" class="btn btn-danger">Negar solicitud</button>
+                    <div-col-sm-4> <button type="submit" class="btn btn-success">Validar prospecto</button>
+                    </div-col-sm-4>
+                    <div-col-sm-4> <button type="submit" class="btn btn-warning">Solicitar documentos</button>
+                    </div-col-sm-4>
+                    <div-col-sm-4> <button type="submit" class="btn btn-danger">Negar solicitud</button></div-col-sm-4>
                 </div>
             </div>
         </div>
