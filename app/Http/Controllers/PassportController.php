@@ -35,6 +35,44 @@ class PassportController extends Controller
             'token' => $token, 200
         ]);
     }
+
+    public function LoginGoogle(Request $request)
+    {
+        // error_log($request->email);
+
+        // $user = User::findOrFail($request->email);
+
+        // return $user;
+
+
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+
+        ];
+
+        $this->validate($request, $rules);
+
+        $datos = $request->all();
+        $datos['password'] = ':D';
+        $datos['role'] = 'USER_ROLE';
+        $datos['verified'] = false;
+        $datos['img'] = $request->photoUrl;
+        $datos['verification_token'] = User::generarToken();
+
+        $usuario = User::create($datos);
+
+
+        $token = $usuario->createToken('dadirugesedevalclkkol')->accessToken;
+
+        return response()->json([
+            'data' => $usuario,
+            'token' => $token, 200
+        ]);
+    }
+
+
+
     public function login(Request $request)
     {
         $credentials = [
@@ -49,6 +87,9 @@ class PassportController extends Controller
             return response()->json(['error' => 'UnAuthorised'], 401);
         }
     }
+
+
+
 
 
     public function index()

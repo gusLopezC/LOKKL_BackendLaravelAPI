@@ -19,6 +19,8 @@ use Illuminate\Http\Request;
  */
 Route::post('login', 'PassportController@login');
 Route::post('register', 'PassportController@register');
+Route::post('LoginGoogle', 'PassportController@LoginGoogle');
+
 
 
 Route::middleware('auth:api')->group(function () {
