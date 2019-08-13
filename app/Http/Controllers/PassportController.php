@@ -7,10 +7,9 @@ use App\User;
 
 class PassportController extends Controller
 {
-
-    public function __construct()
+    public function prueba(Request $request)
     {
-        $this->middleware(['auth','verified']);
+        return 'Hola Welcome';
     }
 
     public function register(Request $request)
@@ -40,45 +39,46 @@ class PassportController extends Controller
         ]);
     }
 
-    public function LoginGoogle(Request $request)
-    {
-        // error_log($request->email);
+    // public function LoginGoogle(Request $request)
+    // {
+    //     // error_log($request->email);
 
-        // $user = User::findOrFail($request->email);
+    //     // $user = User::findOrFail($request->email);
 
-        // return $user;
-
-
-        $rules = [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-
-        ];
-
-        $this->validate($request, $rules);
-
-        $datos = $request->all();
-        $datos['password'] = ':D';
-        $datos['role'] = 'USER_ROLE';
-        $datos['verified'] = false;
-        $datos['img'] = $request->photoUrl;
-        $datos['verification_token'] = User::generarToken();
-
-        $usuario = User::create($datos);
+    //     // return $user;
 
 
-        $token = $usuario->createToken('dadirugesedevalclkkol')->accessToken;
+    //     $rules = [
+    //         'name' => 'required',
+    //         'email' => 'required|email|unique:users',
 
-        return response()->json([
-            'data' => $usuario,
-            'token' => $token, 200
-        ]);
-    }
+    //     ];
+
+    //     $this->validate($request, $rules);
+
+    //     $datos = $request->all();
+    //     $datos['password'] = ':D';
+    //     $datos['role'] = 'USER_ROLE';
+    //     $datos['verified'] = false;
+    //     $datos['img'] = $request->photoUrl;
+    //     $datos['verification_token'] = User::generarToken();
+
+    //     $usuario = User::create($datos);
+
+
+    //     $token = $usuario->createToken('dadirugesedevalclkkol')->accessToken;
+
+    //     return response()->json([
+    //         'data' => $usuario,
+    //         'token' => $token, 200
+    //     ]);
+    // }
 
 
 
     public function login(Request $request)
     {
+
         $credentials = [
             'email' => $request->email,
             'password' => $request->password
@@ -88,7 +88,7 @@ class PassportController extends Controller
             $token = auth()->user()->createToken('dadirugesedevalclkkol')->accessToken;
             return response()->json(['token' => $token, 'user' => auth()->user()], 200);
         } else {
-            return response()->json(['error' => 'UnAuthorised'], 401);
+            return response()->json(['error' => 'UnAuthorised :('], 401);
         }
     }
 

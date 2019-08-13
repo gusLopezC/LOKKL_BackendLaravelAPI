@@ -26,6 +26,14 @@ class CreateProspectosGuidesTable extends Migration
             $table->string('idiomas');
             $table->string('certificacion_idiomas');
             $table->string('comonosconociste');
+
+
+            $table->string('document_identificacion');
+            $table->string('document_comprobantedomicilio');
+            $table->string('document_cedulafiscal');
+            $table->string('document_certificacion');
+            $table->string('document_CV');
+            
             $table->unsignedBigInteger('user_id')->unsigned();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

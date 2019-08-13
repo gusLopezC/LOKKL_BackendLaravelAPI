@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
  * User
  * Route::resource('users', 'User\UserController', ['except' => ['create', 'edit']]);
  */
+Route::get('prueba', 'PassportController@prueba');
 Route::post('login', 'PassportController@login');
 Route::post('register', 'PassportController@register');
 Route::post('LoginGoogle', 'PassportController@LoginGoogle');
