@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 
-Route::auth();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/usuarios', 'PassportController@index')->name('usuarios');

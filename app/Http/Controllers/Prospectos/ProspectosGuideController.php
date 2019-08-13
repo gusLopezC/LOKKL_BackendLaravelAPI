@@ -64,4 +64,28 @@ class ProspectosGuideController extends Controller
 
         return redirect('/prospectos');
     }
+
+    public function updateDocument(Request $request)
+    {
+        eror_log($request);
+        // $this->validate($request, [
+        //     'photo' => 'required|image'
+        // ]);
+        
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $name = time() . $file->getClientOriginalName();
+            $file->move(public_path() . '/images/documents', $name);
+        }
+
+        // Image::make($file)->fit(144, 144)->save($path);
+
+        $user = auth()->user();
+        $user->img = $name;
+        $user->save();
+
+        $token = auth()->user()->createToken('dadirugesedevalclkkol')->accessToken;
+        return response()->json(['token' => $token, 'user' => $user, 200]);
+    }
 }

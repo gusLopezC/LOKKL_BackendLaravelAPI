@@ -8,6 +8,10 @@ use App\User;
 class PassportController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+    }
 
     public function register(Request $request)
     {
@@ -147,10 +151,7 @@ class PassportController extends Controller
 
     public function updatePhoto(Request $request)
     {
-
-        $this->validate($request, [
-            'photo' => 'required|image'
-        ]);
+        // eror_log($request);
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
