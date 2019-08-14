@@ -67,11 +67,60 @@
                     <div class="col-12">
                         <h2>Documentación:</h2>
                     </div>
-                    <div-col-sm-4> <button type="submit" class="btn btn-success">Validar prospecto</button>
-                    </div-col-sm-4>
-                    <div-col-sm-4> <button type="submit" class="btn btn-warning">Solicitar documentos</button>
-                    </div-col-sm-4>
-                    <div-col-sm-4> <button type="submit" class="btn btn-danger">Negar solicitud</button></div-col-sm-4>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <a class="test-popup-link"
+                                href="{{asset('/images/documents/')}}/{{$prospecto->document_identificacion}}">
+                                <img class="img-responsive"
+                                    src=" {{asset('/images/documents/')}}/{{$prospecto->document_identificacion}}"
+                                    alt="">
+                            </a>
+                        </div>
+                        <div class="col-sm-4">
+                            <a class="test-popup-link"
+                                href="{{asset('/images/documents/')}}/{{$prospecto->document_comprobantedomicilio}}">
+
+                                <img class="img-responsive"
+                                    src=" {{asset('/images/documents/')}}/{{$prospecto->document_comprobantedomicilio}}"
+                                    alt="">
+                            </a>
+                        </div>
+                        <div class="col-sm-4">
+                            <a class="test-popup-link"
+                                href="{{asset('/images/documents/')}}/{{$prospecto->document_cedulafiscal}}">
+                                <img class="img-responsive"
+                                    src=" {{asset('/images/documents/')}}/{{$prospecto->document_cedulafiscal}}" alt="">
+                            </a>
+                        </div>
+                        <div class="col-sm-4">
+                            <a class="test-popup-link"
+                                href="{{asset('/images/documents/')}}/{{$prospecto->document_certificacion}}">
+                                <img class="img-responsive"
+                                    src=" {{asset('/images/documents/')}}/{{$prospecto->document_certificacion}}"
+                                    alt="">
+                            </a>
+                        </div>
+                        <div class="col-sm-4">
+                            <a class="test-popup-link"
+                                href="{{asset('/images/documents/')}}/{{$prospecto->document_CV}}">
+                                <img class="img-responsive"
+                                    src=" {{asset('/images/documents/')}}/{{$prospecto->document_CV}}" alt="">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row botonesprospectos">
+                        <div class="col-sm-4"> <button type="submit" class="btn btn-success" style="width: 90%;">Validar
+                                prospecto</button>
+                        </div>
+                        <div class="col-sm-4"> <button type="submit" class="btn btn-warning"
+                                style="width: 90%;">Solicitar documentos</button>
+                        </div>
+                        <div class="col-sm-4"> <button type="submit" class="btn btn-danger" style="width: 90%;">Negar
+                                solicitud</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -79,5 +128,6 @@
 </div>
 @endsection
 @push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
 @endpush

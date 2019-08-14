@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Prospectos;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ProspectosGuide;
+use App\User;
+
 class ProspectosGuideController extends Controller
 {
     /**
@@ -24,8 +26,9 @@ class ProspectosGuideController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'email' => 'required|email',
-        ];$this->validate($request,$rules);
+            'email' => 'required|email|unique:prospectos_guides',
+        ];
+        $this->validate($request, $rules);
 
         $waypoints = implode(",", $request->idiomas);
 
@@ -34,7 +37,7 @@ class ProspectosGuideController extends Controller
         $data['idiomas'] = $waypoints;
         $prospecto = ProspectosGuide::create($data);
 
-         return response()->json(['data'=> $prospecto],201);
+        return response()->json(['data' => $prospecto], 201);
     }
 
     /**
@@ -46,10 +49,9 @@ class ProspectosGuideController extends Controller
     public function show($id)
     {
         $prospecto = ProspectosGuide::findOrFail($id);
-       
-        return view('prospectos.detallesprospecto', compact('prospecto'));
 
-    }   
+        return view('prospectos.detallesprospecto', compact('prospecto'));
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -67,25 +69,27 @@ class ProspectosGuideController extends Controller
 
     public function updateDocument(Request $request)
     {
-        eror_log($request);
-        // $this->validate($request, [
-        //     'photo' => 'required|image'
-        // ]);
-        
+        $campo= $request->campo;
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-            $name = time() . $file->getClientOriginalName();
+
+            $name = $campo. time() . $file->getClientOriginalName();
+
+
             $file->move(public_path() . '/images/documents', $name);
         }
 
-        // Image::make($file)->fit(144, 144)->save($path);
+       
+        //Image::make($file)->fit(144, 144)->save($path);
 
         $user = auth()->user();
-        $user->img = $name;
-        $user->save();
+        $prospecto = ProspectosGuide::where('user_id', $user->id)->first();
+        $prospecto->$campo = $name;
+        $prospecto->save();
+
 
         $token = auth()->user()->createToken('dadirugesedevalclkkol')->accessToken;
-        return response()->json(['token' => $token, 'user' => $user, 200]);
+        return response()->json(['token' => $token, 'user' => '$prospecto', 200]);
     }
 }
