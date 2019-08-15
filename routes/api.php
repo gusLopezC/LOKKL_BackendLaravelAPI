@@ -23,7 +23,6 @@ Route::post('register', 'PassportController@register');
 Route::post('LoginGoogle', 'PassportController@LoginGoogle');
 
 
-
 Route::middleware('auth:api')->group(function () {
 
     /**
@@ -31,6 +30,7 @@ Route::middleware('auth:api')->group(function () {
      */
     Route::resource('users', 'PassportController');
     Route::post('users/perfil/foto', 'PassportController@updatePhoto')->name('users.updatePhoto');
+    
     /**
      * Prospectos
      */
@@ -58,3 +58,13 @@ Route::middleware('auth:api')->group(function () {
      */
     Route::resource('sellers', 'Seller\SellerController', ['only' => ['index', 'show']]);
 });
+
+     /**
+     * Users
+     */
+
+     Route::resource('emails', 'Mail\EmailController');
+     Route::post('emailContacto', 'Mail\EmailController@EmailContact');
+     Route::get('/send/email', 'HomeController@mail');
+     Route::get('users/verify/{token}', 'PassportController@verify')->name('users.verify');
+     Route::get('users/{user}/resend', 'PassportController@resend')->name('users.resend');

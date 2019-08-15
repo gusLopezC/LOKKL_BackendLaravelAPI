@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\User;
+use App\Mail\UserCreated;
+
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PassportController extends Controller
 {
@@ -100,7 +105,8 @@ class PassportController extends Controller
     {
         $usuarios = User::all();
 
-        return view('usuarios.verusuarios', compact('usuarios'));
+        //return view('usuarios.verusuarios', compact('usuarios'));
+        return response()->json(['data' => $usuarios, 200]);
     }
 
     public function show($id)
@@ -185,5 +191,29 @@ class PassportController extends Controller
         } catch (PDOException $e) {
             return 'existe un error' + $e;
         }
+    }
+    public function verify($token)
+    {
+    
+        $user= User::where('verification_token',$token)->firstOrFail();
+
+    $user->verified = 1;
+    $user->verification_token = null;
+
+    $user->save();
+
+    return redirect()->away('https://www.lokkl.com/#/users/profile');
+    }
+
+    public function resend(User $user)
+    {
+    
+     if($user->verified == '1'){
+        return response()->json(['mensaje' => 'Este usuario ya a sido verifcado', 409]);
+     }  
+
+     Mail::to($user)->send(new UserCreated($user));
+
+     return redirect()->away('https://www.lokkl.com/#/users/profile');
     }
 }
