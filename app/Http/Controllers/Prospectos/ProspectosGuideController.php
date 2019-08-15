@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Prospectos;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\ProspectoAcept;
+
 use App\ProspectosGuide;
 use App\User;
+use Mail;
+use Illuminate\Http\Request;
 
 class ProspectosGuideController extends Controller
 {
@@ -21,7 +24,6 @@ class ProspectosGuideController extends Controller
         return view('prospectos.verprospectos', compact('prospectos'));
     }
 
-
     public function store(Request $request)
     {
         $rules = [
@@ -31,7 +33,6 @@ class ProspectosGuideController extends Controller
         $this->validate($request, $rules);
 
         $waypoints = implode(",", $request->idiomas);
-
 
         $data = $request->all();
         $data['idiomas'] = $waypoints;
@@ -69,18 +70,16 @@ class ProspectosGuideController extends Controller
 
     public function updateDocument(Request $request)
     {
-        $campo= $request->campo;
+        $campo = $request->campo;
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
 
-            $name = $campo. time() . $file->getClientOriginalName();
-
+            $name = $campo . time() . $file->getClientOriginalName();
 
             $file->move(public_path() . '/images/documents', $name);
         }
 
-       
         //Image::make($file)->fit(144, 144)->save($path);
 
         $user = auth()->user();
@@ -88,8 +87,26 @@ class ProspectosGuideController extends Controller
         $prospecto->$campo = $name;
         $prospecto->save();
 
-
         $token = auth()->user()->createToken('dadirugesedevalclkkol')->accessToken;
         return response()->json(['token' => $token, 'user' => '$prospecto', 200]);
+    }
+
+    /* ========================
+    Metodo para solicitar documentos esta en MailController
+    ======================== */
+/**
+ * Este  Metodo manda un correo al prospecto diciendole que a sido aceptado
+ * cambiamos el role del usuario a GUIDE_VERIFIED para que pueda comenzar a crear tours
+ * y ademas registrarlo en la table de guias
+ */
+    public function AceptarProspecto($prospectos)
+    {
+
+        $prospectos = ProspectosGuide::findOrFail($prospectos);
+
+        Mail::to($prospectos->email)->send(new ProspectoAcept($prospectos));
+
+        return 'Email enviado';
+
     }
 }

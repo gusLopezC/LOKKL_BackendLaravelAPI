@@ -30,6 +30,7 @@ Route::middleware('auth:api')->group(function () {
      */
     Route::resource('users', 'PassportController');
     Route::post('users/perfil/foto', 'PassportController@updatePhoto')->name('users.updatePhoto');
+    Route::post('users/perfil/changepassword', 'PassportController@changePassword')->name('users.changePassword');
     
     /**
      * Prospectos

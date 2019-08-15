@@ -110,14 +110,22 @@
                     </div>
 
                     <div class="row botonesprospectos">
-                        <div class="col-sm-4"> <button type="submit" class="btn btn-success" style="width: 90%;">Validar
-                                prospecto</button>
+                        <div class="col-sm-4">
+                            <a href="{{route('aceptarProspecto',$prospecto)}}">
+                                <button type="submit" class="btn btn-success" style="width: 90%;">Validar
+                                    prospecto</button></a>
                         </div>
-                        <div class="col-sm-4"> <button type="submit" class="btn btn-warning"
-                                style="width: 90%;">Solicitar documentos</button>
+                        <div class="col-sm-4">
+                            <a href="{{route('solicitarDocumentos',$prospecto)}}">
+                                <button type="submit" class="btn btn-warning" style="width: 90%;">Solicitar
+                                    documentos</button>
+                            </a>
                         </div>
-                        <div class="col-sm-4"> <button type="submit" class="btn btn-danger" style="width: 90%;">Negar
-                                solicitud</button>
+                        <div class="col-sm-4">
+                            <a href="{{route('solicitarDocumentos',$prospecto)}}"> <button type="submit"
+                                    class="btn btn-danger" style="width: 90%;">Negar
+                                    solicitud</button>
+                            </a>
                         </div>
                     </div>
 

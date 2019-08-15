@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
-use App\User;
 use App\Mail\UserCreated;
-
-
+use App\User;
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -22,7 +20,7 @@ class PassportController extends Controller
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
         ];
 
         $this->validate($request, $rules);
@@ -35,12 +33,11 @@ class PassportController extends Controller
 
         $usuario = User::create($datos);
 
-
         $token = $usuario->createToken('dadirugesedevalclkkol')->accessToken;
 
         return response()->json([
             'data' => $usuario,
-            'token' => $token, 200
+            'token' => $token, 200,
         ]);
     }
 
@@ -51,7 +48,6 @@ class PassportController extends Controller
     //     // $user = User::findOrFail($request->email);
 
     //     // return $user;
-
 
     //     $rules = [
     //         'name' => 'required',
@@ -70,7 +66,6 @@ class PassportController extends Controller
 
     //     $usuario = User::create($datos);
 
-
     //     $token = $usuario->createToken('dadirugesedevalclkkol')->accessToken;
 
     //     return response()->json([
@@ -79,14 +74,12 @@ class PassportController extends Controller
     //     ]);
     // }
 
-
-
     public function login(Request $request)
     {
 
         $credentials = [
             'email' => $request->email,
-            'password' => $request->password
+            'password' => $request->password,
         ];
 
         if (auth()->attempt($credentials)) {
@@ -96,10 +89,6 @@ class PassportController extends Controller
             return response()->json(['error' => 'UnAuthorised :('], 401);
         }
     }
-
-
-
-
 
     public function index()
     {
@@ -117,7 +106,6 @@ class PassportController extends Controller
         return response()->json(['data' => $usuarios, 200]);
     }
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -133,9 +121,8 @@ class PassportController extends Controller
         $rules = [
 
             'email' => 'email',
-            'password' => 'min:6'
+            'password' => 'min:6',
         ];
-
 
         $this->validate($request, $rules);
 
@@ -147,7 +134,7 @@ class PassportController extends Controller
         if (!$user->isDirty()) {
 
             return response()->json(['error' =>
-            'Se debe especificar un campo al menos para actualizar', 'code' => 422], 422);
+                'Se debe especificar un campo al menos para actualizar', 'code' => 422], 422);
         }
         $user->save();
 
@@ -189,31 +176,59 @@ class PassportController extends Controller
             $user->delete();
             return response()->json(['data' => $user, 200]);
         } catch (PDOException $e) {
-            return 'existe un error' + $e;
+            return 'existe un error'+$e;
         }
     }
     public function verify($token)
     {
-    
-        $user= User::where('verification_token',$token)->firstOrFail();
 
-    $user->verified = 1;
-    $user->verification_token = null;
+        $user = User::where('verification_token', $token)->firstOrFail();
 
-    $user->save();
+        $user->verified = 1;
+        $user->verification_token = null;
 
-    return redirect()->away('https://www.lokkl.com/#/users/profile');
+        $user->save();
+
+        return redirect()->away('https://www.lokkl.com/#/users/profile');
     }
 
     public function resend(User $user)
     {
-    
-     if($user->verified == '1'){
-        return response()->json(['mensaje' => 'Este usuario ya a sido verifcado', 409]);
-     }  
 
-     Mail::to($user)->send(new UserCreated($user));
+        if ($user->verified == '1') {
+            return response()->json(['mensaje' => 'Este usuario ya a sido verifcado', 409]);
+        }
 
-     return redirect()->away('https://www.lokkl.com/#/users/profile');
+        Mail::to($user)->send(new UserCreated($user));
+
+        return redirect()->away('https://www.lokkl.com/#/users/profile');
+    }
+
+    public function changePassword(Request $request)
+    {
+        error_log($request);
+        $request->validate = [
+            'password' => 'required',
+            'new_password' => 'required|string|min:6|different:password',
+        ];
+
+        error_log($request->password);
+        error_log(auth()->user()->password);
+
+        if (Hash::check($request->password, auth()->user()->password) == false) {
+            error_log($request->password);
+            error_log(auth()->user()->password);
+
+            return response(['message' => 'Unauthorized Fail'], 401);
+        }
+
+        $user = auth()->user();
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return response([
+            'message' => 'Your password has been updated successfully.',
+        ], 200);
+
     }
 }
