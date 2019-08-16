@@ -6,6 +6,7 @@
         @endcomponent
     @endslot
 
+  
     {{-- Body --}}
     {{ $slot }}
 
@@ -21,7 +22,6 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-        <img src="https://img.icons8.com/office/16/000000/facebook-new.png" alt="" width="120px">
             © {{ date('Y') }} {{ config('app.name') }}. @lang('All rights reserved.')
             Si no deseas recibir más correos, puedes modificar tus preferencias unsubscribe .
         @endcomponent

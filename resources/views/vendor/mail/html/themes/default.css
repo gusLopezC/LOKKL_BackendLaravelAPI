@@ -74,7 +74,7 @@ p {
 }
 
 p.sub {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 img {
@@ -154,7 +154,7 @@ img {
 }
 
 .subcopy p {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 
@@ -172,7 +172,7 @@ img {
 
 .footer p {
     color: #aeaeae;
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
 }
 
@@ -195,7 +195,7 @@ img {
 
 .table td {
     color: #74787e;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 18px;
     padding: 10px 0;
     margin: 0;
@@ -229,11 +229,14 @@ img {
 
 .button-blue,
 .button-primary {
-    background-color: #3490dc;
-    border-top: 10px solid #3490dc;
-    border-right: 18px solid #3490dc;
-    border-bottom: 10px solid #3490dc;
-    border-left: 18px solid #3490dc;
+    background-color: #004EA2;
+    border-top: 10px solid #004EA2;
+    border-right: 18px solid #004EA2;
+    border-bottom: 10px solid #004EA2;
+    border-left: 18px solid #004EA2;
+    width: 100%;
+    text-align: center;
+    font-size: 19px;
 }
 
 .button-green,
@@ -298,4 +301,9 @@ img {
 .promotion p {
     font-size: 15px;
     text-align: center;
+}
+
+.iconologo {
+    position: relative;
+    border-radius: 50%;
 }

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\ProspectosGuide;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -11,14 +12,17 @@ class ProspectoAcept extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $prospectos;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ProspectosGuide $prospectos)
     {
-        //
+        $this->prospectos = $prospectos;
+
     }
 
     /**
@@ -28,6 +32,7 @@ class ProspectoAcept extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.aceptProspecto')->subject('Texto para llamar la atencion');
+
+         return $this->markdown('emails.aceptProspecto')->subject('Welcome to LOKKL guides');
     }
 }
