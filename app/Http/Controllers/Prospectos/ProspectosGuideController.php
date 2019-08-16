@@ -104,9 +104,13 @@ class ProspectosGuideController extends Controller
 
         $prospectos = ProspectosGuide::findOrFail($prospectos);
 
-        Mail::to($prospectos->email)->send(new ProspectoAcept($prospectos));
+        $user = auth()->user();
+        $user->role = 'GUIDE_VERIFIQUED';
+        $user->save();
 
-        return 'Email enviado';
+       Mail::to($prospectos->email)->send(new ProspectoAcept($prospectos));
+
+      return 'Email enviado';
 
     }
 }

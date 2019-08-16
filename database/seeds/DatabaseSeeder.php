@@ -37,13 +37,13 @@ class DatabaseSeeder extends Seeder
         factory(User::class, $cantidadUsuarios)->create();
         factory(Category::class, $cantidadCategorias)->create();
 
-        factory(Product::class, $cantidadCategorias)->create()->each(
-            function($producto){
-                $categorias = Category::all()->random(mt_rand(1,5))->pluck('id');
+        // factory(Product::class, $cantidadCategorias)->create()->each(
+        //     function($producto){
+        //         $categorias = Category::all()->random(mt_rand(1,5))->pluck('id');
             
-                $producto-> categories()->attach($categorias->first());
-            }
-        );
+        //         $producto-> categories()->attach($categorias->first());
+        //     }
+        // );
 
        factory(Transaction::class, $cantidadTransacciones)->create();
 

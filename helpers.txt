@@ -1,0 +1,13 @@
+#Correr despues de hacer migraciones
+
+php artisan passport:install
+php artisan passport:client --personal 
+= lokkl
+
+
+
+#limpiar cache
+php artisan cache:clear
+php artisan route:cache 
+php artisan config:clear 
+php artisan view:clear 
