@@ -136,7 +136,6 @@ class PassportController extends Controller
         $rules = [
 
             'email' => 'email',
-            'password' => 'min:6',
         ];
 
         $this->validate($request, $rules);
