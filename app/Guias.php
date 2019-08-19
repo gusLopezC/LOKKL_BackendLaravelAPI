@@ -18,6 +18,10 @@ class Guias extends Model
         'numeroCuenta',
         'RFC',
         'CURP',
+        'document_identificacion',
+        'document_comprobantedomicilio',
+        'document_cedulafiscal',
+        'document_certificacion',
         'user_id',
 
     ];

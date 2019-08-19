@@ -25,6 +25,11 @@ class CreateGuiasTable extends Migration
             $table->string('numeroCuenta');
             $table->string('RFC');
             $table->string('CURP');
+            $table->string('document_identificacion');
+            $table->string('document_comprobantedomicilio');
+            $table->string('document_cedulafiscal');
+            $table->string('document_certificacion');
+            $table->string('document_CV');
 
             $table->unsignedBigInteger('user_id')->unsigned();
             $table->timestamps();
