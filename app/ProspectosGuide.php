@@ -17,6 +17,7 @@ class ProspectosGuide extends Model
         'document_cedulafiscal',
         'document_certificacion',
         'document_CV',
+        'estado',
         'user_id'
 
 

@@ -7,6 +7,7 @@ use App\Mail\ProspectoAcept;
 
 use App\ProspectosGuide;
 use App\User;
+use App\Guias;
 use Mail;
 use Illuminate\Http\Request;
 
@@ -36,6 +37,7 @@ class ProspectosGuideController extends Controller
 
         $data = $request->all();
         $data['idiomas'] = $waypoints;
+        $data['estado'] = 'Nuevo'; 
         $prospecto = ProspectosGuide::create($data);
 
         return response()->json(['data' => $prospecto], 201);
@@ -104,13 +106,18 @@ class ProspectosGuideController extends Controller
 
         $prospectos = ProspectosGuide::findOrFail($prospectos);
 
+        $prospectos->estado = "Aceptado";
+        $prospectos->save();
+        Mail::to($prospectos)->send(new ProspectoAcept($prospectos));
+
+
         $user = auth()->user();
         $user->role = 'GUIDE_VERIFIQUED';
         $user->save();
 
-       Mail::to($prospectos)->send(new ProspectoAcept($prospectos));
+       $guias = Guias::create($user);
 
-      return 'Email enviado';
+       return response()->json(['Guia nuevo' => $guias], 201);
 
     }
 }

@@ -41,38 +41,53 @@ class PassportController extends Controller
         ]);
     }
 
-    // public function LoginGoogle(Request $request)
-    // {
-    //     // error_log($request->email);
+    public function LoginGoogle(Request $request)
+    {
 
-    //     // $user = User::findOrFail($request->email);
+        if ($busquedausuario = User::where('email', $request->email)->first()) {
 
-    //     // return $user;
+            if ($busquedausuario->email == $request->email) {
 
-    //     $rules = [
-    //         'name' => 'required',
-    //         'email' => 'required|email|unique:users',
 
-    //     ];
+                $token = $busquedausuario->createToken('dadirugesedevalclkkol')->accessToken;
 
-    //     $this->validate($request, $rules);
+                return response()->json([
+                    'user' => $busquedausuario,
+                    'token' => $token, 200,
+                ]);
+            }
+        }
 
-    //     $datos = $request->all();
-    //     $datos['password'] = ':D';
-    //     $datos['role'] = 'USER_ROLE';
-    //     $datos['verified'] = false;
-    //     $datos['img'] = $request->photoUrl;
-    //     $datos['verification_token'] = User::generarToken();
 
-    //     $usuario = User::create($datos);
+            $rules = [
+                'name' => 'required',
+                'email' => 'required|email|unique:users',
 
-    //     $token = $usuario->createToken('dadirugesedevalclkkol')->accessToken;
+            ];
 
-    //     return response()->json([
-    //         'data' => $usuario,
-    //         'token' => $token, 200
-    //     ]);
-    // }
+            $this->validate($request, $rules);
+
+            $datos = $request->all();
+            $datos['password'] = ':D';
+            $datos['role'] = 'USER_ROLE';
+            $datos['verified'] = false;
+            $datos['img'] = $request->photoUrl;
+            $datos['verification_token'] = User::generarToken();
+
+            $usuario = User::create($datos);
+
+            $token = $usuario->createToken('dadirugesedevalclkkol')->accessToken;
+
+            // retry(5, function () use ($usuario) {
+            //     Mail::to($usuario->email)->send(new UserCreated($usuario));
+            // }, 100);
+
+            return response()->json([
+                'user' => $datos,
+                'token' => $token, 200,
+            ]);
+
+    }
 
     public function login(Request $request)
     {
@@ -206,18 +221,14 @@ class PassportController extends Controller
 
     public function changePassword(Request $request)
     {
-        error_log($request);
+
         $request->validate = [
             'password' => 'required',
             'new_password' => 'required|string|min:6|different:password',
         ];
 
-        error_log($request->password);
-        error_log(auth()->user()->password);
-
         if (Hash::check($request->password, auth()->user()->password) == false) {
-            error_log($request->password);
-            error_log(auth()->user()->password);
+
 
             return response(['message' => 'Unauthorized Fail'], 401);
         }

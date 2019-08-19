@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Category;
+namespace App\Http\Controllers\Tours;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CategoryController extends Controller
+class ToursEspañol extends Controller
 {
     /**
      * Display a listing of the resource.
