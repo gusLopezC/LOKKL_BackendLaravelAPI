@@ -21,7 +21,10 @@ class CreateGuiasTable extends Migration
             $table->string('edad');
             $table->string('ciudad');
             $table->string('idiomas');
+            $table->string('clabeInterbancaria');
             $table->string('numeroCuenta');
+            $table->string('RFC');
+            $table->string('CURP');
 
             $table->unsignedBigInteger('user_id')->unsigned();
             $table->timestamps();

@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Prospectos;
 
 use App\Http\Controllers\Controller;
-use App\Mail\ProspectoAcept;
 
+use App\Guias;
 use App\ProspectosGuide;
 use App\User;
-use App\Guias;
+
+use App\Mail\ProspectoAcept;
 use Mail;
+
 use Illuminate\Http\Request;
 
 class ProspectosGuideController extends Controller
@@ -64,11 +66,11 @@ class ProspectosGuideController extends Controller
     public function destroy($id)
     {
         $prospecto = ProspectosGuide::findOrFail($id);
-        return $prospecto;
+        //return $prospecto;
         $prospecto->delete();
 
         $files = array($file1, $file2);
-File::delete($files);
+        File::delete($files);
 
         return redirect('/prospectos');
     }
@@ -111,16 +113,31 @@ File::delete($files);
 
         $prospectos->estado = "Aceptado";
         $prospectos->save();
-        Mail::to($prospectos)->send(new ProspectoAcept($prospectos));
-
+         Mail::to($prospectos)->send(new ProspectoAcept($prospectos));
 
         $user = auth()->user();
         $user->role = 'GUIDE_VERIFIQUED';
         $user->save();
 
-       $guias = Guias::create($user);
+        $guias = Guias::create([
+            'name' => $prospectos->name,
+            'email' => $prospectos->email,
+            'telefono' => $prospectos->telefono,
+            'edad' => $prospectos->edad,
+            'ciudad' => $prospectos->ciudad,
+            'idiomas' => $prospectos->idiomas,
+            'numeroCuenta' => '',
+            'clabeInterbancaria' => '',
+            'NumeroCuenta' => '',
+            'RFC' => '',
+            'CURP' => '',
+            'user_id' => $prospectos->user_id,
+            
+        ]);
 
-       return response()->json(['Guia nuevo' => $guias], 201);
+        $prospectos->delete();
+
+        return response()->json(['Guia nuevo' => $guias], 201);
 
     }
 }

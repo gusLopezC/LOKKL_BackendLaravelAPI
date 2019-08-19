@@ -14,8 +14,11 @@ class Guias extends Model
         'edad',
         'ciudad',
         'idiomas',
+        'clabeInterbancaria',
         'numeroCuenta',
-        'user_id'
+        'RFC',
+        'CURP',
+        'user_id',
 
     ];
 }
