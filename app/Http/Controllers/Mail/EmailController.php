@@ -42,7 +42,9 @@ class EmailController extends Controller
     public function SolicitarDocumentacionProspectos($prospectos)
     {
         $prospectos = ProspectosGuide::findOrFail($prospectos);
-        
+        $prospectos->estado = 'Pendiente';
+        $prospectos->save();
+
         Mail::to($prospectos->email)->send(new ProspectoMailDocuments($prospectos));
 
         return 'Email enviado';

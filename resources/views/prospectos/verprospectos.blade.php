@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Prospectos Nuevos</div>
 
                 <div class="card-body">
                     <table id="myTable" class="table">
@@ -20,23 +20,108 @@
                     </thead>
                     <tbody>
                         @foreach ($prospectos as $prospecto)
-                        <tr>
-                            <td><a href="{{route('detallesprospecto',$prospecto->id)}}">{{$prospecto->name}}</a></td>
-                            <td>{{$prospecto->email}}</td>
-                            <td>{{$prospecto->edad}}</td>
-                            <td>{{$prospecto->cuidad_origin}}</td>
-                            <td>{{$prospecto->created_at}}</td>
-                            <td><a href="{{route('eliminarprospecto',$prospecto->id)}}" class="button is-danger"
-                                onclick="return confirm('Esta seguro que desea eliminar este registro');">Eliminar</a></td>
-                    
-                        </tr>
-                        @endforeach
+                        @if($prospecto->estado == 'Nuevo')
+                          <tr>
+                              <td><a href="{{route('detallesprospecto',$prospecto->id)}}">{{$prospecto->name}}</a></td>
+                              <td>{{$prospecto->email}}</td>
+                              <td>{{$prospecto->edad}}</td>
+                              <td>{{$prospecto->cuidad_origin}}</td>
+                              <td>{{$prospecto->created_at}}</td>
+                              <td><a href="{{route('eliminarprospecto',$prospecto->id)}}" class="button is-danger"
+                                  onclick="return confirm('Esta seguro que desea eliminar este registro');">Eliminar</a></td>
+
+                          </tr>
+
+                        @endif
+                          @endforeach
                     </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
+<br><br>
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">Prospectos Pendientes</div>
+
+            <div class="card-body">
+                <table id="myTable" class="table">
+                        <thead>
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Email</td>
+                        <td>Edad</td>
+                        <td>Cuidad Tour</td>
+                        <td>Archivos de verificación</td>
+                        <td>Fecha registro</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($prospectos as $prospecto)
+                    @if($prospecto->estado == 'Pendiente')
+                      <tr>
+                          <td><a href="{{route('detallesprospecto',$prospecto->id)}}">{{$prospecto->name}}</a></td>
+                          <td>{{$prospecto->email}}</td>
+                          <td>{{$prospecto->edad}}</td>
+                          <td>{{$prospecto->cuidad_origin}}</td>
+                          <td>{{$prospecto->created_at}}</td>
+                          <td><a href="{{route('eliminarprospecto',$prospecto->id)}}" class="button is-danger"
+                              onclick="return confirm('Esta seguro que desea eliminar este registro');">Eliminar</a></td>
+
+                      </tr>
+
+                    @endif
+                      @endforeach
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">Prospectos Rechazados</div>
+
+            <div class="card-body">
+                <table id="myTable" class="table">
+                        <thead>
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Email</td>
+                        <td>Edad</td>
+                        <td>Cuidad Tour</td>
+                        <td>Archivos de verificación</td>
+                        <td>Fecha registro</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($prospectos as $prospecto)
+                    @if($prospecto->estado == 'Rechazados')
+                      <tr>
+                          <td><a href="{{route('detallesprospecto',$prospecto->id)}}">{{$prospecto->name}}</a></td>
+                          <td>{{$prospecto->email}}</td>
+                          <td>{{$prospecto->edad}}</td>
+                          <td>{{$prospecto->cuidad_origin}}</td>
+                          <td>{{$prospecto->created_at}}</td>
+                          <td><a href="{{route('eliminarprospecto',$prospecto->id)}}" class="button is-danger"
+                              onclick="return confirm('Esta seguro que desea eliminar este registro');">Eliminar</a></td>
+
+                      </tr>
+
+                    @endif
+                      @endforeach
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>
 @endsection
 @push('scripts')

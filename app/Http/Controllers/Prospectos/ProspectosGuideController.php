@@ -37,7 +37,7 @@ class ProspectosGuideController extends Controller
 
         $data = $request->all();
         $data['idiomas'] = $waypoints;
-        $data['estado'] = 'Nuevo'; 
+        $data['estado'] = 'Nuevo';
         $prospecto = ProspectosGuide::create($data);
 
         return response()->json(['data' => $prospecto], 201);
@@ -64,8 +64,11 @@ class ProspectosGuideController extends Controller
     public function destroy($id)
     {
         $prospecto = ProspectosGuide::findOrFail($id);
-
+        return $prospecto;
         $prospecto->delete();
+
+        $files = array($file1, $file2);
+File::delete($files);
 
         return redirect('/prospectos');
     }

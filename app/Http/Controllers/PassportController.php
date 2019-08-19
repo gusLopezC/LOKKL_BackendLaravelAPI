@@ -204,7 +204,7 @@ class PassportController extends Controller
 
         $user->save();
 
-        return redirect()->away('https://www.lokkl.com/#/users/profile');
+        return redirect()->away('https://www.lokkl.com/');
     }
 
     public function resend(User $user)
@@ -216,7 +216,7 @@ class PassportController extends Controller
 
         Mail::to($user)->send(new UserCreated($user));
 
-        return redirect()->away('https://www.lokkl.com/#/users/profile');
+        return redirect()->away('https://www.lokkl.com/');
     }
 
     public function changePassword(Request $request)
