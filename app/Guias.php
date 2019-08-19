@@ -22,6 +22,7 @@ class Guias extends Model
         'document_comprobantedomicilio',
         'document_cedulafiscal',
         'document_certificacion',
+        'document_CV',
         'user_id',
 
     ];

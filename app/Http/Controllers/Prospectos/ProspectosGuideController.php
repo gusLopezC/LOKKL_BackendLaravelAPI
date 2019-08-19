@@ -127,6 +127,7 @@ class ProspectosGuideController extends Controller
             'document_comprobantedomicilio'=> $prospectos->document_comprobantedomicilio,
             'document_cedulafiscal'=> $prospectos->document_cedulafiscal,
             'document_certificacion'=> $prospectos->document_certificacion,
+            'document_CV' => $prospectos->document_CV,
             'numeroCuenta' => '',
             'clabeInterbancaria' => '',
             'NumeroCuenta' => '',
