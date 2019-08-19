@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers\Prospectos;
 
-use App\Http\Controllers\Controller;
-
 use App\Guias;
+use App\Http\Controllers\Controller;
+use App\Mail\ProspectoAcept;
 use App\ProspectosGuide;
 use App\User;
-
-use App\Mail\ProspectoAcept;
-use Mail;
-
 use Illuminate\Http\Request;
+use Mail;
 
 class ProspectosGuideController extends Controller
 {
@@ -113,9 +110,9 @@ class ProspectosGuideController extends Controller
 
         $prospectos->estado = "Aceptado";
         $prospectos->save();
-         Mail::to($prospectos)->send(new ProspectoAcept($prospectos));
+        Mail::to($prospectos)->send(new ProspectoAcept($prospectos));
 
-        $user = auth()->user();
+        $user = User::where('id', $prospectos->user_id)->first();
         $user->role = 'GUIDE_VERIFIQUED';
         $user->save();
 
@@ -132,10 +129,10 @@ class ProspectosGuideController extends Controller
             'RFC' => '',
             'CURP' => '',
             'user_id' => $prospectos->user_id,
-            
+
         ]);
 
-        $prospectos->delete();
+        //  $prospectos->delete();
 
         return response()->json(['Guia nuevo' => $guias], 201);
 
