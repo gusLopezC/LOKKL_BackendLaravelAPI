@@ -21,6 +21,8 @@ class CreateGuiasTable extends Migration
             $table->string('edad');
             $table->string('ciudad');
             $table->string('idiomas');
+            $table->string('pais');
+            $table->string('tipomoneda');
             $table->string('clabeInterbancaria');
             $table->string('numeroCuenta');
             $table->string('RFC');

@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -11,7 +9,7 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
 /**
  * User
@@ -22,7 +20,6 @@ Route::post('login', 'PassportController@login');
 Route::post('register', 'PassportController@register');
 Route::post('LoginGoogle', 'PassportController@LoginGoogle');
 
-
 Route::middleware('auth:api')->group(function () {
 
     /**
@@ -31,7 +28,7 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('users', 'PassportController');
     Route::post('users/perfil/foto', 'PassportController@updatePhoto')->name('users.updatePhoto');
     Route::post('users/perfil/changepassword', 'PassportController@changePassword')->name('users.changePassword');
-    
+
     /**
      * Prospectos
      */
@@ -39,9 +36,11 @@ Route::middleware('auth:api')->group(function () {
     Route::post('users/perfil/documentGuide', 'Prospectos\ProspectosGuideController@updateDocument')->name('prospects.updateDocument');
 
     /**
-     * Buyers
+     * Guias
      */
-    Route::resource('buyers', 'Buyer\BuyerController', ['only' => ['index', 'show']]);
+    Route::resource('guias', 'Guias\GuiasController');
+    Route::post('guias/datosPago', 'Guias\GuiasController@datosPagos')->name('datosPago.datosPagos');
+
     /**
      * Categories
      */
@@ -54,18 +53,14 @@ Route::middleware('auth:api')->group(function () {
      * transaction
      */
     Route::resource('transactions', 'Transaction\TransactionController');
-    /**
-     * Seller
-     */
-    Route::resource('sellers', 'Seller\SellerController', ['only' => ['index', 'show']]);
 });
 
-     /**
-     * Users
-     */
+/**
+ * Users
+ */
 
-     Route::resource('emails', 'Mail\EmailController');
-     Route::post('emailContacto', 'Mail\EmailController@EmailContact');
-     Route::get('/send/email', 'HomeController@mail');
-     Route::get('users/verify/{token}', 'PassportController@verify')->name('users.verify');
-     Route::get('users/{user}/resend', 'PassportController@resend')->name('users.resend');
+Route::resource('emails', 'Mail\EmailController');
+Route::post('emailContacto', 'Mail\EmailController@EmailContact');
+Route::get('/send/email', 'HomeController@mail');
+Route::get('users/verify/{token}', 'PassportController@verify')->name('users.verify');
+Route::get('users/{user}/resend', 'PassportController@resend')->name('users.resend');

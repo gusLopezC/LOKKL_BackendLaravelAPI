@@ -74,6 +74,9 @@ class ProspectosGuideController extends Controller
 
     public function updateDocument(Request $request)
     {
+        //$path = Storage::disk('s3')->put('images/originals', $request->file);
+
+        
         $campo = $request->campo;
 
         if ($request->hasFile('photo')) {
@@ -128,6 +131,8 @@ class ProspectosGuideController extends Controller
             'document_cedulafiscal'=> $prospectos->document_cedulafiscal,
             'document_certificacion'=> $prospectos->document_certificacion,
             'document_CV' => $prospectos->document_CV,
+            'pais' => '',
+            'tipomoneda' => '',
             'numeroCuenta' => '',
             'clabeInterbancaria' => '',
             'NumeroCuenta' => '',

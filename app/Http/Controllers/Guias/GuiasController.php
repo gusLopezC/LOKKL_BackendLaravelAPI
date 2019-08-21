@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Guias;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Guias;
 class GuiasController extends Controller
 {
     /**
@@ -81,5 +81,22 @@ class GuiasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function datosPagos(Request $request){
+
+        $guia = Guias::where('user_id', $request->user_id)->first();
+
+        $guia->pais = $request->pais;
+        $guia->tipomoneda = $request->tipomoneda;
+        $guia->clabeInterbancaria = $request->clabeInterbancaria;
+        $guia->numeroCuenta = $request->numeroCuenta;
+        $guia->RFC = $request->RFC;
+        $guia->CURP = $request->CURP;
+
+        $guia->save();
+        error_log($request);
+        return response()->json(['guia' => $guia], 201);
+
     }
 }

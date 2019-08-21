@@ -14,6 +14,8 @@ class Guias extends Model
         'edad',
         'ciudad',
         'idiomas',
+        'pais',
+        'tipomoneda',
         'clabeInterbancaria',
         'numeroCuenta',
         'RFC',
