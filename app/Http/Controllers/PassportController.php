@@ -105,6 +105,17 @@ class PassportController extends Controller
         }
     }
 
+    public function refreshUser(Request $request)
+    {
+        if ($user = User::where('email', $request->email)->first()) {
+            $token = auth()->user()->createToken('dadirugesedevalclkkol')->accessToken;
+
+
+            return response()->json(['token' => $token, 'user' => $user], 200);
+
+        }
+    }
+
     public function index()
     {
         $usuarios = User::all();

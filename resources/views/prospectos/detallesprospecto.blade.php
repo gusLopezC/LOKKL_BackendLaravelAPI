@@ -67,48 +67,70 @@
                     <div class="col-12">
                         <h2>Documentación:</h2>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <a class="test-popup-link"
-                                href="{{asset('/images/documents/')}}/{{$prospecto->document_identificacion}}">
-                                <img class="img-responsive"
-                                    src=" {{asset('/images/documents/')}}/{{$prospecto->document_identificacion}}"
-                                    alt="">
-                            </a>
-                        </div>
-                        <div class="col-sm-4">
-                            <a class="test-popup-link"
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>
+                                <h1>Indentificacion oficial</h1>
+                            </td>
+                            <td><a class="test-popup-link"
+                                    href="{{asset('/images/documents/')}}/{{$prospecto->document_identificacion}}">
+                                    <img class="img-responsive"
+                                        src=" {{asset('/images/documents/')}}/{{$prospecto->document_identificacion}}"
+                                        alt="" width="300px">
+                                </a></td>
+                        </tr>
+                        <tr>
+                            <td><h4>Comprobante de domicilio</h4></td>
+                            <td>
+                                <a class="test-popup-link"
                                 href="{{asset('/images/documents/')}}/{{$prospecto->document_comprobantedomicilio}}">
 
                                 <img class="img-responsive"
                                     src=" {{asset('/images/documents/')}}/{{$prospecto->document_comprobantedomicilio}}"
-                                    alt="">
+                                    alt="" width="300px">
                             </a>
-                        </div>
-                        <div class="col-sm-4">
-                            <a class="test-popup-link"
-                                href="{{asset('/images/documents/')}}/{{$prospecto->document_cedulafiscal}}">
-                                <img class="img-responsive"
-                                    src=" {{asset('/images/documents/')}}/{{$prospecto->document_cedulafiscal}}" alt="">
-                            </a>
-                        </div>
-                        <div class="col-sm-4">
-                            <a class="test-popup-link"
-                                href="{{asset('/images/documents/')}}/{{$prospecto->document_certificacion}}">
-                                <img class="img-responsive"
-                                    src=" {{asset('/images/documents/')}}/{{$prospecto->document_certificacion}}"
-                                    alt="">
-                            </a>
-                        </div>
-                        <div class="col-sm-4">
-                            <a class="test-popup-link"
-                                href="{{asset('/images/documents/')}}/{{$prospecto->document_CV}}">
-                                <img class="img-responsive"
-                                    src=" {{asset('/images/documents/')}}/{{$prospecto->document_CV}}" alt="">
-                            </a>
-                        </div>
-                    </div>
-
+                        </td>
+                        </tr>
+                        <tr>
+                            <td><h4>Cedula fiscal</h4></td>
+                            <td>
+                                    @if (pathinfo($prospecto->document_cedulafiscal, PATHINFO_EXTENSION) == 'pdf')
+                                    <a href="{{asset('/images/documents/')}}/{{$prospecto->document_cedulafiscal}}">
+                                        <button class="btn btn-primary btn-block">Descargar</button></a>
+                                    @endif
+                                    <a class="test-popup-link"
+                                        href="{{asset('/images/documents/')}}/{{$prospecto->document_cedulafiscal}}">
+                                        <img class="img-responsive"
+                                            src=" {{asset('/images/documents/')}}/{{$prospecto->document_cedulafiscal}}" alt="" width="3  300px">
+                                    </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><h4>Certificacion</h4></td>
+                            <td>
+                                    <a class="test-popup-link"
+                                    href="{{asset('/images/documents/')}}/{{$prospecto->document_certificacion}}">
+                                    <img class="img-responsive"
+                                        src=" {{asset('/images/documents/')}}/{{$prospecto->document_certificacion}}"
+                                        alt="" width="300px">
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><h4>Curriculum Vitae</h4></td>
+                            <td>
+                                    @if (pathinfo($prospecto->document_CV, PATHINFO_EXTENSION) == 'pdf')
+                                    <a href="{{asset('/images/documents/')}}/{{$prospecto->document_CV}}">
+                                        <button class="btn btn-primary btn-block">Descargar</button></a>
+                                    @endif
+                                    <a class="test-popup-link"
+                                    href="{{asset('/images/documents/')}}/{{$prospecto->document_CV}}">
+                                    <img class="img-responsive"
+                                        src=" {{asset('/images/documents/')}}/{{$prospecto->document_CV}}" alt="" width="300px">
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
                     <div class="row botonesprospectos">
                         <div class="col-sm-4">
                             <a href="{{route('aceptarProspecto',$prospecto)}}">
