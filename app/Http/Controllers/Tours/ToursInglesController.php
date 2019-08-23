@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Tours;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ToursIngles extends Controller
+class ToursInglesController extends Controller
 {
     /**
      * Display a listing of the resource.

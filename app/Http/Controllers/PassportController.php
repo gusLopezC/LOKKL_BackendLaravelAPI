@@ -7,6 +7,7 @@ use App\User;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class PassportController extends Controller
 {
@@ -174,7 +175,9 @@ class PassportController extends Controller
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $name = time() . $file->getClientOriginalName();
-            $file->move(public_path() . '/images/profile', $name);
+            $filePath = '/images/profile/' . $name;
+
+            Storage::disk('s3')->put($filePath, file_get_contents($file));
         }
 
         // Image::make($file)->fit(144, 144)->save($path);

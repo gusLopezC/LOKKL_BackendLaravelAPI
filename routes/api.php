@@ -43,13 +43,11 @@ Route::middleware('auth:api')->group(function () {
     Route::post('guias/datosPago', 'Guias\GuiasController@datosPagos')->name('datosPago.datosPagos');
 
     /**
-     * Categories
+     * Tours
      */
-    Route::resource('categories', 'Category\CategoryController', ['except' => ['create', 'edit']]);
-    /**
-     * transaction
-     */
-    Route::resource('product', 'Product\ProductController', ['only' => ['index', 'show']]);
+    Route::resource('tours', 'Tours\ToursEspañolController');
+
+
     /**
      * transaction
      */

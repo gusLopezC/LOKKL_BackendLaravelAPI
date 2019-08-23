@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Tours;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class Comentarios extends Controller
+class ComentariosController extends Controller
 {
     /**
      * Display a listing of the resource.

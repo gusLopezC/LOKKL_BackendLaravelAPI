@@ -73,9 +73,9 @@
                                 <h1>Indentificacion oficial</h1>
                             </td>
                             <td><a class="test-popup-link"
-                                    href="{{asset('/images/documents/')}}/{{$prospecto->document_identificacion}}">
+                                    href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_identificacion}}">
                                     <img class="img-responsive"
-                                        src=" {{asset('/images/documents/')}}/{{$prospecto->document_identificacion}}"
+                                        src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_identificacion}}"
                                         alt="" width="300px">
                                 </a></td>
                         </tr>
@@ -83,10 +83,10 @@
                             <td><h4>Comprobante de domicilio</h4></td>
                             <td>
                                 <a class="test-popup-link"
-                                href="{{asset('/images/documents/')}}/{{$prospecto->document_comprobantedomicilio}}">
+                                href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_comprobantedomicilio}}">
 
                                 <img class="img-responsive"
-                                    src=" {{asset('/images/documents/')}}/{{$prospecto->document_comprobantedomicilio}}"
+                                    src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_comprobantedomicilio}}"
                                     alt="" width="300px">
                             </a>
                         </td>
@@ -95,13 +95,13 @@
                             <td><h4>Cedula fiscal</h4></td>
                             <td>
                                     @if (pathinfo($prospecto->document_cedulafiscal, PATHINFO_EXTENSION) == 'pdf')
-                                    <a href="{{asset('/images/documents/')}}/{{$prospecto->document_cedulafiscal}}">
+                                    <a href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_cedulafiscal}}">
                                         <button class="btn btn-primary btn-block">Descargar</button></a>
                                     @endif
                                     <a class="test-popup-link"
-                                        href="{{asset('/images/documents/')}}/{{$prospecto->document_cedulafiscal}}">
+                                        href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_cedulafiscal}}">
                                         <img class="img-responsive"
-                                            src=" {{asset('/images/documents/')}}/{{$prospecto->document_cedulafiscal}}" alt="" width="3  300px">
+                                            src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_cedulafiscal}}" alt="" width="3  300px">
                                     </a>
                             </td>
                         </tr>
@@ -109,9 +109,9 @@
                             <td><h4>Certificacion</h4></td>
                             <td>
                                     <a class="test-popup-link"
-                                    href="{{asset('/images/documents/')}}/{{$prospecto->document_certificacion}}">
+                                    href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_certificacion}}">
                                     <img class="img-responsive"
-                                        src=" {{asset('/images/documents/')}}/{{$prospecto->document_certificacion}}"
+                                        src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_certificacion}}"
                                         alt="" width="300px">
                                 </a>
                             </td>
@@ -120,13 +120,13 @@
                             <td><h4>Curriculum Vitae</h4></td>
                             <td>
                                     @if (pathinfo($prospecto->document_CV, PATHINFO_EXTENSION) == 'pdf')
-                                    <a href="{{asset('/images/documents/')}}/{{$prospecto->document_CV}}">
+                                    <a href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_CV}}">
                                         <button class="btn btn-primary btn-block">Descargar</button></a>
                                     @endif
                                     <a class="test-popup-link"
-                                    href="{{asset('/images/documents/')}}/{{$prospecto->document_CV}}">
+                                    href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_CV}}">
                                     <img class="img-responsive"
-                                        src=" {{asset('/images/documents/')}}/{{$prospecto->document_CV}}" alt="" width="300px">
+                                        src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_CV}}" alt="" width="300px">
                                 </a>
                             </td>
                         </tr>

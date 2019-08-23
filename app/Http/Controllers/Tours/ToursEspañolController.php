@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Tours;
 
-use Illuminate\Http\Request;
+use App\Guias;
 use App\Http\Controllers\Controller;
+use App\ToursEspañol;
+use Illuminate\Http\Request;
 
-class ToursEspañol extends Controller
+class ToursEspañolController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +37,27 @@ class ToursEspañol extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datosGuia = Guias::where('id', $request->user_guide)->first();
+
+        $tour = ToursEspañol::create([
+            'name' => $datosGuia->name,
+            'cuidad' => $datosGuia->ciudad,
+            'categories' => $request->categories,
+            'schedulle' => $request->schedulle,
+            'duration' => $request->duration,
+            'override' => $request->override,
+            'whatsIncluded' => $request->whatsIncluded,
+            'itinerary' => $request->itinerary,
+            'mapaGoogle' => $request->mapaGoogle,
+            'puntoInicio' => $request->puntoInicio,
+            'lenguajes' => $datosGuia->idiomas,
+            'price' => $request->price,
+            'user_guide' => $datosGuia->id,
+
+        ]);
+
+        return response()->json(['Tour' => $tour], 200);
+
     }
 
     /**
@@ -82,4 +104,5 @@ class ToursEspañol extends Controller
     {
         //
     }
+
 }

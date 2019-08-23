@@ -8,6 +8,7 @@ use App\Mail\ProspectoAcept;
 use App\ProspectosGuide;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Mail;
 
 class ProspectosGuideController extends Controller
@@ -83,8 +84,9 @@ class ProspectosGuideController extends Controller
             $file = $request->file('photo');
 
             $name = $campo . time() . $file->getClientOriginalName();
+            $filePath = '/images/documents/' . $name;
 
-            $file->move(public_path() . '/images/documents', $name);
+            Storage::disk('s3')->put($filePath, file_get_contents($file));
         }
 
         //Image::make($file)->fit(144, 144)->save($path);
