@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Tours;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class ComentariosController extends Controller
 {
@@ -35,7 +36,28 @@ class ComentariosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $date = date('Y-m-d H:i:s');
+        $newDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)
+            ->format('d-m-Y');
+
+        $rules = [
+            'comentario' => 'required',
+            'calificacion' => 'required',
+        ];
+
+        $this->validate($request, $rules);
+
+        $comentario = ToursEspañol::create([
+            'comentario' => $request->name,
+            'calificacion' => $request->calificacion,
+            'tour_id' => $request->ciudad,
+            'user_id' => $request->categories,
+            'created_at' => $newDate
+        ]);
+
+        return response()->json(['Comentario' => $comentario], 200);
+
     }
 
     /**

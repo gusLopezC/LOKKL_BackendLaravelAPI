@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Tours;
 
 use App\Guias;
 use App\Http\Controllers\Controller;
+use App\PhotosTours;
 use App\ToursEspañol;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ToursEspañolController extends Controller
 {
@@ -17,6 +19,13 @@ class ToursEspañolController extends Controller
     public function index()
     {
         //
+        $tour = ToursEspañol::all();
+
+        // foreach ($tour->getPhotos as $photos) {
+        //     $photostour = ($photos->photo);
+        // }
+
+        return response()->json(['tours' => $tour, 200]);
     }
 
     /**
@@ -37,29 +46,43 @@ class ToursEspañolController extends Controller
      */
     public function store(Request $request)
     {
-        $datosGuia = Guias::where('id', $request->user_guide)->first();
+        if ($request->hasFile('photo')) {
 
-        $tour = ToursEspañol::create([
-            'name' => $datosGuia->name,
-            'cuidad' => $datosGuia->ciudad,
-            'categories' => $request->categories,
-            'schedulle' => $request->schedulle,
-            'duration' => $request->duration,
-            'override' => $request->override,
-            'whatsIncluded' => $request->whatsIncluded,
-            'itinerary' => $request->itinerary,
-            'mapaGoogle' => $request->mapaGoogle,
-            'puntoInicio' => $request->puntoInicio,
-            'lenguajes' => $datosGuia->idiomas,
-            'price' => $request->price,
-            'user_guide' => $datosGuia->id,
+            $datosGuia = Guias::where('id', $request->user_guide)->first();
+            $tour = ToursEspañol::create([
+                'name' => $request->name,
+                'cuidad' => $datosGuia->ciudad,
+                'slug' => $datosGuia->ciudad,
+                'categories' => $request->categories,
+                'schedulle' => $request->schedulle,
+                'duration' => $request->duration,
+                'override' => $request->override,
+                'whatsIncluded' => $request->whatsIncluded,
+                'itinerary' => $request->itinerary,
+                'mapaGoogle' => $request->mapaGoogle,
+                'puntoInicio' => $request->puntoInicio,
+                'lenguajes' => $datosGuia->idiomas,
+                'price' => $request->price,
+                'user_guide' => $datosGuia->id,
 
-        ]);
+            ]);
 
-        return response()->json(['Tour' => $tour], 200);
+            $files = $request->file('photo');
+            foreach ($files as $file) {
+                $name = time() . $file->getClientOriginalName();
+                $filePath = '/images/tours/' . $name;
+                Storage::disk('s3')->put($filePath, file_get_contents($file));
+
+                $phototour = PhotosTours::create([
+                    'photo' => $name,
+                    'tour_id' => $tour->id,
+                ]);
+            }
+        }
+
+        return response()->json(['Tour' => $tour, 'Phototour' => $phototour], 200);
 
     }
-
     /**
      * Display the specified resource.
      *
@@ -68,7 +91,14 @@ class ToursEspañolController extends Controller
      */
     public function show($id)
     {
-        //
+        $tour = ToursEspañol::find($id);
+
+        foreach ($tour->getPhotos as $photos) {
+            $potos = ($photos->photo);
+        }
+
+        return response()->json(['tours' => $tour, 200]);
+
     }
 
     /**
@@ -103,6 +133,31 @@ class ToursEspañolController extends Controller
     public function destroy($id)
     {
         //
+        try {
+            $tour = ToursEspañol::findOrFail($id);
+            foreach ($tour->photos as $photos) {
+                Storage::disk('s3')->delete('images/tours/' . $photos->photo);
+            }
+            $tour->delete();
+
+            return response()->json(['data' => $tour, 200]);
+        } catch (PDOException $e) {
+            return response()->json('existe un error'+$e);
+        }
+    }
+
+    /**
+     * Obtener por cuidad
+     */
+    public function Obtenerporcuidad(Request $request)
+    {
+
+        $tour = ToursEspañol::where('cuidad', $request->cuidad)->get();
+        // foreach ($tour->photos as $photos) {
+        //      $potos = ($photos->photo);
+        // }
+        return response()->json(['data' => $tour, 200]);
+
     }
 
 }

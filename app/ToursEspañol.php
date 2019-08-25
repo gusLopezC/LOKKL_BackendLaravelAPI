@@ -10,6 +10,7 @@ class ToursEspañol extends Model
     protected $fillable = [
         'id',
         'name',
+        'slug',
         'cuidad',
         'categories',
         'schedulle',
@@ -24,6 +25,11 @@ class ToursEspañol extends Model
         'price',
         'user_guide'
     ];
+  public function getPhotos()
+    {
+        return $this->hasMany('App\PhotosTours', 'tour_id');
+    }
+  
 
   
 }
