@@ -18,7 +18,7 @@ class CreatePhotosToursTable extends Migration
             $table->string('photo');
             $table->unsignedBigInteger('tour_id')->unsigned();
             $table->timestamps();
-            $table->foreign('tour_id')->references('id')->on('tours_españols')->onDelete('cascade');
+            $table->foreign('tour_id')->references('id')->on('tours')->onDelete('cascade');
 
         });
     }

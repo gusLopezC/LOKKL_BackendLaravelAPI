@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ToursEspañol extends Model
+class Tours extends Model
 {
     //
     protected $fillable = [

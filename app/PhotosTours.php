@@ -14,6 +14,6 @@ class PhotosTours extends Model
 
     public function getTour()
     {
-        return $this->belongsTo('App\ToursEspañol', 'id');
+        return $this->belongsTo('App\Tours', 'id');
     }
 }

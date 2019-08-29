@@ -45,8 +45,8 @@ Route::middleware('auth:api')->group(function () {
     /**
      * Tours
      */
-    Route::resource('tours', 'Tours\ToursEspañolController');
-    Route::post('tours/obtenerporcuidad', 'Tours\ToursEspañolController@Obtenerporcuidad')->name('tours.obtenerporcuidad');
+    Route::resource('tours', 'Tours\ToursController');
+    Route::post('tours/obtenerporcuidad', 'Tours\ToursController@Obtenerporcuidad')->name('tours.obtenerporcuidad');
 
     /**
     * Tours

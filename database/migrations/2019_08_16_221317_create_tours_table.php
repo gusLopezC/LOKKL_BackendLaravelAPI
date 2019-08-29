@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateToursEspañolsTable extends Migration
+class CreateToursTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateToursEspañolsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tours_españols', function (Blueprint $table) {
+        Schema::create('tours', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug');
             $table->string('cuidad');
-           // $table->string('photo');
             $table->string('categories');
             $table->string('schedulle');
             $table->string('duration');
@@ -27,7 +26,7 @@ class CreateToursEspañolsTable extends Migration
             $table->text('itinerary');
             $table->string('mapaGoogle');
             $table->string('puntoInicio');
-            $table->number('calification')->default(5);
+            $table->integer('calification')->default(5);
             $table->string('lenguajes');
             $table->string('price');
             $table->unsignedBigInteger('user_guide')->unsigned();
@@ -45,6 +44,6 @@ class CreateToursEspañolsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tours_españols');
+        Schema::dropIfExists('tours');
     }
 }
