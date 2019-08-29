@@ -15,6 +15,7 @@ class Tours extends Model
         'categories',
         'schedulle',
         'duration',
+        'overview',
         'override',
         'whatsIncluded',
         'itinerary',

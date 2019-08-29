@@ -18,10 +18,12 @@ class CreateToursTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('cuidad');
+            $table->string('cuidad');
+            $table->string('pais');
             $table->string('categories');
             $table->string('schedulle');
             $table->string('duration');
-            $table->text('override');
+            $table->text('overview');
             $table->text('whatsIncluded');
             $table->text('itinerary');
             $table->string('mapaGoogle');
