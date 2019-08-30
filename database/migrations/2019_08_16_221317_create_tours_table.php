@@ -18,8 +18,8 @@ class CreateToursTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('cuidad');
-            $table->string('cuidad');
             $table->string('pais');
+            $table->string('CP');
             $table->string('categories');
             $table->string('schedulle');
             $table->string('duration');
@@ -32,8 +32,11 @@ class CreateToursTable extends Migration
             $table->string('lenguajes');
             $table->string('price');
             $table->unsignedBigInteger('user_guide')->unsigned();
+            $table->unsignedBigInteger('user_id')->unsigned();
 
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->foreign('user_guide')->references('id')->on('guias')->onDelete('cascade');
 
         });
