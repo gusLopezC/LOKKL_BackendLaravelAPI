@@ -9,22 +9,30 @@ class Tours extends Model
     //
     protected $fillable = [
         'id',
+
+        'cuidad',
+        'pais',
+        'CP',
+
         'name',
         'slug',
-        'cuidad',
-        'categories',
-        'schedulle',
-        'duration',
-        'overview',
-        'override',
-        'whatsIncluded',
-        'itinerary',
+
         'mapaGoogle',
         'puntoInicio',
+
+        'schedulle',
+        'overview',
+
+        'itinerary',
+        'whatsIncluded',
+
+        'categories',        
+        'duration',
         'calification',
         'lenguajes',
         'price',
-        'user_guide'
+        'user_guide',
+        'user_id'
     ];
   public function getPhotos()
     {

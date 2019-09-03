@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Tours;
 
 use App\Guias;
 use App\Http\Controllers\Controller;
-use App\PhotosTours;
-use App\ToursEspañol;
+use App\Tours;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -46,28 +45,38 @@ class ToursController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile('photo')) {
 
-            $datosGuia = Guias::where('id', $request->user_guide)->first();
-            $tour = ToursEspañol::create([
+        if ($request->hasFile('photo')) {
+            $datosGuia = Guias::where('user_id', $request->user_id)->first();
+
+            $tour = Tours::create([
+                'cuidad' => $request->cuidad,
+                'pais' => $request->Pais,
+                'CP' => '',
+
                 'name' => $request->name,
-                'cuidad' => $datosGuia->ciudad,
-                'slug' => $datosGuia->ciudad,
-                'categories' => $request->categories,
-                'schedulle' => $request->schedulle,
-                'duration' => $request->duration,
-                'override' => $request->override,
-                'whatsIncluded' => $request->whatsIncluded,
-                'itinerary' => $request->itinerary,
+                'slug' => $request->name,
+
                 'mapaGoogle' => $request->mapaGoogle,
                 'puntoInicio' => $request->puntoInicio,
+
+                'schedulle' => $request->schedulle,
+                'overview' => $request->overview,
+
+                'itinerary' => '',
+                'whatsIncluded' => '',
+
+                'categories' => $request->categories,
+                'duration' => $request->duration,
                 'lenguajes' => $datosGuia->idiomas,
                 'price' => $request->price,
                 'user_guide' => $datosGuia->id,
+                'user_id' => $request->user_id,
 
             ]);
 
             $files = $request->file('photo');
+
             foreach ($files as $file) {
                 $name = time() . $file->getClientOriginalName();
                 $filePath = '/images/tours/' . $name;
@@ -78,9 +87,10 @@ class ToursController extends Controller
                     'tour_id' => $tour->id,
                 ]);
             }
-        }
 
-        return response()->json(['Tour' => $tour, 'Phototour' => $phototour], 200);
+            return response()->json(['Tour' => $tour], 200);
+
+        }
 
     }
     /**
