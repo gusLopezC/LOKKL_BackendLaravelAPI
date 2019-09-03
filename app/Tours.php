@@ -2,10 +2,14 @@
 
 namespace App;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Tours extends Model
 {
+
+    use Sluggable;
+
     //
     protected $fillable = [
         'id',
@@ -37,6 +41,20 @@ class Tours extends Model
   public function getPhotos()
     {
         return $this->hasMany('App\PhotosTours', 'tour_id');
+    }
+
+        /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
   
 

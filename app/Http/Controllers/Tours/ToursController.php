@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Tours;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 class ToursController extends Controller
 {
     /**
@@ -46,8 +46,9 @@ class ToursController extends Controller
     public function store(Request $request)
     {
 
-        if ($request->hasFile('photo')) {
+       // if ($request->hasFile('photo')) {
             $datosGuia = Guias::where('user_id', $request->user_id)->first();
+            $slug = SlugService::createSlug(Tours::class, 'slug', $request->name, ['unique' => false]);
 
             $tour = Tours::create([
                 'cuidad' => $request->cuidad,
@@ -55,7 +56,7 @@ class ToursController extends Controller
                 'CP' => '',
 
                 'name' => $request->name,
-                'slug' => $request->name,
+                'slug' => $slug,
 
                 'mapaGoogle' => $request->mapaGoogle,
                 'puntoInicio' => $request->puntoInicio,
@@ -90,7 +91,7 @@ class ToursController extends Controller
 
             return response()->json(['Tour' => $tour], 200);
 
-        }
+        //}
 
     }
     /**
