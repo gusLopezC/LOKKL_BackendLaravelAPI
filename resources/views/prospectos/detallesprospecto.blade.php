@@ -15,9 +15,10 @@
                                 <strong>{{$prospecto->name}}</strong>
                             </td>
                             <td>
-                                <h5>Emal:</h5>
+                                <h5>Email:</h5>
                                 <strong>{{$prospecto->email}}</strong>
                             </td>
+                            
                             <td>
                                 <h5>Edad:</h4>
                                     <strong>{{$prospecto->edad}}</strong>
@@ -28,11 +29,16 @@
                                 <h5>Cuidad del tour:</h5>
                                 <strong>{{$prospecto->ciudad}}</strong>
                             </td>
+                            <td >
+                                <h5>Telefono:</h4>
+                                    <strong>{{$prospecto->telefono}}</strong>
+                            </td>
 
-                            <td colspan="2">
+                            <td >
                                 <h5>Como nos conociste:</h4>
                                     <strong>{{$prospecto->comonosconociste}}</strong>
                             </td>
+                           
                         </tr>
                     </table>
 

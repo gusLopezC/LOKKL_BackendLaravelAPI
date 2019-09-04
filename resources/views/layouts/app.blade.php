@@ -28,7 +28,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ 'LOKKL' }}
                 </a>
@@ -54,6 +54,7 @@
                         <ul class="navbar-nav mr-auto">
                             <li class="navbar_item"><a href="">Administrador Tour</a></li>
                             <li class="navbar_item"><a href="/usuarios">Administrador Usuarios</a></li>
+                            <li class="navbar_item"><a href="/guias">Administrador Guias</a></li>
                             <li class="navbar_item"><a href="">Administrador Pagos</a></li>
                             <li class="navbar_item"><a href="/prospectos">Administrador Prospectos</a></li>
                         </ul>

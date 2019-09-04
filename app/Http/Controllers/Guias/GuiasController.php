@@ -51,7 +51,10 @@ class GuiasController extends Controller
      */
     public function show($id)
     {
-        //
+        $guias = Guias::findOrFail($id);
+
+        //return $guias;
+        return view('guias.detallesguia', compact('guias'));
     }
 
     /**
@@ -85,7 +88,14 @@ class GuiasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $guia = Guias::findOrFail($id);
+        //return $prospecto;
+        $guia->delete();
+
+        $files = array($file1, $file2);
+        File::delete($files);
+
+        return redirect('/prospectos');
     }
 
     public function datosPagos(Request $request){

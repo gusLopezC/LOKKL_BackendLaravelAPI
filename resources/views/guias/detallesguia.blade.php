@@ -12,49 +12,131 @@
                         <tr>
                             <td>
                                 <h5>Nombre:</h5>
-                                <strong>{{$prospecto->name}}</strong>
+                                <strong>{{$guias->name}}</strong>
                             </td>
                             <td>
                                 <h5>Emal:</h5>
-                                <strong>{{$prospecto->email}}</strong>
+                                <strong>{{$guias->email}}</strong>
                             </td>
                             <td>
                                 <h5>Edad:</h4>
-                                    <strong>{{$prospecto->edad}}</strong>
+                                    <strong>{{$guias->edad}}</strong>
+                            </td>
+                            <td>
+                                <h5>Edad:</h4>
+                                    <strong>{{$guias->idiomas}}</strong>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <h5>Cuidad del tour:</h5>
-                                <strong>{{$prospecto->ciudad}}</strong>
+                                <strong>{{$guias->ciudad}}</strong>
                             </td>
+                            <td>
+                                <h5>Pais:</h5>
+                                <strong>{{$guias->pais}}</strong>
+                            </td>
+                        </tr>
 
-                            <td colspan="2">
-                                <h5>Como nos conociste:</h4>
-                                    <strong>{{$prospecto->comonosconociste}}</strong>
+                    </table>
+                    <div class="col-12">
+                        <h2>Datos bancarios:</h2>
+                    </div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>
+                                <h5>Tipo moneda:</h5>
+                                <strong>{{$guias->tipomoneda}}</strong>
+                            </td>
+                            <td>
+                                <h5>clabe Interbancaria:</h5>
+                                <strong>{{$guias->clabeInterbancaria}}</strong>
+                            </td>
+                            <td>
+                                <h5>Numero cuenta Paypal:</h4>
+                                    <strong>{{$guias->numeroCuenta}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>RFC:</h5>
+                                <strong>{{$guias->RFC}}</strong>
+                            </td>
+                            <td>
+                                <h5>CURP:</h5>
+                                <strong>{{$guias->CURP}}</strong>
+                            </td>
+                        </tr>
+
+                    </table>
+                    
+                    <div class="col-12">
+                        <h2>Documentación:</h2>
+                    </div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>
+                                <h4>Indentificacion oficial</h4>
+                            </td>
+                            <td><a class="test-popup-link"
+                                    href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_identificacion}}">
+                                    <img class="img-responsive"
+                                        src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_identificacion}}"
+                                        alt="" width="300px">
+                                </a></td>
+                        </tr>
+                        <tr>
+                            <td><h4>Comprobante de domicilio</h4></td>
+                            <td>
+                                <a class="test-popup-link"
+                                href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_comprobantedomicilio}}">
+
+                                <img class="img-responsive"
+                                    src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_comprobantedomicilio}}"
+                                    alt="" width="300px">
+                            </a>
+                        </td>
+                        </tr>
+                        <tr>
+                            <td><h4>Cedula fiscal</h4></td>
+                            <td>
+                                    @if (pathinfo($guias->document_cedulafiscal, PATHINFO_EXTENSION) == 'pdf')
+                                    <a href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_cedulafiscal}}">
+                                        <button class="btn btn-primary btn-block">Descargar</button></a>
+                                    @endif
+                                    <a class="test-popup-link"
+                                        href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_cedulafiscal}}">
+                                        <img class="img-responsive"
+                                            src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_cedulafiscal}}" alt="" width="3  300px">
+                                    </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><h4>Certificacion</h4></td>
+                            <td>
+                                    <a class="test-popup-link"
+                                    href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_certificacion}}">
+                                    <img class="img-responsive"
+                                        src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_certificacion}}"
+                                        alt="" width="300px">
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><h4>Curriculum Vitae</h4></td>
+                            <td>
+                                    @if (pathinfo($guias->document_CV, PATHINFO_EXTENSION) == 'pdf')
+                                    <a href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_CV}}">
+                                        <button class="btn btn-primary btn-block">Descargar</button></a>
+                                    @endif
+                                    <a class="test-popup-link"
+                                    href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_CV}}">
+                                    <img class="img-responsive"
+                                        src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_CV}}" alt="" width="300px">
+                                </a>
                             </td>
                         </tr>
                     </table>
-  
-                    <div class="row botonesprospectos">
-                        <div class="col-sm-4">
-                            <a href="{{route('aceptarProspecto',$prospecto)}}">
-                                <button type="submit" class="btn btn-success" style="width: 90%;">Validar
-                                    prospecto</button></a>
-                        </div>
-                        <div class="col-sm-4">
-                            <a href="{{route('solicitarDocumentos',$prospecto)}}">
-                                <button type="submit" class="btn btn-warning" style="width: 90%;">Solicitar
-                                    documentos</button>
-                            </a>
-                        </div>
-                        <div class="col-sm-4">
-                            <a href="{{route('solicitarDocumentos',$prospecto)}}"> <button type="submit"
-                                    class="btn btn-danger" style="width: 90%;">Negar
-                                    solicitud</button>
-                            </a>
-                        </div>
-                    </div>
 
                 </div>
             </div>
