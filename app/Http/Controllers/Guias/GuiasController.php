@@ -15,6 +15,11 @@ class GuiasController extends Controller
     public function index()
     {
         //
+        $guias = Guias::all();
+
+        //return $guias;
+
+        return view('guias.verguias', compact('guias'));
     }
 
     /**

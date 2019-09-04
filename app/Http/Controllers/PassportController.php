@@ -28,6 +28,7 @@ class PassportController extends Controller
 
         $datos = $request->all();
         $datos['password'] = bcrypt($request->password);
+        $datos['role'] = 'USER_ROLE';
         $datos['verified'] = false;
         $datos['img'] = 'avatar3.png';
         $datos['verification_token'] = User::generarToken();
@@ -121,8 +122,8 @@ class PassportController extends Controller
     {
         $usuarios = User::all();
 
-        //return view('usuarios.verusuarios', compact('usuarios'));
-        return response()->json(['data' => $usuarios, 200]);
+        return view('usuarios.verusuarios', compact('usuarios'));
+        //return response()->json(['data' => $usuarios, 200]);
     }
 
     public function show($id)

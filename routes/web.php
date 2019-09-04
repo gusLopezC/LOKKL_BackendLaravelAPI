@@ -29,3 +29,9 @@ Route::get('/prospectos/{post}/solicitarDocumentos', 'Mail\EmailController@Solic
 Route::get('/prospectos/{post}/aceptarProspecto', 'Prospectos\ProspectosGuideController@AceptarProspecto')->name('aceptarProspecto')->middleware('auth');
 
 Route::get('/prospectos/{post}/delete', 'Prospectos\ProspectosGuideController@destroy')->name('eliminarprospecto')->middleware('auth');     //DELETE
+
+
+Route::get('/guias', 'Guias\GuiasController@index')->name('usuarios');
+Route::get('/guias/{id}', 'Guias\GuiasController@show')->name('detallesguia')->middleware('auth');
+
+Route::get('/guias/{post}/delete', 'Guias\GuiasController@destroy')->name('eliminarguia')->middleware('auth');     //DELETE
