@@ -11,10 +11,7 @@ use Mail;
 
 class EmailController extends Controller
 {
-    public function index()
-    {
-        return "Hola mundo";
-    }
+
     public function EmailContact(Request $request)
     {
 

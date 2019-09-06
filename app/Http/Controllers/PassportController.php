@@ -80,9 +80,9 @@ class PassportController extends Controller
 
             $token = $usuario->createToken('dadirugesedevalclkkol')->accessToken;
 
-            // retry(5, function () use ($usuario) {
-            //     Mail::to($usuario->email)->send(new UserCreated($usuario));
-            // }, 100);
+            retry(5, function () use ($usuario) {
+                Mail::to($usuario->email)->send(new UserCreated($usuario));
+            }, 100);
 
             return response()->json([
                 'user' => $datos,

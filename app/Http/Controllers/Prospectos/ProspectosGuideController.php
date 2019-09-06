@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Prospectos;
 
 use App\Guias;
 use App\Http\Controllers\Controller;
+use App\Mail\NewProspectRegister;
 use App\Mail\ProspectoAcept;
 use App\ProspectosGuide;
 use App\User;
@@ -39,6 +40,10 @@ class ProspectosGuideController extends Controller
         $data['idiomas'] = $waypoints;
         $data['estado'] = 'Nuevo';
         $prospecto = ProspectosGuide::create($data);
+
+        Mail::to('iam@lokkl.com')
+            ->cc(['developerlokkl@gmail.com', 'lokklmx@gmail.com'])
+            ->send(new NewProspectRegister($prospecto));
 
         return response()->json(['data' => $prospecto], 201);
     }
@@ -77,7 +82,6 @@ class ProspectosGuideController extends Controller
     {
         //$path = Storage::disk('s3')->put('images/originals', $request->file);
 
-        
         $campo = $request->campo;
 
         if ($request->hasFile('photo')) {
@@ -128,10 +132,10 @@ class ProspectosGuideController extends Controller
             'edad' => $prospectos->edad,
             'ciudad' => $prospectos->ciudad,
             'idiomas' => $prospectos->idiomas,
-            'document_identificacion'=> $prospectos->document_identificacion,
-            'document_comprobantedomicilio'=> $prospectos->document_comprobantedomicilio,
-            'document_cedulafiscal'=> $prospectos->document_cedulafiscal,
-            'document_certificacion'=> $prospectos->document_certificacion,
+            'document_identificacion' => $prospectos->document_identificacion,
+            'document_comprobantedomicilio' => $prospectos->document_comprobantedomicilio,
+            'document_cedulafiscal' => $prospectos->document_cedulafiscal,
+            'document_certificacion' => $prospectos->document_certificacion,
             'document_CV' => $prospectos->document_CV,
             'pais' => '',
             'tipomoneda' => '',

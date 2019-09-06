@@ -27,9 +27,8 @@ class AppServiceProvider extends ServiceProvider
  
           User::created(function($user){
 
-            retry(5, function() use ($user){ 
             Mail::to($user->email)->send(new UserCreated($user));
-            },100);
+          
           });
 
           User::updated(function($user){

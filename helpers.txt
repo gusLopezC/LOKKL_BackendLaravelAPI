@@ -12,8 +12,3 @@ php artisan route:cache
 php artisan config:clear 
 php artisan view:clear 
 
-
-
-
-
-INSERT INTO `guias` (`id`, `name`, `email`, `telefono`, `edad`, `ciudad`, `idiomas`, `pais`, `tipomoneda`, `clabeInterbancaria`, `numeroCuenta`, `RFC`, `CURP`, `document_identificacion`, `document_comprobantedomicilio`, `document_cedulafiscal`, `document_certificacion`, `document_CV`, `user_id`, `created_at`, `updated_at`) VALUES (NULL, 'gus', 'gus', 'gus', 'gus', 'gus', 'gus', 'gus', 'gus', 'gus', 'gus', 'gus', 'gus', 'gus', 'gus', 'gus', 'gus', 'gus', '1', NULL, NULL);
