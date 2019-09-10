@@ -21,9 +21,6 @@ Route::post('register', 'PassportController@register');
 Route::post('LoginGoogle', 'PassportController@LoginGoogle');
 
 
-Route::resource('tours', 'Tours\ToursController');
-
-
 Route::middleware('auth:api')->group(function () {
 
     /**
@@ -54,6 +51,9 @@ Route::middleware('auth:api')->group(function () {
     /**
     * Tours
      */
+    Route::resource('tours', 'Tours\ToursController');
+    Route::post('tours/uploadFiles/{id}', 'Tours\ToursController@uploadFiles')->name('tours.uploadFiles');
+
     Route::resource('comentarios', 'Tours\ComentariosController');
     /**
      * transaction

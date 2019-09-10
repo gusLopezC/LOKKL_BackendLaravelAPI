@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Tours;
 use App\Guias;
 use App\Http\Controllers\Controller;
 use App\Tours;
+use App\PhotosTours;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Input;
+
+
 class ToursController extends Controller
 {
     /**
@@ -45,63 +49,46 @@ class ToursController extends Controller
      */
     public function store(Request $request)
     {
-         //if ($request->hasFile('photo')) {
-            $datosGuia = Guias::where('user_id', $request->user_id)->first();
-            // $slug = SlugService::createSlug(Tours::class, 'slug', $request->name, ['unique' => false]);
 
-            error_log($datosGuia);
-            
-            $tour = Tours::create([
-                'cuidad' => $request->cuidad,
-                'pais' => $request->Pais,
-                'CP' => '',
 
-                'name' => $request->name,
-                'slug' => $request->name,
+        $datosGuia = Guias::where('user_id', $request->user_id)->first();
+        $slug = SlugService::createSlug(Tours::class, 'slug', $request->name, ['unique' => false]);
 
-                'mapaGoogle' => $request->mapaGoogle,
-                'puntoInicio' => $request->puntoInicio,
+        //if ($request->hasFile('photo')) {
 
-                'schedulle' => $request->schedulle,
-                'overview' => $request->overview,
+        $tour = Tours::create([
+            'cuidad' => $request->cuidad,
+            'pais' => $request->Pais,
+            'CP' => $request->CP,
 
-                'itinerary' => '',
-                'whatsIncluded' => '',
+            'name' => $request->name,
+            'slug' => $request->$slug,
 
-                'categories' => $request->categories,
-                'duration' => $request->duration,
-                'lenguajes' => 'Hola',
-               // 'lenguajes' => $datosGuia->idiomas,
-                'price' => $request->price,
-                'user_guide' => '',
-                //'user_guide' => $datosGuia->id,
-                'user_id' => $request->user_id,
+            'mapaGoogle' => $request->mapaGoogle,
+            'puntoInicio' => $request->puntoInicio,
 
-            ]);
+            'schedulle' => $request->schedulle,
+            'overview' => $request->overview,
 
-            $files = $request->file('photo');
+            'itinerary' => $request->itinerary,
+            'whatsIncluded' => $request->whatsIncluded,
 
-            foreach ($files as $file) {
-                $name = time() . $file->getClientOriginalName();
-                $filePath = '/images/tours/' . $name;
-                Storage::disk('s3')->put($filePath, file_get_contents($file));
+            'categories' => $request->categories,
+            'duration' => $request->duration,
+            'lenguajes' => $datosGuia->idiomas,
+            'price' => $request->price,
+            'user_guide' => $datosGuia->id,
+            'user_id' => $request->user_id,
 
-                $phototour = PhotosTours::create([
-                    'photo' => $name,
-                    'tour_id' => $tour->id,
-                ]);
-            }
+        ]);
 
-            return response()->json(['Tour' => $tour], 200);
 
-       // }
-        // error_log($request);
-        // error_log('==========');
-        // error_log($request->cuidad);
 
-        // return response()->json(['Tour' =>  request('cuidad')], 200);
-      // return var_dump($_POST); 
-      
+        return response()->json(['Tour' => $tour], 200);
+
+            // }
+
+        ;
     }
     /**
      * Display the specified resource.
@@ -118,7 +105,6 @@ class ToursController extends Controller
         }
 
         return response()->json(['tours' => $tour, 200]);
-
     }
 
     /**
@@ -162,7 +148,7 @@ class ToursController extends Controller
 
             return response()->json(['data' => $tour, 200]);
         } catch (PDOException $e) {
-            return response()->json('existe un error'+$e);
+            return response()->json('existe un error' + $e);
         }
     }
 
@@ -177,7 +163,29 @@ class ToursController extends Controller
         //      $potos = ($photos->photo);
         // }
         return response()->json(['data' => $tour, 200]);
-
     }
 
+
+    public function uploadFiles(Request $request, $id)
+    {
+        error_log($request);     
+
+        $tour = Tours::where('id', $id)->first();
+        $files = $request->file('file');
+    
+        foreach ($files as $file) {
+            $name =  $id.'_'.time().$file->getClientOriginalName();
+            error_log($name);
+            $filePath = '/images/tours/' . $name;
+            Storage::disk('s3')->put($filePath, file_get_contents($file));
+
+
+            $phototour = PhotosTours::create([
+                'photo' => $name,
+                'tour_id' => $id,
+            ]);
+        }
+
+        return response()->json(['tours' => $tour, 200]);
+    }
 }
