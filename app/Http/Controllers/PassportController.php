@@ -50,7 +50,9 @@ class PassportController extends Controller
 
             if ($busquedausuario->email == $request->email) {
 
+                error_log($busquedausuario);
 
+                
                 $token = $busquedausuario->createToken('dadirugesedevalclkkol')->accessToken;
 
                 return response()->json([

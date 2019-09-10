@@ -18,7 +18,7 @@ class ToursController extends Controller
     public function index()
     {
         //
-        $tour = ToursEspañol::all();
+        $tour = Tours::all();
 
         // foreach ($tour->getPhotos as $photos) {
         //     $photostour = ($photos->photo);
@@ -45,18 +45,19 @@ class ToursController extends Controller
      */
     public function store(Request $request)
     {
-
-       // if ($request->hasFile('photo')) {
+         //if ($request->hasFile('photo')) {
             $datosGuia = Guias::where('user_id', $request->user_id)->first();
-            $slug = SlugService::createSlug(Tours::class, 'slug', $request->name, ['unique' => false]);
+            // $slug = SlugService::createSlug(Tours::class, 'slug', $request->name, ['unique' => false]);
 
+            error_log($datosGuia);
+            
             $tour = Tours::create([
                 'cuidad' => $request->cuidad,
                 'pais' => $request->Pais,
                 'CP' => '',
 
                 'name' => $request->name,
-                'slug' => $slug,
+                'slug' => $request->name,
 
                 'mapaGoogle' => $request->mapaGoogle,
                 'puntoInicio' => $request->puntoInicio,
@@ -69,9 +70,11 @@ class ToursController extends Controller
 
                 'categories' => $request->categories,
                 'duration' => $request->duration,
-                'lenguajes' => $datosGuia->idiomas,
+                'lenguajes' => 'Hola',
+               // 'lenguajes' => $datosGuia->idiomas,
                 'price' => $request->price,
-                'user_guide' => $datosGuia->id,
+                'user_guide' => '',
+                //'user_guide' => $datosGuia->id,
                 'user_id' => $request->user_id,
 
             ]);
@@ -91,8 +94,14 @@ class ToursController extends Controller
 
             return response()->json(['Tour' => $tour], 200);
 
-        //}
+       // }
+        // error_log($request);
+        // error_log('==========');
+        // error_log($request->cuidad);
 
+        // return response()->json(['Tour' =>  request('cuidad')], 200);
+      // return var_dump($_POST); 
+      
     }
     /**
      * Display the specified resource.
@@ -102,7 +111,7 @@ class ToursController extends Controller
      */
     public function show($id)
     {
-        $tour = ToursEspañol::find($id);
+        $tour = Tours::find($id);
 
         foreach ($tour->getPhotos as $photos) {
             $potos = ($photos->photo);
@@ -145,7 +154,7 @@ class ToursController extends Controller
     {
         //
         try {
-            $tour = ToursEspañol::findOrFail($id);
+            $tour = Tours::findOrFail($id);
             foreach ($tour->photos as $photos) {
                 Storage::disk('s3')->delete('images/tours/' . $photos->photo);
             }
@@ -163,7 +172,7 @@ class ToursController extends Controller
     public function Obtenerporcuidad(Request $request)
     {
 
-        $tour = ToursEspañol::where('cuidad', $request->cuidad)->get();
+        $tour = Tours::where('cuidad', $request->cuidad)->get();
         // foreach ($tour->photos as $photos) {
         //      $potos = ($photos->photo);
         // }
