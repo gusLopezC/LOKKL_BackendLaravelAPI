@@ -152,20 +152,7 @@ class ToursController extends Controller
         }
     }
 
-    /**
-     * Obtener por cuidad
-     */
-    public function Obtenerporcuidad(Request $request)
-    {
-
-        $tour = Tours::where('cuidad', $request->cuidad)->get();
-        // foreach ($tour->photos as $photos) {
-        //      $potos = ($photos->photo);
-        // }
-        return response()->json(['data' => $tour, 200]);
-    }
-
-
+    
     public function uploadFiles(Request $request, $id)
     {
         error_log($request);     
@@ -187,5 +174,36 @@ class ToursController extends Controller
         }
 
         return response()->json(['tours' => $tour, 200]);
+    }
+
+
+    /**
+     * Obtener por cuidad
+     */
+    public function Obtenerporcuidad(Request $request)
+    {
+
+        $tour = Tours::where('cuidad', $request->cuidad)->get();
+        // foreach ($tour->photos as $photos) {
+        //      $potos = ($photos->photo);
+        // }
+        return response()->json(['data' => $tour, 200]);
+    }
+
+
+    /**
+     * Obtener por cuidad
+     */
+    public function ObtenerMisTours($id)
+    {
+
+        $tour = Tours::with('tour_id','getTour')
+        ->where('user_id', $id)
+        ->get();
+        // foreach ($tour->getPhotos as $photos) {
+        //     $potos = ($photos->photo);
+        // }
+
+        return response()->json(['data' => $tour, 200]);
     }
 }
