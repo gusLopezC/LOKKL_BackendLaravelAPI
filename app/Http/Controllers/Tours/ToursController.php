@@ -152,16 +152,16 @@ class ToursController extends Controller
         }
     }
 
-    
+
     public function uploadFiles(Request $request, $id)
     {
-        error_log($request);     
+        error_log($request);
 
         $tour = Tours::where('id', $id)->first();
         $files = $request->file('file');
-    
+
         foreach ($files as $file) {
-            $name =  $id.'_'.time().$file->getClientOriginalName();
+            $name =  $id . '_' . time() . $file->getClientOriginalName();
             error_log($name);
             $filePath = '/images/tours/' . $name;
             Storage::disk('s3')->put($filePath, file_get_contents($file));
@@ -180,16 +180,24 @@ class ToursController extends Controller
     /**
      * Obtener por cuidad
      */
-    public function Obtenerporcuidad(Request $request)
+    public function ObtenerPorCiudad($ciudad)
     {
 
-        $tour = Tours::where('cuidad', $request->cuidad)->get();
+
+        $tour = Tours::where('cuidad', $ciudad)->get();
         // foreach ($tour->photos as $photos) {
         //      $potos = ($photos->photo);
         // }
-        return response()->json(['data' => $tour, 200]);
+        return response()->json(['Tour' => $tour, 200]);
     }
-
+    public function ObtenerTour($slug)
+    {
+        $tour = Tours::where('slug', $slug)->get();
+        // foreach ($tour->photos as $photos) {
+        //     $potos = ($photos->photo);
+        // }
+        return response()->json(['Tour' => $tour, 200]);
+    }
 
     /**
      * Obtener por cuidad
@@ -197,9 +205,9 @@ class ToursController extends Controller
     public function ObtenerMisTours($id)
     {
 
-        $tour = Tours::with('tour_id','getTour')
-        ->where('user_id', $id)
-        ->get();
+        $tour = Tours::with('tour_id', 'getTour')
+            ->where('user_id', $id)
+            ->get();
         // foreach ($tour->getPhotos as $photos) {
         //     $potos = ($photos->photo);
         // }

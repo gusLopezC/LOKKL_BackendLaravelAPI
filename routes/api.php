@@ -46,13 +46,9 @@ Route::middleware('auth:api')->group(function () {
     /**
      * Tours
      */
-    Route::post('tours/obtenerporcuidad', 'Tours\ToursController@Obtenerporcuidad')->name('tours.obtenerporcuidad');
-
-    /**
-    * Tours
-     */
     Route::resource('tours', 'Tours\ToursController');
     Route::post('tours/uploadFiles/{id}', 'Tours\ToursController@uploadFiles')->name('tours.uploadFiles');
+
     Route::get('tours/misTours/{id}', 'Tours\ToursController@ObtenerMisTours')->name('tours.ObtenerMisTours');
 
     Route::resource('comentarios', 'Tours\ComentariosController');
@@ -71,3 +67,13 @@ Route::post('emailContacto', 'Mail\EmailController@EmailContact');
 Route::get('/send/email', 'HomeController@mail');
 Route::get('users/verify/{token}', 'PassportController@verify')->name('users.verify');
 Route::get('users/{user}/resend', 'PassportController@resend')->name('users.resend');
+
+
+/**
+ * Tours
+ */
+Route::get('tours/ObtenerPorCiudad/{ciudad}', 'Tours\ToursController@ObtenerPorCiudad')->name('tours.ObtenerPorCiudad');
+Route::get('tours/ObtenerTour/{slug}', 'Tours\ToursController@ObtenerTour')->name('tours.ObtenerTour');
+
+
+
