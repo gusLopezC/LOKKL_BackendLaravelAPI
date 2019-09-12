@@ -232,28 +232,28 @@ class PassportController extends Controller
 
         Mail::to($user)->send(new UserCreated($user));
 
-        return redirect()->away('https://www.lokkl.com/');
+        return response(['message' => 'El correo se a enviado correctamente'], 200);
     }
 
     public function changePassword(Request $request)
     {
-
+        error_log('Hola');
         $request->validate = [
             'password' => 'required',
             'new_password' => 'required|string|min:6|different:password',
         ];
 
         if (Hash::check($request->password, auth()->user()->password) == false) {
+            error_log('Hola2');
 
-
-            return response(['message' => 'Unauthorized Fail'], 401);
+            return response()->json(['message' => 'Unauthorized Fail'], 401);
         }
-
+        error_log('Hola3');
         $user = auth()->user();
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        return response([
+        return response()->json([
             'message' => 'Your password has been updated successfully.',
         ], 200);
 
