@@ -36,6 +36,7 @@ Route::middleware('auth:api')->group(function () {
      */
     Route::resource('prospectos', 'Prospectos\ProspectosGuideController');
     Route::post('users/perfil/documentGuide', 'Prospectos\ProspectosGuideController@updateDocument')->name('prospects.updateDocument');
+    Route::get('users/prospectos/prospectoRegistrado/{email}', 'Prospectos\ProspectosGuideController@prospectoRegistrado')->name('prospects.prospectoRegistrado');
 
     /**
      * Guias

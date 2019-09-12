@@ -107,11 +107,11 @@ class ProspectosGuideController extends Controller
     /* ========================
     Metodo para solicitar documentos esta en MailController
     ======================== */
-/**
- * Este  Metodo manda un correo al prospecto diciendole que a sido aceptado
- * cambiamos el role del usuario a GUIDE_VERIFIED para que pueda comenzar a crear tours
- * y ademas registrarlo en la table de guias
- */
+    /**
+     * Este  Metodo manda un correo al prospecto diciendole que a sido aceptado
+     * cambiamos el role del usuario a GUIDE_VERIFIED para que pueda comenzar a crear tours
+     * y ademas registrarlo en la table de guias
+     */
     public function AceptarProspecto($prospectos)
     {
 
@@ -151,6 +151,13 @@ class ProspectosGuideController extends Controller
         //  $prospectos->delete();
 
         return response()->json(['Guia nuevo' => $guias], 201);
-
     }
+
+    public function prospectoRegistrado($email)
+    {
+
+        $prospecto = ProspectosGuide::where('email', $email)->first();
+        return response()->json(['Prospecto' => $prospecto], 201);
+    }
+
 }
