@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Storage;
 
 class PassportController extends Controller
 {
-    public function prueba(Request $request)
-    {
-        return 'Hola Welcome';
-    }
-
     public function register(Request $request)
     {
         $rules = [
@@ -163,7 +158,7 @@ class PassportController extends Controller
         if (!$user->isDirty()) {
 
             return response()->json(['error' =>
-                'Se debe especificar un campo al menos para actualizar', 'code' => 422], 422);
+                'At least one field must be specified to update', 'code' => 422], 422);
         }
         $user->save();
 
@@ -207,7 +202,7 @@ class PassportController extends Controller
             $user->delete();
             return response()->json(['data' => $user, 200]);
         } catch (PDOException $e) {
-            return 'existe un error'+$e;
+            return 'There is an error'+$e;
         }
     }
     public function verify($token)
@@ -227,12 +222,12 @@ class PassportController extends Controller
     {
 
         if ($user->verified == '1') {
-            return response()->json(['mensaje' => 'Este usuario ya a sido verifcado', 409]);
+            return response()->json(['mensaje' => 'This user has already been verified', 409]);
         }
 
         Mail::to($user)->send(new UserCreated($user));
 
-        return response(['message' => 'El correo se a enviado correctamente'], 200);
+        return response(['message' => 'The email was sent successfully'], 200);
     }
 
     public function changePassword(Request $request)

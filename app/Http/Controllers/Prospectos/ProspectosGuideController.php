@@ -41,9 +41,9 @@ class ProspectosGuideController extends Controller
         $data['estado'] = 'Nuevo';
         $prospecto = ProspectosGuide::create($data);
 
-        Mail::to('iam@lokkl.com')
-            ->cc(['developerlokkl@gmail.com', 'lokklmx@gmail.com'])
-            ->send(new NewProspectRegister($prospecto));
+        // Mail::to('iam@lokkl.com')
+        //     ->cc(['developerlokkl@gmail.com', 'lokklmx@gmail.com'])
+        //     ->send(new NewProspectRegister($prospecto));
 
         return response()->json(['data' => $prospecto], 201);
     }

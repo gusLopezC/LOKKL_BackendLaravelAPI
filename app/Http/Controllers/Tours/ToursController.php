@@ -141,12 +141,19 @@ class ToursController extends Controller
         //
         try {
             $tour = Tours::findOrFail($id);
-            foreach ($tour->photos as $photos) {
-                Storage::disk('s3')->delete('images/tours/' . $photos->photo);
-            }
-            $tour->delete();
 
-            return response()->json(['data' => $tour, 200]);
+            $Photostour = PhotosTours::where('tour_id', $tour->id)->get();
+
+            foreach ($Photostour as $photos) {
+                error_log($photos->id);
+                // Storage::disk('s3')->delete('images/tours/' . $photos->photo);
+                // error_log($photos->id);
+                // $Photostour->destroy($photos->id);
+            }
+           
+           // $tour->delete();
+
+            return response()->json(['Tour' => $Photostour, 200]);
         } catch (PDOException $e) {
             return response()->json('existe un error' + $e);
         }
@@ -155,8 +162,6 @@ class ToursController extends Controller
 
     public function uploadFiles(Request $request, $id)
     {
-        error_log($request);
-
         $tour = Tours::where('id', $id)->first();
         $files = $request->file('file');
 
@@ -204,14 +209,16 @@ class ToursController extends Controller
      */
     public function ObtenerMisTours($id)
     {
-
-        $tour = Tours::with('tour_id', 'getTour')
-            ->where('user_id', $id)
+        $tour = Tours::where('user_id', $id)
             ->get();
+
+        // $tour = Tours::join('photos_tours', '','=',$id)
+        // ->where('user_id', $id)
+        // ->get();
         // foreach ($tour->getPhotos as $photos) {
         //     $potos = ($photos->photo);
         // }
 
-        return response()->json(['data' => $tour, 200]);
+        return response()->json(['Tours' => $tour, 200]);
     }
 }
