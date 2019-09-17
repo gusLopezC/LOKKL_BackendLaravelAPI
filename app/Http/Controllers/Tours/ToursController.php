@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Tours;
 
+use App\Comentarios;
 use App\Guias;
 use App\Http\Controllers\Controller;
 use App\Tours;
@@ -9,7 +10,7 @@ use App\PhotosTours;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 
 
 class ToursController extends Controller
@@ -145,13 +146,12 @@ class ToursController extends Controller
             $Photostour = PhotosTours::where('tour_id', $tour->id)->get();
 
             foreach ($Photostour as $photos) {
-                error_log($photos->id);
-                // Storage::disk('s3')->delete('images/tours/' . $photos->photo);
-                // error_log($photos->id);
-                // $Photostour->destroy($photos->id);
+
+                Storage::disk('s3')->delete('images/tours/' . $photos->photo);
+                $Photostour->each->delete();
             }
-           
-           // $tour->delete();
+
+            $tour->delete();
 
             return response()->json(['Tour' => $Photostour, 200]);
         } catch (PDOException $e) {
@@ -189,19 +189,28 @@ class ToursController extends Controller
     {
 
 
-        $tour = Tours::where('cuidad', $ciudad)->get();
-        // foreach ($tour->photos as $photos) {
-        //      $potos = ($photos->photo);
-        // }
+        $tour = Tours::with('getPhotos')
+        ->where('cuidad', $ciudad)->get();
+
         return response()->json(['Tour' => $tour, 200]);
     }
+
+
+
     public function ObtenerTour($slug)
     {
-        $tour = Tours::where('slug', $slug)->get();
-        // foreach ($tour->photos as $photos) {
-        //     $potos = ($photos->photo);
-        // }
-        return response()->json(['Tour' => $tour, 200]);
+        $tour = Tours::with('getPhotos')
+        ->where('slug', $slug)->first();
+
+        $guia = DB::table('users')->select('name','infopersonal','img')
+        ->where('id','=', $tour->user_id)
+        ->get();
+
+        $comentarios = Comentarios::with('getUser:id,name')
+        ->where('tour_id','=', $tour->id)->get();
+
+
+        return response()->json(['Tour' => $tour,"Guia" => $guia, "Comentarios" => $comentarios, 200]);
     }
 
     /**
@@ -209,15 +218,11 @@ class ToursController extends Controller
      */
     public function ObtenerMisTours($id)
     {
-        $tour = Tours::where('user_id', $id)
+        $tour = Tours::with('getPhotos')
+            ->where('user_id', $id)
             ->get();
 
-        // $tour = Tours::join('photos_tours', '','=',$id)
-        // ->where('user_id', $id)
-        // ->get();
-        // foreach ($tour->getPhotos as $photos) {
-        //     $potos = ($photos->photo);
-        // }
+       // error_log($tour->getPhotos);
 
         return response()->json(['Tours' => $tour, 200]);
     }

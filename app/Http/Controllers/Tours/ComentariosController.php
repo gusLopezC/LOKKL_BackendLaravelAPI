@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Tours;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+
+use App\Comentarios;
+use App\Tours;
 use Illuminate\Http\Request;
 
 class ComentariosController extends Controller
@@ -15,7 +18,10 @@ class ComentariosController extends Controller
      */
     public function index()
     {
+        $timezone = date_default_timezone_get();
+        // $date = Carbon\Carbon::now();
         //
+        return Carbon::now();;
     }
 
     /**
@@ -25,7 +31,9 @@ class ComentariosController extends Controller
      */
     public function create()
     {
-        //
+        $comentarios = TouComentariosrs::all();
+
+        return response()->json(['Comentarios' => $comentarios, 200]);
     }
 
     /**
@@ -48,16 +56,19 @@ class ComentariosController extends Controller
 
         $this->validate($request, $rules);
 
-        $comentario = ToursEspañol::create([
-            'comentario' => $request->name,
+        $comentario = Comentarios::create([
+            'comentario' => $request->comentario,
             'calificacion' => $request->calificacion,
-            'tour_id' => $request->ciudad,
-            'user_id' => $request->categories,
+            'tour_id' => $request->tour_id,
+            'user_id' => $request->user_id,
             'created_at' => $newDate
         ]);
 
-        return response()->json(['Comentario' => $comentario], 200);
+        $tour = Tours::find($request->tour_id)->first();;
+        $tour->calification = ($tour->calification + $request->calificacion) / 2;
+        $tour->save();
 
+        return response()->json(['Comentario' => $comentario], 200);
     }
 
     /**
@@ -102,6 +113,10 @@ class ComentariosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comentario = Comentarios::findOrFail($id);
+
+        $comentario->delete();
+
+        return response()->json(['Comentario' => $comentario, 200]);
     }
 }

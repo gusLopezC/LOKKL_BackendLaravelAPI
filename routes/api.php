@@ -52,7 +52,6 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('tours/misTours/{id}', 'Tours\ToursController@ObtenerMisTours')->name('tours.ObtenerMisTours');
 
-    Route::resource('comentarios', 'Tours\ComentariosController');
     /**
      * transaction
      */
@@ -75,6 +74,7 @@ Route::get('users/{user}/resend', 'PassportController@resend')->name('users.rese
  */
 Route::get('tours/ObtenerPorCiudad/{ciudad}', 'Tours\ToursController@ObtenerPorCiudad')->name('tours.ObtenerPorCiudad');
 Route::get('tours/ObtenerTour/{slug}', 'Tours\ToursController@ObtenerTour')->name('tours.ObtenerTour');
+Route::resource('tour/comentarios', 'Tours\ComentariosController');
 
 
 

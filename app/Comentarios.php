@@ -16,10 +16,10 @@ class Comentarios extends Model
 
     public function getTour()
     {
-        return $this->belongsTo('App\ToursEspañol', 'id');
+        return $this->belongsTo('App\Tours', 'id');
     }
     public function getUser()
     {
-        return $this->belongsTo('App\User', 'id');
+        return $this->belongsTo('App\User', 'user_id');
     }
 }
