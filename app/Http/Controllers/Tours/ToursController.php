@@ -202,6 +202,10 @@ class ToursController extends Controller
         $tour = Tours::with('getPhotos')
         ->where('slug', $slug)->first();
 
+
+
+        error_log($tour);
+
         $guia = DB::table('users')->select('name','infopersonal','img')
         ->where('id','=', $tour->user_id)
         ->get();
