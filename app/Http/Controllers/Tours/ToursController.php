@@ -7,6 +7,7 @@ use App\Guias;
 use App\Http\Controllers\Controller;
 use App\Tours;
 use App\PhotosTours;
+use App\TourExtra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
@@ -188,11 +189,20 @@ class ToursController extends Controller
     public function ObtenerPorCiudad($ciudad)
     {
 
-
         $tour = Tours::with('getPhotos')
         ->where('cuidad', $ciudad)->get();
 
-        return response()->json(['Tour' => $tour, 200]);
+        $tourextra = TourExtra::where('cuidad', $ciudad)->first();
+
+        error_log($tourextra);
+        if (! $tourextra) { 
+            $tourextra = TourExtra::where('cuidad', 'default')->first();
+
+            return response()->json(['Tour' => $tour, 'TourExtra' => $tourextra, 200]);
+        }
+        
+
+        return response()->json(['Tour' => $tour, 'TourExtra' => $tourextra, 200]);
     }
 
 
@@ -203,15 +213,13 @@ class ToursController extends Controller
         ->where('slug', $slug)->first();
 
 
-
-        error_log($tour);
-
         $guia = DB::table('users')->select('name','infopersonal','img')
         ->where('id','=', $tour->user_id)
         ->get();
 
         $comentarios = Comentarios::with('getUser:id,name')
         ->where('tour_id','=', $tour->id)->get();
+
 
 
         return response()->json(['Tour' => $tour,"Guia" => $guia, "Comentarios" => $comentarios, 200]);
