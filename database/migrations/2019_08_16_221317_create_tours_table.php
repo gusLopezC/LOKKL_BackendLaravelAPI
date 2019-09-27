@@ -21,16 +21,18 @@ class CreateToursTable extends Migration
             $table->string('pais');
             $table->string('CP');
             $table->string('categories');
-            $table->string('schedulle');
+            $table->longText('schedulle');
             $table->string('duration');
-            $table->text('overview');
-            $table->text('whatsIncluded');
-            $table->text('itinerary');
+            $table->longText('whatsIncluded');
+            $table->longText('itinerary');
             $table->string('mapaGoogle');
             $table->string('puntoInicio');
             $table->integer('calification')->default(5);
             $table->string('lenguajes');
             $table->string('price');
+            $table->string('moneda');
+            $table->string('verificado')->default('No');
+
             $table->unsignedBigInteger('user_guide')->unsigned();
             $table->unsignedBigInteger('user_id')->unsigned();
 
