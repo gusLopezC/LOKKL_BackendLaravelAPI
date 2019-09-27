@@ -16,6 +16,7 @@ class ChangeDataTour extends Migration
         //
         Schema::table('tours', function (Blueprint $table) {
             //
+            $table->dropColumn('moneda');
             $table->string('moneda');
             $table->string('verificado')->default('No');
         });
