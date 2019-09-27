@@ -70,8 +70,7 @@ class ToursController extends Controller
             'puntoInicio' => $request->puntoInicio,
 
             'schedulle' => $request->schedulle,
-            'overview' => $request->overview,
-
+            
             'itinerary' => $request->itinerary,
             'whatsIncluded' => $request->whatsIncluded,
 
@@ -79,6 +78,8 @@ class ToursController extends Controller
             'duration' => $request->duration,
             'lenguajes' => $datosGuia->idiomas,
             'price' => $request->price,
+            'moneda' => $request->moneda,
+
             'user_guide' => $datosGuia->id,
             'user_id' => $request->user_id,
 
@@ -168,8 +169,9 @@ class ToursController extends Controller
 
         foreach ($files as $file) {
             $name =  $id . '_' . time() . $file->getClientOriginalName();
-            error_log($name);
+
             $filePath = '/images/tours/' . $name;
+            error_log($file);
             Storage::disk('s3')->put($filePath, file_get_contents($file));
 
 
@@ -194,7 +196,6 @@ class ToursController extends Controller
 
         $tourextra = TourExtra::where('cuidad', $ciudad)->first();
 
-        error_log($tourextra);
         if (! $tourextra) { 
             $tourextra = TourExtra::where('cuidad', 'default')->first();
 

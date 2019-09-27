@@ -25,7 +25,7 @@ class Tours extends Model
         'puntoInicio',
 
         'schedulle',
-        'overview',
+ 
 
         'itinerary',
         'whatsIncluded',
@@ -35,6 +35,8 @@ class Tours extends Model
         'calification',
         'lenguajes',
         'price',
+        'moneda',
+        
         'user_guide',
         'user_id'
     ];
