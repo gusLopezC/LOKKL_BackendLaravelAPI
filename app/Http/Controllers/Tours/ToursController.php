@@ -165,23 +165,27 @@ class ToursController extends Controller
     public function uploadFiles(Request $request, $id)
     {
         $tour = Tours::where('id', $id)->first();
+
         $files = $request->file('file');
 
-        foreach ($files as $file) {
-            $name =  $id . '_' . time() . $file->getClientOriginalName();
+        
+        if ($request->hasFile('file')) {
+       
+            foreach ($files as $file) {
+                $name =  $id . '_' . time() . $file->getClientOriginalName();
+                error_log($name);
+                $filePath = '/images/tours/' . $name;
+                Storage::disk('s3')->put($filePath, file_get_contents($file));
 
-            $filePath = '/images/tours/' . $name;
-            error_log($file);
-            Storage::disk('s3')->put($filePath, file_get_contents($file));
 
-
-            $phototour = PhotosTours::create([
-                'photo' => $name,
-                'tour_id' => $id,
-            ]);
-        }
-
+                $phototour = PhotosTours::create([
+                    'photo' => $name,
+                    'tour_id' => $id,
+                ]);
+            }
         return response()->json(['tours' => $tour, 200]);
+    }
+        
     }
 
 
@@ -213,7 +217,8 @@ class ToursController extends Controller
         $tour = Tours::with('getPhotos')
         ->where('slug', $slug)->first();
 
-
+        $tour->price =  $tour->price + ($tour->price * .20);
+        
         $guia = DB::table('users')->select('name','infopersonal','img')
         ->where('id','=', $tour->user_id)
         ->get();
