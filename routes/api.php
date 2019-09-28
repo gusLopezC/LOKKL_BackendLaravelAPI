@@ -43,6 +43,7 @@ Route::middleware('auth:api')->group(function () {
      */
     Route::resource('guias', 'Guias\GuiasController');
     Route::post('guias/datosPago', 'Guias\GuiasController@datosPagos')->name('datosPago.datosPagos');
+    Route::get('guias/datosPago/{id}', 'Guias\GuiasController@obtenerMisDatosPago')->name('datosPago.obtenerMisDatosPago');
 
     /**
      * Tours

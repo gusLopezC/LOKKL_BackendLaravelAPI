@@ -114,4 +114,13 @@ class GuiasController extends Controller
         return response()->json(['guia' => $guia], 201);
 
     }
+
+    public function obtenerMisDatosPago($user_id){
+
+        $guia = Guias::where('user_id', $user_id)->first();
+
+
+        return response()->json(['guia' => $guia], 201);
+
+    }
 }
