@@ -35,6 +35,7 @@ class Tours extends Model
         'calification',
         'lenguajes',
         'price',
+        'priceFinal',
         'moneda',
         
         'user_guide',

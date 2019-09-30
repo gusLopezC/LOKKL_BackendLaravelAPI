@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\UserCreated;
 use App\User;
+use App\Tours;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -13,6 +14,7 @@ class PassportController extends Controller
 {
     public function register(Request $request)
     {
+        
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -20,20 +22,24 @@ class PassportController extends Controller
         ];
 
         $this->validate($request, $rules);
+        
+      $usuario = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => 'USER_ROLE',
+            'verified' => false,
+            'img' => 'avatar3.png',
+            'verification_token' => User::generarToken(),
 
-        $datos = $request->all();
-        $datos['password'] = bcrypt($request->password);
-        $datos['role'] = 'USER_ROLE';
-        $datos['verified'] = false;
-        $datos['img'] = 'avatar3.png';
-        $datos['verification_token'] = User::generarToken();
+        ]);
 
-        $usuario = User::create($datos);
-
+        
         $token = $usuario->createToken('dadirugesedevalclkkol')->accessToken;
 
+        return $usuario;
         return response()->json([
-            'data' => $usuario,
+            'user' => $datos,
             'token' => $token, 200,
         ]);
     }
@@ -251,6 +257,17 @@ class PassportController extends Controller
         return response()->json([
             'message' => 'Your password has been updated successfully.',
         ], 200);
+
+    }
+    public function ObtenerPerfilPublico($id){
+
+        $usuarios = User::findOrFail($id);
+
+        $tour = Tours::with('getPhotos')
+            ->where('user_id', $id)
+            ->get();
+
+        return response()->json(['Usuario' => $usuarios,'Tours' => $tour, 200]);
 
     }
 }

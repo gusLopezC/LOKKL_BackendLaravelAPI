@@ -25,11 +25,11 @@ class AppServiceProvider extends ServiceProvider
          Schema::defaultStringLength(191);
  
  
-          User::created(function($user){
+         /* User::created(function($user){
 
             Mail::to($user->email)->send(new UserCreated($user));
           
-          });
+          });*/
 
           User::updated(function($user){
            if($user->isDirty('email')){

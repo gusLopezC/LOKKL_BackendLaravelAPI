@@ -67,6 +67,7 @@ Route::resource('emails', 'Mail\EmailController');
 Route::post('emailContacto', 'Mail\EmailController@EmailContact');
 Route::get('/send/email', 'HomeController@mail');
 Route::get('users/verify/{token}', 'PassportController@verify')->name('users.verify');
+Route::get('users/perfil/perfilpublico/{id}', 'PassportController@ObtenerPerfilPublico')->name('users.ObtenerPerfilPublico');
 Route::get('users/{user}/resend', 'PassportController@resend')->name('users.resend');
 
 

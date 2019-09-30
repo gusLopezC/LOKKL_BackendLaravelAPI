@@ -78,6 +78,7 @@ class ToursController extends Controller
             'duration' => $request->duration,
             'lenguajes' => $datosGuia->idiomas,
             'price' => $request->price,
+            'priceFinal' => $request->price+($request->price * .20 ),
             'moneda' => $request->moneda,
 
             'user_guide' => $datosGuia->id,
@@ -198,6 +199,8 @@ class ToursController extends Controller
         $tour = Tours::with('getPhotos')
         ->where('cuidad', $ciudad)->get();
 
+        //$tour->price =  $tour->price + ($tour->price * .20);
+
         $tourextra = TourExtra::where('cuidad', $ciudad)->first();
 
         if (! $tourextra) { 
@@ -216,10 +219,8 @@ class ToursController extends Controller
     {
         $tour = Tours::with('getPhotos')
         ->where('slug', $slug)->first();
-
-        $tour->price =  $tour->price + ($tour->price * .20);
         
-        $guia = DB::table('users')->select('name','infopersonal','img')
+        $guia = DB::table('users')->select('id','name','infopersonal','img')
         ->where('id','=', $tour->user_id)
         ->get();
 
