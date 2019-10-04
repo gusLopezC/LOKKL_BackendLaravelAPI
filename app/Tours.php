@@ -16,7 +16,7 @@ class Tours extends Model
 
         'cuidad',
         'pais',
-        'CP',
+        'placeID',
 
         'name',
         'slug',

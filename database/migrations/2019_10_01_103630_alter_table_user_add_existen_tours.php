@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChangeTourSchedulleType extends Migration
+class AlterTableUserAddExistenTours extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class ChangeTourSchedulleType extends Migration
      */
     public function up()
     {
-        Schema::table('tours', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
-            $table->longText('schedulle')->change();
+            $table->boolean('tieneTours')->default(0);
         });
     }
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Guias;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Guias;
+use App\PaymentGuide;
+
 class GuiasController extends Controller
 {
     /**
@@ -98,29 +100,42 @@ class GuiasController extends Controller
         return redirect('/prospectos');
     }
 
-    public function datosPagos(Request $request){
+    public function datosPagos(Request $request)
+    {
 
-        $guia = Guias::where('user_id', $request->user_id)->first();
+        $guia = PaymentGuide::where('user_id', $request->user_id)->first();
 
-        $guia->pais = $request->pais;
-        $guia->tipomoneda = $request->tipomoneda;
-        $guia->clabeInterbancaria = $request->clabeInterbancaria;
-        $guia->numeroCuenta = $request->numeroCuenta;
-        $guia->RFC = $request->RFC;
-        $guia->CURP = $request->CURP;
+        if ($guia) {
+            $guia->pais = $request->pais;
+            $guia->tipomoneda = $request->tipomoneda;
+            $guia->clabeInterbancaria = $request->clabeInterbancaria;
+            $guia->numeroCuenta = $request->numeroCuenta;
+            $guia->RFC = $request->RFC;
+            $guia->CURP = $request->CURP;
+            $guia->save();
+            return response()->json(['guia' => $guia], 201);
+        } else {
 
-        $guia->save();
-        error_log($request);
+            $guia = PaymentGuide::create([
+                'pais' => $request->pais,
+                'tipomoneda' => $request->tipomoneda,
+                'clabeInterbancaria' => $request->clabeInterbancaria,
+                'numeroCuenta' => $request->numeroCuenta,
+                'RFC' => $request->RFC,
+                'CURP' => $request->CURP,
+                'user_id' => $request->user_id
+
+            ]);
+        }
+
         return response()->json(['guia' => $guia], 201);
-
     }
 
-    public function obtenerMisDatosPago($user_id){
+    public function obtenerMisDatosPago($user_id)
+    {
 
-        $guia = Guias::where('user_id', $user_id)->first();
-
+        $guia = PaymentGuide::where('user_id', $user_id)->first();
 
         return response()->json(['guia' => $guia], 201);
-
     }
 }

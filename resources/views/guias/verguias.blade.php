@@ -13,7 +13,7 @@
                             <td>Nombre</td>
                             <td>Email</td>
                             <td>Telefono</td>
-                            <td>Cuidad Tour</td>
+                            <td>Ciudad Tour</td>
                             <td>Pais</td>
 
                         </tr>

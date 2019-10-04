@@ -8,7 +8,7 @@ class TourExtra extends Model
 {
     //
     protected $fillable = [
-    'cuidad',
+    'ciudad',
     'foto',
     'urldata'
 ];

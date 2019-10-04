@@ -35,6 +35,7 @@ Route::middleware('auth:api')->group(function () {
      * Prospectos
      */
     Route::resource('prospectos', 'Prospectos\ProspectosGuideController');
+    Route::post('prospectosEmpresa', 'Prospectos\ProspectosGuideController@registrarProspectoEmpresa')->name('prospects.registrarProspectoEmpresa');
     Route::post('users/perfil/documentGuide', 'Prospectos\ProspectosGuideController@updateDocument')->name('prospects.updateDocument');
     Route::get('users/prospectos/prospectoRegistrado/{email}', 'Prospectos\ProspectosGuideController@prospectoRegistrado')->name('prospects.prospectoRegistrado');
 
@@ -50,7 +51,6 @@ Route::middleware('auth:api')->group(function () {
      */
     Route::resource('tours', 'Tours\ToursController');
     Route::post('tours/uploadFiles/{id}', 'Tours\ToursController@uploadFiles')->name('tours.uploadFiles');
-
     Route::get('tours/misTours/{id}', 'Tours\ToursController@ObtenerMisTours')->name('tours.ObtenerMisTours');
 
     /**

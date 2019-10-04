@@ -214,8 +214,12 @@ class PassportController extends Controller
     public function verify($token)
     {
 
-        $user = User::where('verification_token', $token)->firstOrFail();
+        $user = User::where('verification_token', $token)->first();
 
+        if(!$user){
+            return redirect()->away('https://www.lokkl.com/');
+
+        }
         $user->verified = 1;
         $user->verification_token = null;
 
@@ -233,7 +237,7 @@ class PassportController extends Controller
 
         Mail::to($user)->send(new UserCreated($user));
 
-        return response(['message' => 'The email was sent successfully'], 200);
+        return response(['message' => 'El email a sido enviado correctamente'], 200);
     }
 
     public function changePassword(Request $request)

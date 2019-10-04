@@ -12,8 +12,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/funciones.js') }}"></script>
-    
-   
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -52,7 +50,7 @@
                         @else
                         @if (Auth::user()->role == 'ADMIN_ROLE')
                         <ul class="navbar-nav mr-auto">
-                            <li class="navbar_item"><a href="">Administrador Tour</a></li>
+                            <li class="navbar_item"><a href="/tours">Administrador Tour</a></li>
                             <li class="navbar_item"><a href="/usuarios">Administrador Usuarios</a></li>
                             <li class="navbar_item"><a href="/guias">Administrador Guias</a></li>
                             <li class="navbar_item"><a href="">Administrador Pagos</a></li>
@@ -90,6 +88,9 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ffcf465b0a.js" crossorigin="anonymous"></script>
+    @include('sweetalert::alert')
+
     @stack('scripts')
 </body>
 </html>

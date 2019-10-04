@@ -13,7 +13,7 @@
                             <td>Nombre</td>
                             <td>Email</td>
                             <td>Edad</td>
-                            <td>Cuidad Tour</td>
+                            <td>Ciudad Tour</td>
                             <td>Archivos de verificación</td>
                             <td>Fecha registro</td>
                         </tr>
@@ -22,10 +22,10 @@
                         @foreach ($prospectos as $prospecto)
                         @if($prospecto->estado == 'Nuevo')
                           <tr>
-                              <td><a href="{{route('detallesprospecto',$prospecto->id)}}">{{$prospecto->name}}</a></td>
-                              <td>{{$prospecto->email}}</td>
+                              <td><a href="{{route('detallesprospecto',$prospecto->id)}}">{{$prospecto->nameContacto}}</a></td>
+                              <td>{{$prospecto->emailContacto}}</td>
                               <td>{{$prospecto->edad}}</td>
-                              <td>{{$prospecto->cuidad_origin}}</td>
+                              <td>{{$prospecto->ciudad}}</td>
                               <td>{{$prospecto->created_at}}</td>
                               <td><a href="{{route('eliminarprospecto',$prospecto->id)}}" class="button is-danger"
                                   onclick="return confirm('Esta seguro que desea eliminar este registro');">Eliminar</a></td>
@@ -54,7 +54,7 @@
                         <td>Nombre</td>
                         <td>Email</td>
                         <td>Edad</td>
-                        <td>Cuidad Tour</td>
+                        <td>Ciudad Tour</td>
                         <td>Archivos de verificación</td>
                         <td>Fecha registro</td>
                     </tr>
@@ -63,10 +63,10 @@
                     @foreach ($prospectos as $prospecto)
                     @if($prospecto->estado == 'Pendiente')
                       <tr>
-                          <td><a href="{{route('detallesprospecto',$prospecto->id)}}">{{$prospecto->name}}</a></td>
-                          <td>{{$prospecto->email}}</td>
+                          <td><a href="{{route('detallesprospecto',$prospecto->id)}}">{{$prospecto->nameContacto}}</a></td>
+                          <td>{{$prospecto->emailContacto}}</td>
                           <td>{{$prospecto->edad}}</td>
-                          <td>{{$prospecto->cuidad_origin}}</td>
+                          <td>{{$prospecto->ciudad}}</td>
                           <td>{{$prospecto->created_at}}</td>
                           <td><a href="{{route('eliminarprospecto',$prospecto->id)}}" class="button is-danger"
                               onclick="return confirm('Esta seguro que desea eliminar este registro');">Eliminar</a></td>
@@ -94,7 +94,7 @@
                         <td>Nombre</td>
                         <td>Email</td>
                         <td>Edad</td>
-                        <td>Cuidad Tour</td>
+                        <td>Ciudad Tour</td>
                         <td>Archivos de verificación</td>
                         <td>Fecha registro</td>
                     </tr>

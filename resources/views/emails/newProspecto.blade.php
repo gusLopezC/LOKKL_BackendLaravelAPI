@@ -9,7 +9,7 @@
 <p><b>Nombre:</b>&nbsp;{{$prospectos->name}}</p>
 <p><b>Email:</b>&nbsp;{{$prospectos->email}}</p>
 <p><b>Telefono:</b>&nbsp;{{$prospectos->telefono}}</p>
-<p><b>Cuidad del tour:</b>&nbsp;{{$prospectos->ciudad}}</p>
+<p><b>Ciudad del tour:</b>&nbsp;{{$prospectos->ciudad}}</p>
 
 </div>
 

@@ -8,23 +8,16 @@ class Guias extends Model
 {
     //
     protected $fillable = [
+        'TipoGuia',
         'name',
         'email',
         'telefono',
         'edad',
         'ciudad',
-        'idiomas',
-        'pais',
-        'tipomoneda',
-        'clabeInterbancaria',
-        'numeroCuenta',
-        'RFC',
-        'CURP',
         'document_identificacion',
         'document_comprobantedomicilio',
         'document_cedulafiscal',
         'document_certificacion',
-        'document_CV',
         'user_id',
 
     ];

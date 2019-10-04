@@ -29,23 +29,59 @@ class ProspectosGuideController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required',
-            'email' => 'required|email|unique:prospectos_guides',
+            'nameContacto' => 'required',
+            'emailContacto' => 'required|email|unique:prospectos_guides',
         ];
         $this->validate($request, $rules);
 
-        $waypoints = implode(",", $request->idiomas);
 
         $data = $request->all();
-        $data['idiomas'] = $waypoints;
         $data['estado'] = 'Nuevo';
         $prospecto = ProspectosGuide::create($data);
+
+        //Mail::to('iam@lokkl.com')
+        //   ->cc(['developerlokkl@gmail.com', 'lokklmx@gmail.com'])
+        //    ->send(new NewProspectRegister($prospecto));
+
+        return response()->json(['data' => $prospecto], 201);
+    }
+
+    public function registrarProspectoEmpresa(Request $request)
+    {
+        $rules = [
+            'nameempresa' => 'required',
+            'emailContacto' => 'required|email|unique:prospectos_guides',
+        ];
+        $this->validate($request, $rules);
+
+        $guia = ProspectosGuide::create([
+
+            'TipoProspecto' => $request->TipoProspecto,
+            'nameContacto' => $request->nameempresa,
+            'emailContacto'=> $request->emailContacto,
+            'telefonoContacto' => $request->telefono,
+            'edad'  =>  null,
+            'ciudad' => $request->ciudad,
+            'preguntasGuia'  =>  null,
+            'comoNosConociste'  =>  null,
+            'document_identificacion' => null,
+            'document_comprobantedomicilio'  => null,
+            'document_cedulafiscal' => null,
+            'document_certificacion' => null,
+            'estado' => 'Nuevo',
+            'nameempresa' => $request->nameempresa,
+            'nombreempresaLegal' => $request->nombreempresaLegal,
+            'sitioweb' => $request->sitioweb,
+            'DireccionCompletaEmpresa' => $request->ciudadContacto . ',' . $request->CP . ',' . $request->dirección,
+            'ContactoCompletoEmpresa' => $request->nombreContacto . ',' . $request->puestoTrabajo . ',' . $request->telefonocontacto,
+            'user_id' => $request->user_id
+        ]);
 
         // Mail::to('iam@lokkl.com')
         //     ->cc(['developerlokkl@gmail.com', 'lokklmx@gmail.com'])
         //     ->send(new NewProspectRegister($prospecto));
 
-        return response()->json(['data' => $prospecto], 201);
+         return response()->json(['Prospecto' => $guia], 201);
     }
 
     /**
@@ -69,11 +105,10 @@ class ProspectosGuideController extends Controller
     public function destroy($id)
     {
         $prospecto = ProspectosGuide::findOrFail($id);
-        //return $prospecto;
         $prospecto->delete();
-
-        $files = array($file1, $file2);
-        File::delete($files);
+        //TODO:Falta eliminar de aws imagenes
+        //$files = array($file1, $file2);
+        //File::delete($files);
 
         return redirect('/prospectos');
     }
@@ -119,45 +154,38 @@ class ProspectosGuideController extends Controller
 
         $prospectos->estado = "Aceptado";
         $prospectos->save();
-        Mail::to($prospectos)->send(new ProspectoAcept($prospectos));
+        //Mail::to($prospectos)->send(new ProspectoAcept($prospectos));
 
         $user = User::where('id', $prospectos->user_id)->first();
+
         $user->role = 'GUIDE_VERIFIQUED';
         $user->save();
 
         $guias = Guias::create([
-            'name' => $prospectos->name,
-            'email' => $prospectos->email,
-            'telefono' => $prospectos->telefono,
+
+            'TipoGuia' => $prospectos->TipoProspecto,
+            'name' => $prospectos->nameContacto,
+            'email' => $prospectos->emailContacto,
+            'telefono' => $prospectos->telefonoContacto,
             'edad' => $prospectos->edad,
             'ciudad' => $prospectos->ciudad,
-            'idiomas' => $prospectos->idiomas,
             'document_identificacion' => $prospectos->document_identificacion,
             'document_comprobantedomicilio' => $prospectos->document_comprobantedomicilio,
             'document_cedulafiscal' => $prospectos->document_cedulafiscal,
             'document_certificacion' => $prospectos->document_certificacion,
-            'document_CV' => $prospectos->document_CV,
-            'pais' => '',
-            'tipomoneda' => '',
-            'numeroCuenta' => '',
-            'clabeInterbancaria' => '',
-            'NumeroCuenta' => '',
-            'RFC' => '',
-            'CURP' => '',
             'user_id' => $prospectos->user_id,
 
         ]);
 
         //  $prospectos->delete();
-
+        return redirect('/prospectos');
         return response()->json(['Guia nuevo' => $guias], 201);
     }
 
-    public function prospectoRegistrado($email)
+    public function prospectoRegistrado($id)
     {
 
-        $prospecto = ProspectosGuide::where('email', $email)->first();
+        $prospecto = ProspectosGuide::where('user_id', $id)->first();
         return response()->json(['Prospecto' => $prospecto], 201);
     }
-
 }

@@ -8,15 +8,15 @@
                     <div class="col-12">
                         <h2>Datos personales:</h2>
                     </div>
-                    <table class="table table-bordered">
+                    <table class="table">
                         <tr>
                             <td>
                                 <h5>Nombre:</h5>
-                                <strong>{{$prospecto->name}}</strong>
+                                <strong>{{$prospecto->nameContacto}}</strong>
                             </td>
                             <td>
                                 <h5>Email:</h5>
-                                <strong>{{$prospecto->email}}</strong>
+                                <strong>{{$prospecto->emailContacto}}</strong>
                             </td>
                             
                             <td>
@@ -26,17 +26,17 @@
                         </tr>
                         <tr>
                             <td>
-                                <h5>Cuidad del tour:</h5>
+                                <h5>Ciudad del tour:</h5>
                                 <strong>{{$prospecto->ciudad}}</strong>
                             </td>
                             <td >
                                 <h5>Telefono:</h4>
-                                    <strong>{{$prospecto->telefono}}</strong>
+                                    <strong>{{$prospecto->telefonoContacto}}</strong>
                             </td>
 
                             <td >
                                 <h5>Como nos conociste:</h4>
-                                    <strong>{{$prospecto->comonosconociste}}</strong>
+                                    <strong>{{$prospecto->comoNosConociste}}</strong>
                             </td>
                            
                         </tr>
@@ -47,25 +47,12 @@
                     </div>
                     <table class="table table-bordered">
                         <tr>
+                           
                             <td>
-                                <h5>Que idiomas manejas:</h4>
-                                    <strong>{{$prospecto->idiomas}}</strong>
+                                <h5>Eres o has trabajado como guia:<br>Trabajas como guia actualmente:<br>Cuentas con certificacion de idiomas:</h5>
                             </td>
                             <td>
-                                <h5>Eres o has trabajado<br> como guia:</h5>
-                                <strong>{{$prospecto->eres_guia}}</strong>
-                            </td>
-                            <td>
-                                <h5>Trabajas como guia actualmente:</h4>
-                                    <strong>{{$prospecto->trabajas_como_guia}}</strong>
-                            </td>
-                            <td>
-                                <h5>Cuentas con <br>certificacion de guia:</h4>
-                                    <strong>{{$prospecto->certificacion_guia}}</strong>
-                            </td>
-                            <td>
-                                <h5>Cuentas con <br>certificacion de idiomas:</h4>
-                                    <strong>{{$prospecto->certificacion_guia}}</strong>
+                            <strong>{{$prospecto->preguntasGuia}}</strong>
                             </td>
                         </tr>
                     </table>
@@ -119,20 +106,6 @@
                                     <img class="img-responsive"
                                         src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_certificacion}}"
                                         alt="" width="300px">
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><h4>Curriculum Vitae</h4></td>
-                            <td>
-                                    @if (pathinfo($prospecto->document_CV, PATHINFO_EXTENSION) == 'pdf')
-                                    <a href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_CV}}">
-                                        <button class="btn btn-primary btn-block">Descargar</button></a>
-                                    @endif
-                                    <a class="test-popup-link"
-                                    href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_CV}}">
-                                    <img class="img-responsive"
-                                        src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_CV}}" alt="" width="300px">
                                 </a>
                             </td>
                         </tr>

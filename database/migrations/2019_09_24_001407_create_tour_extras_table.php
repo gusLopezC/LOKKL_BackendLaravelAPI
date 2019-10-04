@@ -15,7 +15,8 @@ class CreateTourExtrasTable extends Migration
     {
         Schema::create('tour_extras', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('cuidad');
+            $table->text('ciudad');
+            $table->text('ciudadingles');
             $table->text('foto');
             $table->text('urldata');
            

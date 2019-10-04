@@ -22,20 +22,14 @@
                                 <h5>Edad:</h4>
                                     <strong>{{$guias->edad}}</strong>
                             </td>
-                            <td>
-                                <h5>Edad:</h4>
-                                    <strong>{{$guias->idiomas}}</strong>
-                            </td>
+                           
                         </tr>
                         <tr>
                             <td>
-                                <h5>Cuidad del tour:</h5>
+                                <h5>Ciudad del tour:</h5>
                                 <strong>{{$guias->ciudad}}</strong>
                             </td>
-                            <td>
-                                <h5>Pais:</h5>
-                                <strong>{{$guias->pais}}</strong>
-                            </td>
+                            
                         </tr>
 
                     </table>
@@ -122,20 +116,7 @@
                                 </a>
                             </td>
                         </tr>
-                        <tr>
-                            <td><h4>Curriculum Vitae</h4></td>
-                            <td>
-                                    @if (pathinfo($guias->document_CV, PATHINFO_EXTENSION) == 'pdf')
-                                    <a href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_CV}}">
-                                        <button class="btn btn-primary btn-block">Descargar</button></a>
-                                    @endif
-                                    <a class="test-popup-link"
-                                    href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_CV}}">
-                                    <img class="img-responsive"
-                                        src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_CV}}" alt="" width="300px">
-                                </a>
-                            </td>
-                        </tr>
+
                     </table>
 
                 </div>

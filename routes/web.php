@@ -33,5 +33,12 @@ Route::get('/prospectos/{post}/delete', 'Prospectos\ProspectosGuideController@de
 
 Route::get('/guias', 'Guias\GuiasController@index')->name('usuarios');
 Route::get('/guias/{id}', 'Guias\GuiasController@show')->name('detallesguia')->middleware('auth');
-
 Route::get('/guias/{post}/delete', 'Guias\GuiasController@destroy')->name('eliminarguia')->middleware('auth');     //DELETE
+
+
+Route::get('/tours', 'Tours\ToursController@index')->name('tours');
+Route::get('/tours/{id}', 'Tours\ToursController@MostrarDatoTour')->name('detallestours');
+Route::get('/tours/{tour}/aceptarTour', 'Tours\ToursController@AceptarTour')->name('AceptarTour')->middleware('auth');
+Route::get('/tours/{tour}/NegarTour', 'Tours\ToursController@NegarTour')->name('NegarTour')->middleware('auth');
+
+Route::delete('photo/{photo}', 'Tours\PhotoTourController@destroy')->name('admin.photos.destroy');     //DELETE

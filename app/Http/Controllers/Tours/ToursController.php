@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Tours;
 
+use Alert;
 use App\Comentarios;
-use App\Guias;
 use App\Http\Controllers\Controller;
 use App\Tours;
 use App\PhotosTours;
@@ -24,13 +24,12 @@ class ToursController extends Controller
     public function index()
     {
         //
-        $tour = Tours::all();
+        $tours = Tours::all();
 
         // foreach ($tour->getPhotos as $photos) {
         //     $photostour = ($photos->photo);
         // }
-
-        return response()->json(['tours' => $tour, 200]);
+        return view('tours.vertours', compact('tours'));
     }
 
     /**
@@ -52,16 +51,17 @@ class ToursController extends Controller
     public function store(Request $request)
     {
 
-
-        $datosGuia = Guias::where('user_id', $request->user_id)->first();
         $slug = SlugService::createSlug(Tours::class, 'slug', $request->name, ['unique' => false]);
+       
+        //$waypoints = implode(",", $request->idiomas);
+       // error_log($waypoints);
 
-        //if ($request->hasFile('photo')) {
+        //
 
         $tour = Tours::create([
             'cuidad' => $request->cuidad,
             'pais' => $request->Pais,
-            'CP' => $request->CP,
+            'placeID' => $request->placeID,
 
             'name' => $request->name,
             'slug' => $request->$slug,
@@ -70,18 +70,17 @@ class ToursController extends Controller
             'puntoInicio' => $request->puntoInicio,
 
             'schedulle' => $request->schedulle,
-            
+
             'itinerary' => $request->itinerary,
             'whatsIncluded' => $request->whatsIncluded,
 
             'categories' => $request->categories,
             'duration' => $request->duration,
-            'lenguajes' => $datosGuia->idiomas,
+            'lenguajes' => $request->idiomas, 
             'price' => $request->price,
-            'priceFinal' => $request->price+($request->price * .20 ),
+            'priceFinal' => $request->price + ($request->price * .20),
             'moneda' => $request->moneda,
 
-            'user_guide' => $datosGuia->id,
             'user_id' => $request->user_id,
 
         ]);
@@ -169,9 +168,9 @@ class ToursController extends Controller
 
         $files = $request->file('file');
 
-        
+
         if ($request->hasFile('file')) {
-       
+
             foreach ($files as $file) {
                 $name =  $id . '_' . time() . $file->getClientOriginalName();
                 error_log($name);
@@ -184,31 +183,33 @@ class ToursController extends Controller
                     'tour_id' => $id,
                 ]);
             }
-        return response()->json(['tours' => $tour, 200]);
-    }
-        
+            return response()->json(['tours' => $tour, 200]);
+        }
     }
 
 
     /**
      * Obtener por cuidad
      */
-    public function ObtenerPorCiudad($ciudad)
+    public function ObtenerPorCiudad($placeID)
     {
 
         $tour = Tours::with('getPhotos')
-        ->where('cuidad', $ciudad)->get();
+            ->where('placeID', $placeID)
+            ->where('verificado', 'Si')
+            ->get();
 
         //$tour->price =  $tour->price + ($tour->price * .20);
 
-        $tourextra = TourExtra::where('cuidad', $ciudad)->first();
-
-        if (! $tourextra) { 
-            $tourextra = TourExtra::where('cuidad', 'default')->first();
+       // $tourextra = TourExtra::where('ciudad', $ciudad)->first();
+        $tourextra = TourExtra::where('ciudad', 'default')->first();
+        if (!$tourextra) {
+           
+            $tourextra = TourExtra::where('ciudad', 'default')->first();
 
             return response()->json(['Tour' => $tour, 'TourExtra' => $tourextra, 200]);
         }
-        
+
 
         return response()->json(['Tour' => $tour, 'TourExtra' => $tourextra, 200]);
     }
@@ -218,18 +219,18 @@ class ToursController extends Controller
     public function ObtenerTour($slug)
     {
         $tour = Tours::with('getPhotos')
-        ->where('slug', $slug)->first();
-        
-        $guia = DB::table('users')->select('id','name','infopersonal','img')
-        ->where('id','=', $tour->user_id)
-        ->get();
+            ->where('slug', $slug)->first();
+
+        $guia = DB::table('users')->select('id', 'name', 'infopersonal', 'img')
+            ->where('id', '=', $tour->user_id)
+            ->get();
 
         $comentarios = Comentarios::with('getUser:id,name')
-        ->where('tour_id','=', $tour->id)->get();
+            ->where('tour_id', '=', $tour->id)->get();
 
 
 
-        return response()->json(['Tour' => $tour,"Guia" => $guia, "Comentarios" => $comentarios, 200]);
+        return response()->json(['Tour' => $tour, "Guia" => $guia, "Comentarios" => $comentarios, 200]);
     }
 
     /**
@@ -241,8 +242,71 @@ class ToursController extends Controller
             ->where('user_id', $id)
             ->get();
 
-       // error_log($tour->getPhotos);
+        // error_log($tour->getPhotos);
 
         return response()->json(['Tours' => $tour, 200]);
+    }
+
+
+
+
+    /**
+     * 
+     * 
+     * Metodos para la administracion aceptar tour y verificar toda la info de los tours
+     */
+
+
+    public function MostrarDatoTour($id)
+    {
+
+
+        $tours = Tours::find($id);
+
+        $arrayCordenanaMapa = preg_split("/[,]/", $tours->mapaGoogle);
+        $tours->mapaGoogle = $arrayCordenanaMapa;
+
+        foreach ($tours->getPhotos as $photos) {
+            $potos = ($photos->photo);
+        }
+
+        // return $tours->getPhotos;
+        return view('tours.detallestour', compact('tours'));
+    }
+
+    public function AceptarTour($tour)
+    {
+
+
+        $datatour = Tours::findOrFail($tour);
+
+        $datatour->verificado = "Si";
+        $datatour->save();
+
+        //Alert::success('Tour aprobado');
+        return redirect('/tours');
+    }
+
+    public function NegarTour($id)
+    {
+
+
+        try {
+            $tour = Tours::findOrFail($id);
+
+            $Photostour = PhotosTours::where('tour_id', $id)->get();
+
+            foreach ($Photostour as $photos) {
+
+                Storage::disk('s3')->delete('images/tours/' . $photos->photo);
+                $Photostour->each->delete();
+            }
+
+            $tour->delete();
+
+            return redirect('/tours');
+        } catch (PDOException $e) {
+            return "A ocurrido un error" + $e;
+        }
     }
 }
