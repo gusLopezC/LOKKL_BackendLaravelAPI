@@ -7,7 +7,7 @@
                 <div class="card-header">Peticiones de tours</div>
 
                 <div class="card-body">
-                    <table id="myTable"  class="display responsive nowrap" style="width:100%">
+                    <table id="myTable" class="display responsive nowrap" style="width:100%">
                         <thead>
                             <tr>
                                 <td>Nombre</td>
@@ -20,15 +20,17 @@
                         <tbody>
                             @foreach ($tours as $tour)
                             @if($tour->verificado == 'No')
-                            <td>
-                                <a href="{{route('detallestours',$tour->id)}}">{{$tour->name}}
-                                </a>
-                            </td>
-                            <td>{{$tour->cuidad}}</td>
-                            <td>{{$tour->pais}}</td>
-                            <td>{{$tour->price}}</td>
-                            <td>{{$tour->created_at}}</td>
 
+                            <tr>
+                                <td>
+                                    <a href="{{route('detallestours',$tour->id)}}">{{$tour->name}}
+                                    </a>
+                                </td>
+                                <td>{{$tour->cuidad}}</td>
+                                <td>{{$tour->pais}}</td>
+                                <td>{{$tour->price}}</td>
+                                <td>{{$tour->created_at}}</td>
+                            </tr>
                             @endif
                             @endforeach
                         </tbody>
@@ -36,13 +38,16 @@
                 </div>
             </div>
         </div>
-
+    </div>
+    <br>
+    <br>
+    <div class="row justify-content-center">>
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Tours Aceptados</div>
 
                 <div class="card-body">
-                    <table id="myTable"  class="display responsive nowrap" style="width:100%">
+                    <table id="myTable2" class="display responsive nowrap" style="width:100%">
                         <thead>
                             <tr>
                                 <td>Nombre</td>
@@ -55,6 +60,7 @@
                         <tbody>
                             @foreach ($tours as $tour)
                             @if($tour->verificado == 'Si')
+
                             <tr>
                                 <td>
                                     <a href="{{route('detallestours',$tour->id)}}">{{$tour->name}}
@@ -65,7 +71,6 @@
                                 <td>{{$tour->price}}</td>
                                 <td>{{$tour->created_at}}</td>
                             </tr>
-
                             @endif
                             @endforeach
                         </tbody>
@@ -74,8 +79,6 @@
             </div>
         </div>
     </div>
-
-    <br><br>
 </div>
 @endsection
 @push('scripts')
@@ -90,7 +93,16 @@
             'ordering': true,
             'info': true,
             'autoWidth': false,
-            
+
+        })
+        $('#myTable2').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+
         })
     })
 </script>

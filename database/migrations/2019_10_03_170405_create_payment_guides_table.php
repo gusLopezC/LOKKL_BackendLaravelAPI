@@ -19,7 +19,7 @@ class CreatePaymentGuidesTable extends Migration
             $table->string('pais');
             $table->string('tipomoneda');
             $table->string('clabeInterbancaria');
-            $table->string('numeroCuenta');
+            $table->string('numeroCuenta')->nullable();
             $table->string('RFC');
             $table->string('CURP');
 
