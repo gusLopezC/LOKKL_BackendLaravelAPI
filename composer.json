@@ -19,6 +19,7 @@
         "laravel/tinker": "^1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
         "nesbot/carbon": "^2.24",
+        "paypal/rest-api-sdk-php": "*",
         "realrashid/sweet-alert": "^2.0"
     },
     "require-dev": {

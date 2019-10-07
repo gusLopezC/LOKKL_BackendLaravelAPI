@@ -7,6 +7,20 @@
                 <div class="card-body row">
                     <div class="col-12">
                         <h2>Datos:</h2>
+                        <div class="alert alert-info" role="alert">
+                            @foreach ($tours->getUser as $usuario)
+                            Tour creado por : {{$usuario->name}}
+                            <br>
+                            @if($usuario->role == 'GUIDE_VERIFIQUED')
+                            <strong> Este usuario es verificado como guia</strong>
+                            @endif
+                            @if($usuario->role == 'USER_ROLE' || $usuario->role == 'ADMIN_ROLE' )
+                            <a href="/prospectos"><strong> Este usuario aun no es verificado revisa si ya lleno su ficha de registro</strong></a>
+                            @endif
+                            @endforeach
+                            <br>
+                            <br>
+                        </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <tr>
@@ -97,21 +111,21 @@
                         <div class="col-sm-6">
                             <h2>Administrar media</h2>
                             <div class="row no-gutters">
-                            @foreach ($tours->getPhotos as $imagen)
+                                @foreach ($tours->getPhotos as $imagen)
                                 <div class="col-sm-4">
-                                <form method="POST" action="{{ route('admin.photos.destroy',$imagen->photo)}}">
-                                {{ csrf_field() }} {{ method_field('DELETE') }}
-                                <button class="btn btn-danger btn-xs" style="position:absolute"><i class="fas fa-times"></i></button>
-                                <a class="test-popup-link" href="https://lokkl.s3.us-east-2.amazonaws.com/images/tours/{{$imagen->photo}}">
-                                    <img src="https://lokkl.s3.us-east-2.amazonaws.com/images/tours/{{$imagen->photo}}" class="img-responsive" alt="" width="150px" height="150px"></a>
+                                    <form method="POST" action="{{ route('admin.photos.destroy',$imagen->photo)}}">
+                                        {{ csrf_field() }} {{ method_field('DELETE') }}
+                                        <button class="btn btn-danger btn-xs" style="position:absolute"><i class="fas fa-times"></i></button>
+                                        <a class="test-popup-link" href="https://lokkl.s3.us-east-2.amazonaws.com/images/tours/{{$imagen->photo}}">
+                                            <img src="https://lokkl.s3.us-east-2.amazonaws.com/images/tours/{{$imagen->photo}}" class="img-responsive" alt="" width="150px" height="150px"></a>
 
-                            </form>
+                                    </form>
                                 </div>
                                 @endforeach
                             </div>
-                           
-                           
-                          
+
+
+
                         </div>
                         <div class="col-sm-6">
                             <h4>Administrar itinierario</h4>
@@ -124,8 +138,10 @@
                     <br>
                     <br>
                     <br>
+
                 </div>
             </div>
+
             <div class="card">
                 <div class="row botonesprospectos">
 

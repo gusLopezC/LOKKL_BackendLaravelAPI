@@ -7,7 +7,7 @@
                 <div class="card-header">Peticiones de tours</div>
 
                 <div class="card-body">
-                    <table id="myTable" class="table">
+                    <table id="myTable"  class="display responsive nowrap" style="width:100%">
                         <thead>
                             <tr>
                                 <td>Nombre</td>
@@ -21,8 +21,8 @@
                             @foreach ($tours as $tour)
                             @if($tour->verificado == 'No')
                             <td>
-                            <a href="{{route('detallestours',$tour->id)}}">{{$tour->name}}
-                            </a>
+                                <a href="{{route('detallestours',$tour->id)}}">{{$tour->name}}
+                                </a>
                             </td>
                             <td>{{$tour->cuidad}}</td>
                             <td>{{$tour->pais}}</td>
@@ -42,7 +42,7 @@
                 <div class="card-header">Tours Aceptados</div>
 
                 <div class="card-body">
-                    <table id="myTable" class="table">
+                    <table id="myTable"  class="display responsive nowrap" style="width:100%">
                         <thead>
                             <tr>
                                 <td>Nombre</td>
@@ -55,14 +55,16 @@
                         <tbody>
                             @foreach ($tours as $tour)
                             @if($tour->verificado == 'Si')
-                            <td>
-                            <a href="{{route('detallestours',$tour->id)}}">{{$tour->name}}
-                            </a>
-                            </td>
-                            <td>{{$tour->cuidad}}</td>
-                            <td>{{$tour->pais}}</td>
-                            <td>{{$tour->price}}</td>
-                            <td>{{$tour->created_at}}</td>
+                            <tr>
+                                <td>
+                                    <a href="{{route('detallestours',$tour->id)}}">{{$tour->name}}
+                                    </a>
+                                </td>
+                                <td>{{$tour->cuidad}}</td>
+                                <td>{{$tour->pais}}</td>
+                                <td>{{$tour->price}}</td>
+                                <td>{{$tour->created_at}}</td>
+                            </tr>
 
                             @endif
                             @endforeach
@@ -78,15 +80,17 @@
 @endsection
 @push('scripts')
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <script>
     $(function() {
         $('#myTable').DataTable({
             'paging': true,
             'lengthChange': false,
-            'searching': false,
+            'searching': true,
             'ordering': true,
             'info': true,
-            'autoWidth': false
+            'autoWidth': false,
+            
         })
     })
 </script>

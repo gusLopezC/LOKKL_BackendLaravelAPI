@@ -29,6 +29,7 @@ class ToursController extends Controller
         // foreach ($tour->getPhotos as $photos) {
         //     $photostour = ($photos->photo);
         // }
+
         return view('tours.vertours', compact('tours'));
     }
 
@@ -270,7 +271,9 @@ class ToursController extends Controller
             $potos = ($photos->photo);
         }
 
-        // return $tours->getPhotos;
+        $tours->getUser;
+
+        //return $tours;
         return view('tours.detallestour', compact('tours'));
     }
 

@@ -21,4 +21,9 @@ class Guias extends Model
         'user_id',
 
     ];
+
+    public function getDatosPago()
+    {
+        return $this->hasMany('App\PaymentGuide', 'user_id');
+    }
 }

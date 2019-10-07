@@ -16,4 +16,9 @@ class PaymentGuide extends Model
         'CURP',
         'user_id',
     ];
+
+    public function getDatosGuia()
+    {
+        return $this->hasMany('App\Guia', 'user_id');
+    }
 }

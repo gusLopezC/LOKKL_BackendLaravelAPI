@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Guias;
 use App\PaymentGuide;
+use Illuminate\Support\Facades\DB; 
 
 class GuiasController extends Controller
 {
@@ -53,10 +54,17 @@ class GuiasController extends Controller
      */
     public function show($id)
     {
-        $guias = Guias::findOrFail($id);
+        $guias = Guias::find($id);
 
-        //return $guias;
-        return view('guias.detallesguia', compact('guias'));
+        $Paymentguias = PaymentGuide::where('user_id','=', $guias->user_id)->get();
+
+
+        /*$guias = DB::table('guias')
+        ->join('payment_guides', 'guias.user_id', '=', 'payment_guides.user_id')
+        ->where('guias.id', $id)
+        ->get();*/
+        //return $Paymentguias;
+        return view('guias.detallesguia', compact('guias','Paymentguias'));
     }
 
     /**

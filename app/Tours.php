@@ -46,6 +46,11 @@ class Tours extends Model
         return $this->hasMany('App\PhotosTours', 'tour_id');
     }
 
+    public function getUser()
+    {
+        return $this->hasMany('App\User', 'id');
+    }
+
         /**
      * Return the sluggable configuration array for this model.
      *
