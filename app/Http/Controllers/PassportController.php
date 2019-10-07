@@ -49,11 +49,7 @@ class PassportController extends Controller
 
         if ($busquedausuario = User::where('email', $request->email)->first()) {
 
-            if ($busquedausuario->email == $request->email) {
-
-                error_log($busquedausuario);
-
-                
+            if ($busquedausuario->email == $request->email) {                
                 $token = $busquedausuario->createToken('dadirugesedevalclkkol')->accessToken;
 
                 return response()->json([
@@ -62,8 +58,6 @@ class PassportController extends Controller
                 ]);
             }
         }
-
-
             $rules = [
                 'name' => 'required',
                 'email' => 'required|email|unique:users',
@@ -88,7 +82,7 @@ class PassportController extends Controller
             }, 100);
 
             return response()->json([
-                'user' => $datos,
+                'user' => $usuario,
                 'token' => $token, 200,
             ]);
 
@@ -242,18 +236,15 @@ class PassportController extends Controller
 
     public function changePassword(Request $request)
     {
-        error_log('Hola');
         $request->validate = [
             'password' => 'required',
             'new_password' => 'required|string|min:6|different:password',
         ];
 
         if (Hash::check($request->password, auth()->user()->password) == false) {
-            error_log('Hola2');
 
             return response()->json(['message' => 'Unauthorized Fail'], 401);
         }
-        error_log('Hola3');
         $user = auth()->user();
         $user->password = Hash::make($request->new_password);
         $user->save();
