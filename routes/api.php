@@ -21,6 +21,9 @@ Route::post('register', 'PassportController@register');
 Route::post('LoginGoogle', 'PassportController@LoginGoogle');
 
 
+Route::get('tours/ObtenerToursPopulares', 'Tours\ToursController@ObtenerTourPopulares')->name('tours.ObtenerTourPopulares');
+
+
 Route::middleware('auth:api')->group(function () {
 
     /**
@@ -76,7 +79,5 @@ Route::get('users/{user}/resend', 'PassportController@resend')->name('users.rese
  */
 Route::get('tours/ObtenerPorCiudad/{ciudad}', 'Tours\ToursController@ObtenerPorCiudad')->name('tours.ObtenerPorCiudad');
 Route::get('tours/ObtenerTour/{slug}', 'Tours\ToursController@ObtenerTour')->name('tours.ObtenerTour');
+
 Route::resource('tour/comentarios', 'Tours\ComentariosController');
-
-
-

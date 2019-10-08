@@ -53,9 +53,9 @@ class ToursController extends Controller
     {
 
         $slug = SlugService::createSlug(Tours::class, 'slug', $request->name, ['unique' => false]);
-       
+
         //$waypoints = implode(",", $request->idiomas);
-       // error_log($waypoints);
+        // error_log($waypoints);
 
         //
 
@@ -77,7 +77,7 @@ class ToursController extends Controller
 
             'categories' => $request->categories,
             'duration' => $request->duration,
-            'lenguajes' => $request->idiomas, 
+            'lenguajes' => $request->idiomas,
             'price' => $request->price,
             'priceFinal' => $request->price + ($request->price * .20),
             'moneda' => $request->moneda,
@@ -202,10 +202,10 @@ class ToursController extends Controller
 
         //$tour->price =  $tour->price + ($tour->price * .20);
 
-       // $tourextra = TourExtra::where('ciudad', $ciudad)->first();
+        // $tourextra = TourExtra::where('ciudad', $ciudad)->first();
         $tourextra = TourExtra::where('ciudad', 'default')->first();
         if (!$tourextra) {
-           
+
             $tourextra = TourExtra::where('ciudad', 'default')->first();
 
             return response()->json(['Tour' => $tour, 'TourExtra' => $tourextra, 200]);
@@ -277,6 +277,15 @@ class ToursController extends Controller
         return view('tours.detallestour', compact('tours'));
     }
 
+    public function ObtenerTourPopulares()
+    {
+        $tour = Tours::with('getPhotos')
+            ->where('verificado', 'Si')
+            ->get();
+
+        return response()->json(['Tour' => $tour,  200]);
+    }
+
     public function AceptarTour($tour)
     {
 
@@ -292,8 +301,6 @@ class ToursController extends Controller
 
     public function NegarTour($id)
     {
-
-
         try {
             $tour = Tours::findOrFail($id);
 
