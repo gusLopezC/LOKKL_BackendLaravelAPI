@@ -55,6 +55,7 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('tours', 'Tours\ToursController');
     Route::post('tours/uploadFiles/{id}', 'Tours\ToursController@uploadFiles')->name('tours.uploadFiles');
     Route::get('tours/misTours/{id}', 'Tours\ToursController@ObtenerMisTours')->name('tours.ObtenerMisTours');
+    Route::post('tours/editTours', 'Tours\ToursController@EditarTours')->name('tours.EditarTours');
 
     /**
      * transaction

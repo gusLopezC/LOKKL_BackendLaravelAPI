@@ -117,9 +117,52 @@ class ToursController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function EditarTours(Request $request)
     {
-        //
+        /*'cuidad' => $request->cuidad,
+        'pais' => $request->Pais,
+        'placeID' => $request->placeID,
+
+        'name' => $request->name,
+        'slug' => $request->$slug,
+
+        'mapaGoogle' => $request->mapaGoogle,
+        'puntoInicio' => $request->puntoInicio,
+
+        'schedulle' => $request->schedulle,
+
+        'itinerary' => $request->itinerary,
+        'whatsIncluded' => $request->whatsIncluded,
+
+        'categories' => $request->categories,
+        'duration' => $request->duration,
+        'lenguajes' => $request->idiomas,
+        'price' => $request->price,
+        'priceFinal' => $request->price + ($request->price * .20),
+        'moneda' => $request->moneda,
+
+        'user_id' => $request->user_id,*/
+        $tour = Tours::where('id', $request->id)->first();
+        $tour->cuidad  = $request->cuidad;
+        $tour->pais  = $request->pais;
+        $tour->placeID  = $request->placeID;
+
+        $tour->name  = $request->name;
+
+        $tour->mapaGoogle  = $request->mapaGoogle;
+        $tour->puntoInicio  = $request->puntoInicio;
+
+        $tour->schedulle  = $request->schedulle;
+
+        $tour->categories  = $request->categories;
+        $tour->duration  = $request->duration;
+        $tour->lenguajes  = $request->lenguajes;
+        
+        $tour->price  = $request->price;
+        $tour->priceFinal  = $request->price + ($request->price * .20);
+        $tour->moneda = $request->moneda;
+        $tour->save();
+        return response()->json(['Tour' => $tour], 201);
     }
 
     /**
@@ -129,17 +172,7 @@ class ToursController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
