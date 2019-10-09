@@ -57,6 +57,8 @@ Route::middleware('auth:api')->group(function () {
     Route::get('tours/misTours/{id}', 'Tours\ToursController@ObtenerMisTours')->name('tours.ObtenerMisTours');
     Route::post('tours/editTours', 'Tours\ToursController@EditarTours')->name('tours.EditarTours');
 
+    Route::delete('tours/borrarFotoTour/{id}', 'Tours\PhotoTourController@destroyPhotoApi')->name('tours.destroyPhotoApi');
+
     /**
      * transaction
      */
