@@ -21,8 +21,38 @@ Route::post('register', 'PassportController@register');
 Route::post('LoginGoogle', 'PassportController@LoginGoogle');
 
 
-Route::get('tours/ObtenerToursPopulares', 'Tours\ToursController@ObtenerTourPopulares')->name('tours.ObtenerTourPopulares');
 
+/**
+ * Users
+ */
+
+Route::resource('emails', 'Mail\EmailController');
+Route::post('emailContacto', 'Mail\EmailController@EmailContact');
+Route::get('/send/email', 'HomeController@mail');
+Route::get('users/verify/{token}', 'PassportController@verify')->name('users.verify');
+Route::get('users/perfil/perfilpublico/{id}', 'PassportController@ObtenerPerfilPublico')->name('users.ObtenerPerfilPublico');
+Route::get('users/{user}/resend', 'PassportController@resend')->name('users.resend');
+
+
+/**
+ * Tours
+ */
+Route::get('tours/ObtenerPorCiudad/{ciudad}', 'Tours\ToursController@ObtenerPorCiudad')->name('tours.ObtenerPorCiudad');
+Route::get('tours/ObtenerTour/{slug}', 'Tours\ToursController@ObtenerTour')->name('tours.ObtenerTour');
+
+Route::resource('tour/comentarios', 'Tours\ComentariosController');
+
+
+/**
+ * ToursPorCiudad
+ */
+Route::get('tours/ObtenerToursNuevos', 'Tours\ToursCiudad\ToursCiudad@ObtenerToursNuevos')->name('tours.ObtenerToursNuevos');
+Route::get('tours/ObtenerToursCiudad/{ciudad}', 'Tours\ToursCiudad\ToursCiudad@ObtenerToursCiudad')->name('tours.ObtenerToursCiudad');
+
+
+/**
+ * Rutas protegidas por autentificacion
+ */
 
 Route::middleware('auth:api')->group(function () {
 
@@ -64,23 +94,3 @@ Route::middleware('auth:api')->group(function () {
      */
     Route::resource('transactions', 'Transaction\TransactionController');
 });
-
-/**
- * Users
- */
-
-Route::resource('emails', 'Mail\EmailController');
-Route::post('emailContacto', 'Mail\EmailController@EmailContact');
-Route::get('/send/email', 'HomeController@mail');
-Route::get('users/verify/{token}', 'PassportController@verify')->name('users.verify');
-Route::get('users/perfil/perfilpublico/{id}', 'PassportController@ObtenerPerfilPublico')->name('users.ObtenerPerfilPublico');
-Route::get('users/{user}/resend', 'PassportController@resend')->name('users.resend');
-
-
-/**
- * Tours
- */
-Route::get('tours/ObtenerPorCiudad/{ciudad}', 'Tours\ToursController@ObtenerPorCiudad')->name('tours.ObtenerPorCiudad');
-Route::get('tours/ObtenerTour/{slug}', 'Tours\ToursController@ObtenerTour')->name('tours.ObtenerTour');
-
-Route::resource('tour/comentarios', 'Tours\ComentariosController');

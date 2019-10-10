@@ -310,15 +310,6 @@ class ToursController extends Controller
         return view('tours.detallestour', compact('tours'));
     }
 
-    public function ObtenerTourPopulares()
-    {
-        $tour = Tours::with('getPhotos')
-            ->where('verificado', 'Si')
-            ->get();
-
-        return response()->json(['Tour' => $tour,  200]);
-    }
-
     public function AceptarTour($tour)
     {
 
