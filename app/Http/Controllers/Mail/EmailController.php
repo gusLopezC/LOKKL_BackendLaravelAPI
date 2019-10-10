@@ -42,7 +42,7 @@ class EmailController extends Controller
         $prospectos->estado = 'Pendiente';
         $prospectos->save();
 
-        Mail::to($prospectos->email)->send(new ProspectoMailDocuments($prospectos));
+        Mail::to($prospectos->emailContacto)->send(new ProspectoMailDocuments($prospectos));
 
         return 'Email enviado';
 
