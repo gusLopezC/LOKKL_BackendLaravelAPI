@@ -41,22 +41,8 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
                         </ul>
                         @else
-                        @if (Auth::user()->role == 'ADMIN_ROLE')
-                        <ul class="navbar-nav mr-auto">
-                            <li class="navbar_item"><a href="/tours">Administrador Tour</a></li>
-                            <li class="navbar_item"><a href="/usuarios">Administrador Usuarios</a></li>
-                            <li class="navbar_item"><a href="/guias">Administrador Guias</a></li>
-                            <li class="navbar_item"><a href="">Administrador Pagos</a></li>
-                            <li class="navbar_item"><a href="/prospectos">Administrador Prospectos</a></li>
-                        </ul>
-                        @endif
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

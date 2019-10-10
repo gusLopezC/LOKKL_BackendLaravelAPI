@@ -1,4 +1,11 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Admin Tours')
+
+@section('content_header')
+<h1>Administrar Tours</h1>
+@stop
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -41,7 +48,7 @@
     </div>
     <br>
     <br>
-    <div class="row justify-content-center">>
+    <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Tours Aceptados</div>
@@ -80,9 +87,16 @@
         </div>
     </div>
 </div>
-@endsection
-@push('scripts')
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+@stop
+
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+<script>
+    < script src = "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" >
+</script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <script>
     $(function() {
@@ -106,4 +120,5 @@
         })
     })
 </script>
-@endpush
+</script>
+@stop

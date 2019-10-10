@@ -1,4 +1,12 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Admin Tours')
+
+@section('content_header')
+<h1>Administrar Usuarios</h1>
+@stop
+
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -36,11 +44,16 @@
         </div>
     </div>
 </div>
-@endsection
-@push('scripts')
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+@stop
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+@stop
 
+@section('js')
+<script>
+    < script src = "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" >
+</script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <script>
     $(function() {
         $('#myTable').DataTable({
@@ -49,8 +62,19 @@
             'searching': true,
             'ordering': true,
             'info': true,
-            'autoWidth': false
+            'autoWidth': false,
+
+        })
+        $('#myTable2').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+
         })
     })
 </script>
-@endpush
+</script>
+@stop

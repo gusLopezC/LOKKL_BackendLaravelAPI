@@ -1,4 +1,11 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Admin Tours')
+
+@section('content_header')
+<h1>Administrar Tours</h1>
+@stop
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -161,7 +168,7 @@
     </div>
 </div>
 @endsection
-@push('scripts')
+@push('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
 @endpush

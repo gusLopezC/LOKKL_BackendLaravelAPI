@@ -1,4 +1,11 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Admin Tours')
+
+@section('content_header')
+<h1>Administrar Usuarios</h1>
+@stop
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -123,8 +130,8 @@
 </div>
 
 </div>
-@endsection
-@push('scripts')
+@stop
+@push('js')
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 

@@ -1,4 +1,11 @@
-@extends('layouts.app')
+
+@extends('adminlte::page')
+
+@section('title', 'Admin Tours')
+
+@section('content_header')
+<h1>Bienvenido a lokkl</h1>
+@stop
 
 @section('content')
 <div class="">
