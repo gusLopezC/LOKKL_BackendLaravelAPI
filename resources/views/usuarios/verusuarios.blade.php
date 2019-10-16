@@ -57,6 +57,7 @@
 <script>
     $(function() {
         $('#myTable').DataTable({
+            "pageLength": 50,
             'paging': true,
             'lengthChange': false,
             'searching': true,
@@ -65,15 +66,7 @@
             'autoWidth': false,
 
         })
-        $('#myTable2').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': true,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false,
-
-        })
+        
     })
 </script>
 </script>

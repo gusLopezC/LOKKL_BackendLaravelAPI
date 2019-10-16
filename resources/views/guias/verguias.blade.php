@@ -55,6 +55,7 @@
 <script>
     $(function() {
         $('#myTable').DataTable({
+            "pageLength": 50,
             'paging': true,
             'lengthChange': false,
             'searching': true,

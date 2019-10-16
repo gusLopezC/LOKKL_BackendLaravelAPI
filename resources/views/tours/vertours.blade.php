@@ -101,6 +101,7 @@
 <script>
     $(function() {
         $('#myTable').DataTable({
+            "pageLength": 30,
             'paging': true,
             'lengthChange': false,
             'searching': true,
@@ -110,6 +111,7 @@
 
         })
         $('#myTable2').DataTable({
+            "pageLength": 30,
             'paging': true,
             'lengthChange': false,
             'searching': true,
