@@ -90,8 +90,13 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('tours/borrarFotoTour/{id}', 'Tours\PhotoTourController@destroyPhotoApi')->name('tours.destroyPhotoApi');
 
     /**
-     * transaction
+     * Transaction
      */
     Route::get('transactions/execute-payment-paypal', 'Payment\PaymentController@execute');
     Route::post('transactions/paymentStripe', 'Payment\PaymentController@pagoStripeApi');
+    /**
+     * transaction
+     */
+    Route::get('reservaciones/obtenerReservaciones/{id}', 'Reservas\ReservasController@obtenerReservaciones');
+
 });

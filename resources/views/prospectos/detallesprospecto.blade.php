@@ -100,7 +100,7 @@
                                     <a class="test-popup-link"
                                         href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_cedulafiscal}}">
                                         <img class="img-responsive"
-                                            src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_cedulafiscal}}" alt="" width="3  300px">
+                                            src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$prospecto->document_cedulafiscal}}" alt="" width="300px">
                                     </a>
                             </td>
                         </tr>

@@ -6,20 +6,7 @@
 <h1>Prueba Pagos</h1>
 @stop
 @section('content')
-<div class="content">
-    <h1>Compra de Prueba</h1>
-    <h3>US$ 19.99</h3>
-    <form action="/pagoStripe" method="POST">
-        {{ csrf_field() }}
-        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="{{ config('services.stripe.key') }}" data-amount="1990" data-name="Compra" data-description="Prueba compra" data-image="https://stripe.com/img/documentation/checkout/marketplace.png" data-locale="auto">
-        </script>
-    </form>
-</div>
-
 <div class="container">
-
-    <h1>Laravel 5 - Stripe Payment Gateway Integration Example <br /> ItSolutionStuff.com</h1>
-
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default credit-card-box">

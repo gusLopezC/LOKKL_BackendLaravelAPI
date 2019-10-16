@@ -48,7 +48,7 @@ class Tours extends Model
 
     public function getUser()
     {
-        return $this->hasMany('App\User', 'id');
+        return $this->hasMany('App\User', 'id' , 'user_id');
     }
 
         /**
