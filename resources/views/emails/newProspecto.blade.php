@@ -1,6 +1,6 @@
 @component('mail::message')
 #Un nuevo candidato a empezo su proceso de registro
-
+ 
 <p>Este mensaje es recibido desde lokkl.com</p>
 
 <div>

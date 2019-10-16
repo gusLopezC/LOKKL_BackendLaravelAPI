@@ -4,16 +4,16 @@
     <img src="https://lokkl.ml/images/Tiki.png" alt="" width="150px">
 </div>
 
-#Hello {{ $prospectos->name}}
+#Hola {{ $prospectos->name}}
 
-<p>It is a pleasure to inform you that it has been verified as a LOKKL guide, beginning with the LOKKL family.<p>
-
+<p>Es un placer informarle que ha sido verificado como una guía LOKKL, ¡Lo más increíble de ser un LOKKL es que serás parte de una familia de guías que trabajarán y pondrán lo mejor de sus esfuerzos para que todos los viajeros que contraten un tour LOKKL piensen en nosotros para su próximo viaje!.<p>
+        <br><br><br><br>
         @component('mail::button', ['url'=> 'https://www.lokkl.com/#/home'])
         Create your experiences
         @endcomponent
 
         <br><br>
-        Thank,<br>
+        Gracias,<br>
         The LOKKL team
         <br>
         @endcomponent

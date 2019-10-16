@@ -164,6 +164,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -230,6 +231,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Carbon' => 'Carbon\Carbon',
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+        
     ],
 
 ];

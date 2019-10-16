@@ -42,3 +42,8 @@ Route::get('/tours/{tour}/aceptarTour', 'Tours\ToursController@AceptarTour')->na
 Route::get('/tours/{tour}/NegarTour', 'Tours\ToursController@NegarTour')->name('NegarTour')->middleware('auth');
 
 Route::delete('photo/{photo}', 'Tours\PhotoTourController@destroy')->name('admin.photos.destroy');     //DELETE
+
+
+
+Route::get('/pagos', 'Payment\PaymentController@index')->name('pagos.verpagos');
+Route::post('/pagoStripe', 'Payment\PaymentController@pagoStripe')->name('pagos.pagoStripe');

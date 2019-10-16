@@ -1,16 +1,16 @@
 @component('mail::message')
-#Hello {{ $user->name}}
-<h1>Welcome to LOOK.</h1><br><br>
+#Hola {{ $user->name}}
+<h1>Bienvenido a LOKKL.</h1><br><br>
 
 
-Thank you for joining LOKKL: <br>
+Gracias por unirte a LOKKL:<br>
 
-Please verify it using the following link:
+Por favor verifíquelo usando el siguiente enlace:
 
-@component('mail::button', ['url'=> route('users.verify',$user->verification_token)]) 
-    Confirm your account
+@component('mail::button', ['url'=> route('users.verify',$user->verification_token)])
+Confirme su cuenta
 @endcomponent
 
-Thank you<br>
+Gracias<br>
 {{config('app.name')}}
 @endcomponent

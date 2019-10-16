@@ -150,7 +150,7 @@ return [
         ],
         [
             'text' => 'Administrador Pagos',
-            'url'  => 'usuarios',
+            'url'  => 'pagos',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

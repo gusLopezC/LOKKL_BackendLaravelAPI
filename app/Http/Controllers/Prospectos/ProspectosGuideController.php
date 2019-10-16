@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Prospectos;
 
 use App\Guias;
+use App\ProspectosGuide;
+use App\User;
+
 use App\Http\Controllers\Controller;
 use App\Mail\NewProspectRegister;
 use App\Mail\ProspectoAcept;
-use App\ProspectosGuide;
-use App\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Mail;
@@ -115,9 +117,8 @@ class ProspectosGuideController extends Controller
 
     public function updateDocument(Request $request)
     {
-        //$path = Storage::disk('s3')->put('images/originals', $request->file);
-
         $campo = $request->campo;
+        $iduser = $request->iduser;
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
@@ -130,8 +131,8 @@ class ProspectosGuideController extends Controller
 
         //Image::make($file)->fit(144, 144)->save($path);
 
-        $user = auth()->user();
-        $prospecto = ProspectosGuide::where('user_id', $user->id)->first();
+
+        $prospecto = ProspectosGuide::where('user_id', $iduser)->first();
         $prospecto->$campo = $name;
         $prospecto->save();
 

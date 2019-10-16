@@ -6,7 +6,7 @@
 
 #Congratulations {{ $prospectos->name}}
 
-<p>You are one step closer to being a LOCAL guide and belonging to the best network of guides, now we will review your information and inform you when you have been accepted.<p>
+<p>Estás un paso más cerca de ser una guía LOKKL y pertenecer a la mejor red de guías, ahora revisaremos tu información y te informaremos cuando hayas sido aceptado.<p>
 
         @component('mail::button', ['url'=> 'https://www.lokkl.com/#/home'])
         Create your experiences

@@ -92,5 +92,6 @@ Route::middleware('auth:api')->group(function () {
     /**
      * transaction
      */
-    Route::resource('transactions', 'Transaction\TransactionController');
+    Route::get('transactions/execute-payment-paypal', 'Payment\PaymentController@execute');
+    Route::post('transactions/paymentStripe', 'Payment\PaymentController@pagoStripeApi');
 });
