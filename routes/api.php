@@ -98,5 +98,7 @@ Route::middleware('auth:api')->group(function () {
      * transaction
      */
     Route::get('reservaciones/obtenerReservaciones/{id}', 'Reservas\ReservasController@obtenerReservaciones');
+    Route::post('reservaciones/actualizarEstadoReserva', 'Reservas\ReservasController@actualizarEstadoReserva');
+    Route::get('reservaciones/obtenerMisViajes/{id}', 'Reservas\ReservasController@obtenerMisViajes');
 
 });
