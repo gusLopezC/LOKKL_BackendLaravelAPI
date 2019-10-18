@@ -98,7 +98,12 @@ Route::middleware('auth:api')->group(function () {
      * transaction
      */
     Route::get('reservaciones/obtenerReservaciones/{id}', 'Reservas\ReservasController@obtenerReservaciones');
-    Route::post('reservaciones/actualizarEstadoReserva', 'Reservas\ReservasController@actualizarEstadoReserva');
+    Route::get('reservaciones/obtenerHistorialReservaciones/{id}', 'Reservas\ReservasController@obtenerHistorialReservaciones');
     Route::get('reservaciones/obtenerMisViajes/{id}', 'Reservas\ReservasController@obtenerMisViajes');
+    Route::get('reservaciones/obtenerHistorialMisViajes/{id}', 'Reservas\ReservasController@obtenerHistorialMisViajes');
+    Route::get('reservaciones/obtenerReservacionesCalendario/{id}', 'Reservas\ReservasController@obtenerReservacionesCalendario');
+
+
+    Route::post('reservaciones/actualizarEstadoReserva', 'Reservas\ReservasController@actualizarEstadoReserva');
 
 });

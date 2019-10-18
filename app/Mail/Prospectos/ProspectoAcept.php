@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\Prospectos;
 
 use App\ProspectosGuide;
 use Illuminate\Bus\Queueable;

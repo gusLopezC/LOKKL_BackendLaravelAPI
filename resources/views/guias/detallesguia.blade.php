@@ -1,4 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Admin Tours')
+
+@section('content_header')
+<h1>Administrar Usuarios</h1>
+@stop
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -29,6 +35,10 @@
                                 <h5>Ciudad del tour:</h5>
                                 <strong>{{$guias->ciudad}}</strong>
                             </td>
+                            <td colspan="2">
+                                <h5>Telefono:</h5>
+                                <strong>{{$guias->telefono}}</strong>
+                            </td>
 
                         </tr>
 
@@ -36,39 +46,81 @@
                     <div class="col-12">
                         <h2>Datos bancarios:</h2>
                     </div>
-                    @foreach ($Paymentguias as $pago)
-                    <table class="table table-bordered">
-                        <tr>
-                            <td>
-                                <h5>Tipo moneda:</h5>
-                                <strong>{{$pago->tipomoneda}}</strong>
-                            </td>
-                            <td>
-                                <h5>clabe Interbancaria:</h5>
-                                <strong>{{$pago->clabeInterbancaria}}</strong>
-                            </td>
-                            <td>
-                                <h5>Numero cuenta Paypal:</h4>
-                                    <strong>{{$pago->numeroCuenta}}</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>RFC:</h5>
-                                <strong>{{$pago->RFC}}</strong>
-                            </td>
-                            <td>
-                                <h5>CURP:</h5>
-                                <strong>{{$pago->CURP}}</strong>
-                            </td>
-                            <td>
-                                <h5>Pais:</h5>
-                                <strong>{{$pago->pais}}</strong>
-                            </td>
-                        </tr>
+                    <div class="col-12">
+                        @if (count($guias->getDatosPago) == 0 )
+                        <div class="alert alert-warning" role="alert">
+                            Este usaurio aun no carga sus datos bancarios
+                            <br><br>
+                        </div>
+                        @endif
+                        @foreach ($guias->getDatosPago as $pago)
 
-                    </table>
-                    @endforeach
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>
+                                    <h5>Tipo moneda:</h5>
+                                    <strong>{{$pago->tipomoneda}}</strong>
+                                </td>
+                                <td>
+                                    <h5>clabe Interbancaria:</h5>
+                                    <strong>{{$pago->clabeInterbancaria}}</strong>
+                                </td>
+                                <td>
+                                    <h5>Numero cuenta Paypal:</h4>
+                                        <strong>{{$pago->numeroCuenta}}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>RFC:</h5>
+                                    <strong>{{$pago->RFC}}</strong>
+                                </td>
+                                <td>
+                                    <h5>CURP:</h5>
+                                    <strong>{{$pago->CURP}}</strong>
+                                </td>
+                                <td>
+                                    <h5>Pais:</h5>
+                                    <strong>{{$pago->pais}}</strong>
+                                </td>
+                            </tr>
+
+                        </table>
+                        @endforeach
+                    </div>
+                    <div class="col-12">
+                        <h2>Sus tours:</h2>
+                    </div>
+                    <div class="col-12">
+                    @if (count($guias->getTours) == 0 )
+                        <div class="alert alert-warning" role="alert">
+                            Este usaurio aun no carga su tours
+                            <br><br>
+                        </div>
+                        @endif
+                        <table class="table table-bordered">
+                            @foreach ($guias->getTours as $tour)
+                            <tr>
+                                <td>
+                                    <h5>Nombre tour:</h5>
+                                    <a href="{{route('detallestours',$tour->id)}}"><strong>{{$tour->name}}</strong>
+                                    </a>
+
+                                </td>
+                                <td>
+                                    <h5>Nombre tour:</h5>
+                                    <strong>{{$tour->cuidad}}</strong>
+                                </td>
+                                <td>
+                                    <h5>Precio base:</h5>
+                                    <strong>{{$tour->price}}</strong>
+                                </td>
+                            </tr>
+                            @endforeach
+
+                        </table>
+
+                    </div>
 
                     <div class="col-12">
                         <h2>Documentación:</h2>
@@ -103,7 +155,7 @@
                                     <button class="btn btn-primary btn-block">Descargar</button></a>
                                 @endif
                                 <a class="test-popup-link" href="https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_cedulafiscal}}">
-                                    <img class="img-responsive" src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_cedulafiscal}}" alt="" width="3  300px">
+                                    <img class="img-responsive" src=" https://lokkl.s3.us-east-2.amazonaws.com/images/documents/{{$guias->document_cedulafiscal}}" alt="" width="300px">
                                 </a>
                             </td>
                         </tr>
@@ -125,8 +177,8 @@
         </div>
     </div>
 </div>
-@endsection
-@push('scripts')
+@stop
+@push('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
 @endpush

@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\Common;
 
-use App\ProspectosGuide;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ProspectoMailDocuments extends Mailable
+class SendMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $prospectos;
+    public $demo;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(ProspectosGuide $prospectos)
+    public function __construct($demo)
     {
-        $this->prospectos = $prospectos;
+        $this->demo = $demo;
+       
     }
 
     /**
@@ -30,6 +30,7 @@ class ProspectoMailDocuments extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.solicitardocumentos')->subject('Finish your verification process and become a LOKKL guide');
+        
+        return $this->markdown('emails.contact')->subject('Hemos Recibido un email');
     }
 }

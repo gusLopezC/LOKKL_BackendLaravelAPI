@@ -10,11 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class GuiasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
@@ -25,46 +21,14 @@ class GuiasController extends Controller
         return view('guias.verguias', compact('guias'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $guias = Guias::find($id);
+        $guias->getTours;
+        $guias->getDatosPago;
 
-        $Paymentguias = PaymentGuide::where('user_id','=', $guias->user_id)->get();
-
-
-        /*$guias = DB::table('guias')
-        ->join('payment_guides', 'guias.user_id', '=', 'payment_guides.user_id')
-        ->where('guias.id', $id)
-        ->get();*/
-        //return $Paymentguias;
-        return view('guias.detallesguia', compact('guias','Paymentguias'));
+        //return $guias;
+        return view('guias.detallesguia', compact('guias'));
     }
 
 

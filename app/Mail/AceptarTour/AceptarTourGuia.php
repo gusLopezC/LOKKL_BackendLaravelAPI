@@ -1,26 +1,24 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\AceptarTour;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendMailable extends Mailable
+class AceptarTourGuia extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $demo;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($demo)
+    public function __construct()
     {
-        $this->demo = $demo;
-       
+        //
     }
 
     /**
@@ -30,7 +28,6 @@ class SendMailable extends Mailable
      */
     public function build()
     {
-        
-        return $this->markdown('emails.contact')->subject('Hemos Recibido un email');
+        return $this->view('view.name');
     }
 }

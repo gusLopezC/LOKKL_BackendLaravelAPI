@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Mail;
-
-use App\User;
+namespace App\Mail\RechazarTour;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserMailChanged extends Mailable
+class RechazarTourCliente extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,9 +16,9 @@ class UserMailChanged extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct()
     {
-        $this->user = $user;
+        //
     }
 
     /**
@@ -30,6 +28,6 @@ class UserMailChanged extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.confirm')->subject('Welcome to lokkl Please verify your email');
+        return $this->view('view.name');
     }
 }

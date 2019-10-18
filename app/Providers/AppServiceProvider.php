@@ -4,7 +4,7 @@ namespace App\Providers;
 
 
 use App\User;
-use App\Mail\UserCreated;
+use App\Mail\Common\UserCreated;
 
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;

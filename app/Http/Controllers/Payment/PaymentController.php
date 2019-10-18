@@ -24,6 +24,7 @@ use Stripe\Charge;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mail;
+use Carbon\Carbon;
 
 
 class PaymentController extends Controller
@@ -101,7 +102,7 @@ class PaymentController extends Controller
     {
         $price = str_replace('.', '', $request->price);
         try {
-            
+
             $user = User::where('id', $request->id_user)->first();
             $guia = User::where('id', $request->id_vendedor)->first();
 
@@ -123,7 +124,7 @@ class PaymentController extends Controller
                 'NameTour' => $request->name_tour,
                 'Monto' => $request->price,
                 'Moneda' => $request->moneda,
-                'Fechareserva' => $request->fecha,
+                'Fechareserva' => Carbon::createFromFormat('Y-m-d', $request->fecha),
                 'CantidadTuristas' => $request->cantidadTurtias,
                 'id_tour' => $request->id_tour,
                 'id_comprador' => $request->id_user,
@@ -134,8 +135,8 @@ class PaymentController extends Controller
             $payment->getGuia;
             //Mail::to($user->email)->send(new ReservaClienteMail($user));
             //Mail::to($guia->email)->send(new ReservaVendedorMail($user));
-            Mail::to('guslopezcallejas@gmail.com')->send(new ReservaClienteMail($payment));
-            Mail::to('guslopezcallejas@gmail.com')->send(new ReservaVendedorMail($payment));
+            //Mail::to('guslopezcallejas@gmail.com')->send(new ReservaClienteMail($payment));
+            //Mail::to('guslopezcallejas@gmail.com')->send(new ReservaVendedorMail($payment));
 
             return response()->json(['Cargo' => $payment], 201);
         } catch (\Exception $ex) {

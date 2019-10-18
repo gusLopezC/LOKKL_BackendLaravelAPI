@@ -139,8 +139,13 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'Administrador Usuarios',
-            'url'  => 'usuarios',
+            'text' => 'Administrador Reservaciones',
+            'url'  => 'reservaciones',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Gestion cancelaciones',
+            'url'  => 'cancelaciones',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
@@ -151,6 +156,11 @@ return [
         [
             'text' => 'Administrador Pagos',
             'url'  => 'pagos',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Administrador Usuarios',
+            'url'  => 'usuarios',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

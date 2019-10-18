@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Mail;
 
 use App\Http\Controllers\Controller;
-use App\Mail\ProspectoMailDocuments;
-use App\Mail\SendMailable;
+use App\Mail\Prospectos\ProspectoMailDocuments;
+use App\Mail\Common\SendMailable;
 use App\ProspectosGuide;
 use Illuminate\Http\Request;
 use Mail;

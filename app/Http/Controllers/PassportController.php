@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\UserCreated;
+use App\Mail\Common\UserCreated;
 use App\User;
 use App\Tours;
 use Hash;

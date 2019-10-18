@@ -7,8 +7,8 @@ use App\ProspectosGuide;
 use App\User;
 
 use App\Http\Controllers\Controller;
-use App\Mail\NewProspectRegister;
-use App\Mail\ProspectoAcept;
+use App\Mail\Prospectos\NewProspectRegister;
+use App\Mail\Prospectos\ProspectoAcept;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
