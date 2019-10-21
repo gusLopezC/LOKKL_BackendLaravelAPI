@@ -1,6 +1,6 @@
 <tr>
     <td class="header">
-        <a href="{{ $url }}">
+        <a>
             {{-- {{ $slot }} --}}
             <img src="https://www.lokkl.com/assets/img/logo.png" alt="" width="120px">
         </a>

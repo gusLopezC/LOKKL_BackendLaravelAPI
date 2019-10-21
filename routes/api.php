@@ -94,6 +94,7 @@ Route::middleware('auth:api')->group(function () {
      */
     Route::get('transactions/execute-payment-paypal', 'Payment\PaymentController@execute');
     Route::post('transactions/paymentStripe', 'Payment\PaymentController@pagoStripeApi');
+
     /**
      * transaction
      */
@@ -103,7 +104,10 @@ Route::middleware('auth:api')->group(function () {
     Route::get('reservaciones/obtenerHistorialMisViajes/{id}', 'Reservas\ReservasController@obtenerHistorialMisViajes');
     Route::get('reservaciones/obtenerReservacionesCalendario/{id}', 'Reservas\ReservasController@obtenerReservacionesCalendario');
 
+    Route::post('reservaciones/aceptarTour', 'Reservas\ReservasController@aceptarTour');
+    Route::post('reservaciones/cancelarReservacionCliente', 'Cancelations\CancelationsController@cancelarReservacionCliente');
+    Route::post('reservaciones/cancelarReservacionGuia', 'Cancelations\CancelationsController@cancelarReservacionGuia');
 
-    Route::post('reservaciones/actualizarEstadoReserva', 'Reservas\ReservasController@actualizarEstadoReserva');
+    Route::get('reservaciones/obtenerDiferenciasDias/{order}', 'Cancelations\CancelationsController@obtenerDiferenciasDias');
 
 });

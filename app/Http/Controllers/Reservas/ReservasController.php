@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Reservas;
 
+
 use App\Payments;
+use App\Cancelations;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -10,6 +12,28 @@ use Carbon\Carbon;
 class ReservasController extends Controller
 {
     //
+    public function index()
+    {
+
+        $reservaciones = Payments::orderBy('updated_at', 'DESC')
+            ->get();
+        // return $reservaciones;
+        return view('reservaciones.verreservaciones', compact('reservaciones'));
+    }
+
+    public function MostrarDatoSReservacion($id)
+    {
+        $reservacion = Payments::findOrFail($id);
+
+        $reservacion->getComprador;
+        $reservacion->getGuia;
+        $reservacion->getTour;
+
+        //return $reservacion;
+        return view('reservaciones.detallesreservacion', compact('reservacion'));
+    }
+
+
     public function obtenerMisViajes($id)
     {
 
@@ -72,7 +96,7 @@ class ReservasController extends Controller
         return response()->json(['Reservaciones' => $reservaciones, 200]);
     }
 
-    public function actualizarEstadoReserva(Request $request)
+    public function aceptarTour(Request $request)
     {
 
         $reservacion = Payments::where('id', $request->id)->first();
@@ -82,9 +106,13 @@ class ReservasController extends Controller
             $reservacion->save();
 
 
+            $date = Carbon::now();
+            $date = $date->format('Y-m-d');
+
             $reservaciones = Payments::with('getComprador')
                 ->orderBy('created_at', 'DESC')
                 ->where('id_guia', $reservacion->id_guia)
+                ->where('Fechareserva', '>=', $date)
                 ->get();
 
             return response()->json(['Reservaciones' => $reservaciones, 200]);
@@ -101,4 +129,6 @@ class ReservasController extends Controller
 
         return response()->json(['Reservaciones' => $reservaciones, 200]);
     }
+
+
 }

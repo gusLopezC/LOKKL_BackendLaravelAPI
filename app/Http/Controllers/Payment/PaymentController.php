@@ -74,7 +74,7 @@ class PaymentController extends Controller
     {
         try {
             Stripe::setApiKey(config('services.stripe.secret'));
-            /* $customer = Customer::create(array(
+            $customer = Customer::create(array(
                 'email' => $request->stripeEmail,
                 'source' => $request->stripeToken
             ));
@@ -82,10 +82,10 @@ class PaymentController extends Controller
                 'customer' => $customer->id,
                 'amount' => 10000,
                 'currency' => 'mxn',
-                "description" => "Test payment" 
-            ));*/
+                "description" => "Test payment"
+            ));
 
-            dd($request->stripeToken);
+
             Charge::create([
                 "amount" => 1000,
                 "currency" => "mxn",
@@ -117,7 +117,7 @@ class PaymentController extends Controller
             $latestOrder = Payments::orderBy('created_at', 'DESC')->first();
 
             $payment = Payments::create([
-                'order_nr' => '#' . str_pad($latestOrder->id + 1, 8, "0", STR_PAD_LEFT),
+                'order_nr' => str_pad($latestOrder->id + 1, 8, "0", STR_PAD_LEFT),
                 'ModoPago' => 'Stripe',
                 'IdPago' => $request->stripeToken,
                 'DatosComprador' => 'Nombre Contacto: ' . $request->name . '' . $request->lastname . ' Email: ' . $request->email . ' Telefono: ' .  $request->telephone,
@@ -126,6 +126,8 @@ class PaymentController extends Controller
                 'Moneda' => $request->moneda,
                 'Fechareserva' => Carbon::createFromFormat('Y-m-d', $request->fecha),
                 'CantidadTuristas' => $request->cantidadTurtias,
+                'NumTarjeta' => $request->NumTarjeta,
+                'EstadoDinero' => 'Almacenado en cuenta',
                 'id_tour' => $request->id_tour,
                 'id_comprador' => $request->id_user,
                 'id_guia' => $request->id_vendedor

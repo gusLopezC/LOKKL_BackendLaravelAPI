@@ -4,25 +4,23 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Payments extends Model
+class Cancelations extends Model
 {
     //
     protected $fillable = [
         'id',
         'order_nr',
         'ModoPago',
-        'IdPago',
-        'DatosComprador',
-        'NameTour',
-
         'Monto',
         'Moneda',
         'Fechareserva',
-        'CantidadTuristas',
-        'status',
+        'FechaCancelacion',
+        'Estado',
+        'Cancela',
+        'motivoCancelacion',
         'NumTarjeta',
         'EstadoDinero',
-
+        'id_payments',
         'id_tour',
         'id_comprador',
         'id_guia'

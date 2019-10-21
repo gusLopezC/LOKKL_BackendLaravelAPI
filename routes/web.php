@@ -56,14 +56,17 @@ Route::delete('photo/{photo}', 'Tours\PhotoTourController@destroy')->name('admin
  * Transacciones
  */
 
-Route::get('/pagos', 'Payment\PaymentController@index')->name('pagos.verpagos');
-Route::post('/pagoStripe', 'Payment\PaymentController@pagoStripe')->name('pagos.pagoStripe');
+Route::get('/pagos', 'Payment\PaymentController@index')->name('pagos.verpagos')->middleware('auth');  
+Route::post('/pagoStripe', 'Payment\PaymentController@pagoStripe')->name('pagos.pagoStripe')->middleware('auth');  
 
 /**
  * Reservaciones
  */
-Route::get('/pagos', 'Reservas\ReservasController@index')->name('pagos.verpagos');
+Route::get('/reservaciones', 'Reservas\ReservasController@index')->name('reservacion.verreservaciones')->middleware('auth');  
+Route::get('/reservacion/{id}', 'Reservas\ReservasController@MostrarDatoSReservacion')->name('reservacion.detallesreservacion')->middleware('auth');  
 
 /**
  * Cancelaciones
  */
+Route::get('/cancelaciones', 'Cancelations\CancelationsController@index')->name('cancelaciones.vercancelacion')->middleware('auth');  
+Route::get('/cancelacion/{id}', 'Cancelations\CancelationsController@MostrarCancelacion')->name('cancelaciones.detallescanelacion')->middleware('auth');  
