@@ -5,9 +5,15 @@ namespace App\Http\Controllers\Reservas;
 
 use App\Payments;
 use App\Cancelations;
+use App\User;
+
+use App\Mail\AceptarTour\AceptarTourCliente;
+use App\Mail\AceptarTour\AceptarTourGuia;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Mail;
 
 class ReservasController extends Controller
 {
@@ -101,6 +107,9 @@ class ReservasController extends Controller
 
         $reservacion = Payments::where('id', $request->id)->first();
 
+        $user = User::where('id', $reservacion->id_comprador)->first();
+        $guia = User::where('id', $reservacion->id_guia)->first();
+
         if ($request->estado == 'Aceptar') {
             $reservacion->status = 'Aceptado';
             $reservacion->save();
@@ -109,11 +118,22 @@ class ReservasController extends Controller
             $date = Carbon::now();
             $date = $date->format('Y-m-d');
 
+
+
             $reservaciones = Payments::with('getComprador')
                 ->orderBy('created_at', 'DESC')
                 ->where('id_guia', $reservacion->id_guia)
                 ->where('Fechareserva', '>=', $date)
                 ->get();
+
+
+            $reservacion->getComprador;
+            $reservacion->getGuia;
+            //Mail::to($user->email)->send(new AceptarTourCliente($reservacion));
+            //Mail::to($guia->email)->send(new AceptarTourGuia($reservacion)); 
+            Mail::to('guslopezcallejas@gmail.com')->send(new AceptarTourCliente($reservacion));
+            Mail::to('guslopezcallejas@gmail.com')->send(new AceptarTourGuia($reservacion));
+
 
             return response()->json(['Reservaciones' => $reservaciones, 200]);
         }
@@ -129,6 +149,4 @@ class ReservasController extends Controller
 
         return response()->json(['Reservaciones' => $reservaciones, 200]);
     }
-
-
 }

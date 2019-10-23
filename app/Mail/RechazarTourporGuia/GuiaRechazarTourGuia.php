@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail\AceptarTour;
+namespace App\Mail\RechazarTourporGuia;
 
 use App\User;
 use App\Payments;
@@ -10,13 +10,10 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class AceptarTourGuia extends Mailable
+class GuiaRechazarTourGuia extends Mailable
 {
     use Queueable, SerializesModels;
-
     public $payment;
-
-
     /**
      * Create a new message instance.
      *
@@ -35,7 +32,6 @@ class AceptarTourGuia extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.TourAceptado.tourAceptadoGuiaMail')->subject('Tu reservación esta lista');
-
+        return $this->markdown('emails.CancelarTour.guiaRechazaTourGuiaMail')->subject('Tu reservación a sido cancelada');
     }
 }

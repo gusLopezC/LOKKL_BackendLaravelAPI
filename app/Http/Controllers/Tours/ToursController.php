@@ -54,11 +54,6 @@ class ToursController extends Controller
 
         $slug = SlugService::createSlug(Tours::class, 'slug', $request->name, ['unique' => false]);
 
-        //$waypoints = implode(",", $request->idiomas);
-        // error_log($waypoints);
-
-        //
-
         $tour = Tours::create([
             'cuidad' => $request->cuidad,
             'pais' => $request->Pais,
@@ -207,7 +202,7 @@ class ToursController extends Controller
 
             foreach ($files as $file) {
                 $name =  $id . '_' . time() . $file->getClientOriginalName();
-                error_log($name);
+
                 $filePath = '/images/tours/' . $name;
                 Storage::disk('s3')->put($filePath, file_get_contents($file));
 
@@ -276,7 +271,6 @@ class ToursController extends Controller
             ->where('user_id', $id)
             ->get();
 
-        // error_log($tour->getPhotos);
 
         return response()->json(['Tours' => $tour, 200]);
     }

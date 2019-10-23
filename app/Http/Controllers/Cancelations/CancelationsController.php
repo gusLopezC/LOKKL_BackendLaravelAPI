@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers\Cancelations;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+
 use App\Payments;
 use App\Cancelations;
+use App\User;
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Mail;
+
+use App\Mail\RechazarTour\RechazarTourCliente;
+use App\Mail\RechazarTour\RechazarTourGuia;
+use App\Mail\RechazarTourporGuia\GuiaRechazarTourCliente;
+use App\Mail\RechazarTourporGuia\GuiaRechazarTourGuia;
 
 
 class CancelationsController extends Controller
@@ -43,7 +51,7 @@ class CancelationsController extends Controller
         $now = Carbon::now();
         //$now = $now->format('Y-m-d');
         $date = Carbon::parse($reservacion->Fechareserva);
-        $date->addHours(12); 
+        $date->addHours(12);
         //$date = $date->format('Y-m-d');
         $diff = $date->diffInHours($now);
 
@@ -81,6 +89,11 @@ class CancelationsController extends Controller
             'id_guia'  => $reservacion->id_guia,
 
         ]);
+        //Mail::to($user->email)->send(new RechazarTourCliente($reservacion));
+        //Mail::to($guia->email)->send(new RechazarTourGuia($reservacion)); 
+        Mail::to('guslopezcallejas@gmail.com')->send(new RechazarTourCliente($reservacion));
+        Mail::to('guslopezcallejas@gmail.com')->send(new RechazarTourGuia($reservacion));
+
 
         return response()->json(['Reservaciones' => $reservacion, 200]);
     }
@@ -93,6 +106,9 @@ class CancelationsController extends Controller
 
         $reservacion = Payments::where('order_nr', $request->pedido)
             ->first();
+
+        $user = User::where('id', $reservacion->id_comprador)->first();
+        $guia = User::where('id', $reservacion->id_guia)->first();
 
         $reservacion->status = 'Cancelado';
         $reservacion->save();
@@ -115,6 +131,15 @@ class CancelationsController extends Controller
             'id_guia'  => $reservacion->id_guia,
 
         ]);
+
+
+        $reservacion->getComprador;
+        $reservacion->getGuia;
+        //Mail::to($user->email)->send(new GuiaRechazarTourCliente($reservacion));
+        //Mail::to($guia->email)->send(new GuiaRechazarTourGuia($reservacion)); 
+        Mail::to('guslopezcallejas@gmail.com')->send(new GuiaRechazarTourCliente($reservacion));
+        Mail::to('guslopezcallejas@gmail.com')->send(new GuiaRechazarTourGuia($reservacion));
+
 
         return response()->json(['Reservaciones' => $reservacion, 200]);
     }

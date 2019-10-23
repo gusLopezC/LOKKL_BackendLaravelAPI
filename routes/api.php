@@ -20,7 +20,9 @@ Route::post('login', 'PassportController@login');
 Route::post('register', 'PassportController@register');
 Route::post('LoginGoogle', 'PassportController@LoginGoogle');
 
-
+Route::post('password/create', 'User\PasswordResetController@create');
+Route::get('password/find/{token}', 'User\PasswordResetController@find');
+Route::post('password/reset', 'User\PasswordResetController@reset');
 
 /**
  * Users

@@ -1,31 +1,32 @@
 <?php
 
-namespace App\Mail\AceptarTour;
+namespace App\Mail\CrearReserva;
 
-use App\User;
 use App\Payments;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-
-class AceptarTourGuia extends Mailable
+use Carbon\Carbon;
+class ReservaVendedorMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+
     public $payment;
-
-
     /**
      * Create a new message instance.
      *
      * @return void
      */
+    
     public function __construct(Payments $payment)
     {
-
         $this->payment = $payment;
+        $payment->Fechareserva = Carbon::parse($payment->Fechareserva);
+        $payment->Fechareserva= $payment->Fechareserva->format('Y-m-d');
+
     }
 
     /**
@@ -35,7 +36,6 @@ class AceptarTourGuia extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.TourAceptado.tourAceptadoGuiaMail')->subject('Tu reservación esta lista');
-
+        return $this->markdown('emails.ReservaVendedorMail')->subject('Haz recibido una reserva');
     }
 }

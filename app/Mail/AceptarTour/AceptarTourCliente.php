@@ -2,6 +2,9 @@
 
 namespace App\Mail\AceptarTour;
 
+use App\User;
+use App\Payments;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -10,15 +13,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class AceptarTourCliente extends Mailable
 {
     use Queueable, SerializesModels;
+    
+    public $payment;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Payments $payment)
     {
-        //
+
+        $this->payment = $payment;
+
     }
 
     /**
@@ -28,6 +35,7 @@ class AceptarTourCliente extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->markdown('emails.TourAceptado.tourAceptadoClienteMail')->subject('Tu reserva a sido aceptada');
+
     }
 }
