@@ -14,7 +14,6 @@ class PassportController extends Controller
 {
     public function register(Request $request)
     {
-        
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -22,8 +21,8 @@ class PassportController extends Controller
         ];
 
         $this->validate($request, $rules);
-        
-      $usuario = User::create([
+
+        $usuario = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
@@ -34,14 +33,9 @@ class PassportController extends Controller
 
         ]);
 
-        
         $token = $usuario->createToken('dadirugesedevalclkkol')->accessToken;
 
-        return $usuario;
-        return response()->json([
-            'user' => $datos,
-            'token' => $token, 200,
-        ]);
+        return response()->json(['user' => $usuario, 'token' => $token, 200,]);
     }
 
     public function LoginGoogle(Request $request)
@@ -49,7 +43,7 @@ class PassportController extends Controller
 
         if ($busquedausuario = User::where('email', $request->email)->first()) {
 
-            if ($busquedausuario->email == $request->email) {                
+            if ($busquedausuario->email == $request->email) {
                 $token = $busquedausuario->createToken('dadirugesedevalclkkol')->accessToken;
 
                 return response()->json([
@@ -58,38 +52,38 @@ class PassportController extends Controller
                 ]);
             }
         }
-            $rules = [
-                'name' => 'required',
-                'email' => 'required|email|unique:users',
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
 
-            ];
+        ];
 
-            $this->validate($request, $rules);
+        $this->validate($request, $rules);
 
-            $datos = $request->all();
-            $datos['password'] = ':D';
-            $datos['role'] = 'USER_ROLE';
-            $datos['verified'] = false;
-            $datos['img'] = $request->photoUrl;
-            $datos['verification_token'] = User::generarToken();
+        $datos = $request->all();
+        $datos['password'] = ':D';
+        $datos['role'] = 'USER_ROLE';
+        $datos['verified'] = false;
+        $datos['img'] = $request->photoUrl;
+        $datos['verification_token'] = User::generarToken();
 
-            $usuario = User::create($datos);
+        $usuario = User::create($datos);
 
-            $token = $usuario->createToken('dadirugesedevalclkkol')->accessToken;
+        $token = $usuario->createToken('dadirugesedevalclkkol')->accessToken;
 
-            retry(5, function () use ($usuario) {
-                Mail::to($usuario->email)->send(new UserCreated($usuario));
-            }, 100);
+        retry(5, function () use ($usuario) {
+            Mail::to($usuario->email)->send(new UserCreated($usuario));
+        }, 100);
 
-            return response()->json([
-                'user' => $usuario,
-                'token' => $token, 200,
-            ]);
-
+        return response()->json([
+            'user' => $usuario,
+            'token' => $token, 200,
+        ]);
     }
 
     public function login(Request $request)
     {
+
 
         $credentials = [
             'email' => $request->email,
@@ -111,7 +105,6 @@ class PassportController extends Controller
 
 
             return response()->json(['token' => $token, 'user' => $user], 200);
-
         }
     }
 
@@ -158,7 +151,7 @@ class PassportController extends Controller
         if (!$user->isDirty()) {
 
             return response()->json(['error' =>
-                'At least one field must be specified to update', 'code' => 422], 422);
+            'At least one field must be specified to update', 'code' => 422], 422);
         }
         $user->save();
 
@@ -202,7 +195,7 @@ class PassportController extends Controller
             $user->delete();
             return response()->json(['data' => $user, 200]);
         } catch (PDOException $e) {
-            return 'There is an error'+$e;
+            return 'There is an error' + $e;
         }
     }
     public function verify($token)
@@ -210,9 +203,8 @@ class PassportController extends Controller
 
         $user = User::where('verification_token', $token)->first();
 
-        if(!$user){
+        if (!$user) {
             return redirect()->away('https://www.lokkl.com/');
-
         }
         $user->verified = 1;
         $user->verification_token = null;
@@ -252,9 +244,9 @@ class PassportController extends Controller
         return response()->json([
             'message' => 'Your password has been updated successfully.',
         ], 200);
-
     }
-    public function ObtenerPerfilPublico($id){
+    public function ObtenerPerfilPublico($id)
+    {
 
         $usuarios = User::findOrFail($id);
 
@@ -262,7 +254,6 @@ class PassportController extends Controller
             ->where('user_id', $id)
             ->get();
 
-        return response()->json(['Usuario' => $usuarios,'Tours' => $tour, 200]);
-
+        return response()->json(['Usuario' => $usuarios, 'Tours' => $tour, 200]);
     }
 }
