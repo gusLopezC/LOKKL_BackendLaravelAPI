@@ -52,6 +52,8 @@ Route::get('tours/ObtenerToursNuevos', 'Tours\ToursCiudad\ToursCiudad@ObtenerTou
 Route::get('tours/ObtenerToursCiudad/{ciudad}', 'Tours\ToursCiudad\ToursCiudad@ObtenerToursCiudad')->name('tours.ObtenerToursCiudad');
 
 
+
+
 /**
  * Rutas protegidas por autentificacion
  */
@@ -94,8 +96,8 @@ Route::middleware('auth:api')->group(function () {
     /**
      * Transaction
      */
-    Route::get('transactions/execute-payment-paypal', 'Payment\PaymentController@execute');
     Route::post('transactions/paymentStripe', 'Payment\PaymentController@pagoStripeApi');
+    Route::post('transactions/paymentPaypal', 'Payment\PaymentController@pagoPaypal');
 
     /**
      * transaction
@@ -111,5 +113,4 @@ Route::middleware('auth:api')->group(function () {
     Route::post('reservaciones/cancelarReservacionGuia', 'Cancelations\CancelationsController@cancelarReservacionGuia');
 
     Route::get('reservaciones/obtenerDiferenciasDias/{order}', 'Cancelations\CancelationsController@obtenerDiferenciasDias');
-
 });
