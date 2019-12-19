@@ -89,10 +89,8 @@ class CancelationsController extends Controller
             'id_guia'  => $reservacion->id_guia,
 
         ]);
-        //Mail::to($user->email)->send(new RechazarTourCliente($reservacion));
-        //Mail::to($guia->email)->send(new RechazarTourGuia($reservacion)); 
-        Mail::to('guslopezcallejas@gmail.com')->send(new RechazarTourCliente($reservacion));
-        Mail::to('guslopezcallejas@gmail.com')->send(new RechazarTourGuia($reservacion));
+        Mail::to($user->email)->send(new RechazarTourCliente($reservacion));
+        Mail::to($guia->email)->send(new RechazarTourGuia($reservacion));
 
 
         return response()->json(['Reservaciones' => $reservacion, 200]);
@@ -135,10 +133,8 @@ class CancelationsController extends Controller
 
         $reservacion->getComprador;
         $reservacion->getGuia;
-        //Mail::to($user->email)->send(new GuiaRechazarTourCliente($reservacion));
-        //Mail::to($guia->email)->send(new GuiaRechazarTourGuia($reservacion)); 
-        Mail::to('guslopezcallejas@gmail.com')->send(new GuiaRechazarTourCliente($reservacion));
-        Mail::to('guslopezcallejas@gmail.com')->send(new GuiaRechazarTourGuia($reservacion));
+        Mail::to($user->email)->send(new GuiaRechazarTourCliente($reservacion));
+        Mail::to($guia->email)->send(new GuiaRechazarTourGuia($reservacion));
 
 
         return response()->json(['Reservaciones' => $reservacion, 200]);
