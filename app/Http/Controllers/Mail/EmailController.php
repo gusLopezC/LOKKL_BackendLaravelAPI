@@ -30,6 +30,7 @@ class EmailController extends Controller
 
         Mail::to('iam@lokkl.com')->send(new SendMailable($objMensaje));
 
+
         if (Mail::failures()) {
             return response()->Fail('Sorry! Please try again latter');
         } else {
@@ -45,6 +46,5 @@ class EmailController extends Controller
         Mail::to($prospectos->emailContacto)->send(new ProspectoMailDocuments($prospectos));
 
         return 'Email enviado';
-
     }
 }

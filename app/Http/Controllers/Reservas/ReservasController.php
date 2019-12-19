@@ -131,8 +131,8 @@ class ReservasController extends Controller
             $reservacion->getGuia;
             //Mail::to($user->email)->send(new AceptarTourCliente($reservacion));
             //Mail::to($guia->email)->send(new AceptarTourGuia($reservacion)); 
-            Mail::to('guslopezcallejas@gmail.com')->send(new AceptarTourCliente($reservacion));
-            Mail::to('guslopezcallejas@gmail.com')->send(new AceptarTourGuia($reservacion));
+            //Mail::to('guslopezcallejas@gmail.com')->send(new AceptarTourCliente($reservacion));
+            //Mail::to('guslopezcallejas@gmail.com')->send(new AceptarTourGuia($reservacion));
 
 
             return response()->json(['Reservaciones' => $reservaciones, 200]);

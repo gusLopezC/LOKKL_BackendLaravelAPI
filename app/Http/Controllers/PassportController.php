@@ -40,7 +40,6 @@ class PassportController extends Controller
 
     public function LoginGoogle(Request $request)
     {
-
         if ($busquedausuario = User::where('email', $request->email)->first()) {
 
             if ($busquedausuario->email == $request->email) {
@@ -229,7 +228,7 @@ class PassportController extends Controller
     public function changePassword(Request $request)
     {
         error_log($request);
-        
+
         $request->validate = [
             'password' => 'required',
             'new_password' => 'required|string|min:6|different:password',
