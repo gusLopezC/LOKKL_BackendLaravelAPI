@@ -28,7 +28,8 @@ class EmailController extends Controller
         $objMensaje->email = $request->email;
         $objMensaje->textomensaje = $request->textomensaje;
 
-        Mail::to('iam@lokkl.com')->send(new SendMailable($objMensaje));
+        // Mail::to('iam@lokkl.com')->send(new SendMailable($objMensaje));
+        Mail::to('guslopezcallejas@gmail.com')->send(new SendMailable($objMensaje));
 
 
         if (Mail::failures()) {
