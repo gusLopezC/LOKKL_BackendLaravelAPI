@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //
         //Commands\LogTest::class,
-        'App\Console\Commands\UpdateTourRealizado'
+        'App\Console\Commands\UpdateTourRealizado',
+        'App\Console\Commands\TourCancelNoRespuesta'
     ];
 
     /**
@@ -29,6 +30,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('tour:realizado')->daily();
+        $schedule->command('tour:noRespuesta')->daily();
     }
 
     /**

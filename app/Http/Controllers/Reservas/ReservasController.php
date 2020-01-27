@@ -15,6 +15,11 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Mail;
 
+
+use App\Mail\RechazarTourporGuia\GuiaRechazarTourCliente;
+use App\Mail\RechazarTourporGuia\GuiaRechazarTourGuia;
+
+
 class ReservasController extends Controller
 {
     //
@@ -151,16 +156,46 @@ class ReservasController extends Controller
 
     public function obtenertourRealizado()
     {
-        $today = Carbon::today();
+        $today = Carbon::now();
         $today->subDays(1);
-        $today = Carbon::parse($today)->format('Y-m-d');
+        $today = Carbon::parse($today)->format('Y-m-d h:m:s');
+
         $reservaciones = Payments::all()
-            ->where('Fechareserva', '==', $today)
-            ->where('status', '==', 'Aceptado');
+            ->where('status', '==', 'Pendiente')
+            ->where('created_at', "<=", $today);
 
         foreach ($reservaciones as $reservacion) {
-            $reservacion->status = 'Realizado';
+            $reservacion->status = 'Cancelado';
             $reservacion->save();
+
+            $Cancelación = Cancelations::create([
+                'order_nr' => $reservacion->order_nr,
+                'ModoPago' => $reservacion->ModoPago,
+                'Monto' => $reservacion->Monto,
+                'Moneda' => $reservacion->Moneda,
+                'Fechareserva' => $reservacion->Fechareserva,
+                'FechaCancelacion' =>   $reservacion->Fechareserva,
+                'Estado' => $reservacion->status,
+                'Cancela' => 'Sistema',
+                'motivoCancelacion' => 'No respuesta en 24 horas',
+                'NumTarjeta' => $reservacion->NumTarjeta,
+                'EstadoDinero' => $reservacion->EstadoDinero,
+                'id_payments' => $reservacion->id,
+                'id_tour' => $reservacion->id_tour,
+                'id_comprador' => $reservacion->id_comprador,
+                'id_guia'  => $reservacion->id_guia,
+
+            ]);
+            $compradores = $reservacion->getComprador;
+            $guias = $reservacion->getGuia;
+            foreach ($compradores as $comprador) {
+                error_log($comprador->email);
+                Mail::to($comprador->email)->send(new GuiaRechazarTourCliente($reservacion));
+            }
+            foreach ($guias as $guia) {
+                error_log($guia->email);
+                Mail::to($guia->email)->send(new GuiaRechazarTourGuia($reservacion));
+            }
         }
 
 
