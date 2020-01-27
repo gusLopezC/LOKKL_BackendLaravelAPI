@@ -147,4 +147,23 @@ class ReservasController extends Controller
 
         return response()->json(['Reservaciones' => $reservaciones, 200]);
     }
+
+
+    public function obtenertourRealizado()
+    {
+        $today = Carbon::today();
+        $today->subDays(1);
+        $today = Carbon::parse($today)->format('Y-m-d');
+        $reservaciones = Payments::all()
+            ->where('Fechareserva', '==', $today)
+            ->where('status', '==', 'Aceptado');
+
+        foreach ($reservaciones as $reservacion) {
+            $reservacion->status = 'Realizado';
+            $reservacion->save();
+        }
+
+
+        return response()->json(['Reservaciones' => $reservaciones, 200]);
+    }
 }

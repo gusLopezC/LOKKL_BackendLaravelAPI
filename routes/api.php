@@ -54,6 +54,7 @@ Route::get('tours/ObtenerToursCiudad/{ciudad}', 'Tours\ToursCiudad\ToursCiudad@O
 
 
 
+Route::get('reservaciones/obtenertourRealizado', 'Reservas\ReservasController@obtenertourRealizado');
 
 /**
  * Rutas protegidas por autentificacion
@@ -114,4 +115,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('reservaciones/cancelarReservacionGuia', 'Cancelations\CancelationsController@cancelarReservacionGuia');
 
     Route::get('reservaciones/obtenerDiferenciasDias/{order}', 'Cancelations\CancelationsController@obtenerDiferenciasDias');
+
+
 });
