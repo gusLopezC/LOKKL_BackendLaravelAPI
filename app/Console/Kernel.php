@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command('tour:realizado')->everyMinute();
+        $schedule->command('tour:realizado')->daily();
     }
 
     /**
