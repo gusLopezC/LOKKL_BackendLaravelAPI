@@ -12,6 +12,7 @@
         "aws/aws-sdk-php": "^3.129",
         "cartalyst/stripe-laravel": "10.0.*",
         "cviebrock/eloquent-sluggable": "^4.8",
+        "darkaonline/l5-swagger": "5.8.*",
         "doctrine/dbal": "^2.9",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.5",

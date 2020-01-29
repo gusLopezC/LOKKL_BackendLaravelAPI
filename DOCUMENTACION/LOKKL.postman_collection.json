@@ -1,0 +1,1980 @@
+{
+	"info": {
+		"_postman_id": "54997102-05ab-4f9d-a3da-b0716d5ff247",
+		"name": "LOKKL",
+		"description": "La siguiente documentacion son los metodos y acciones requeridas para la compra y gestion de los tours LOKKL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "developerlokkl@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "lokkldesarrollo",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"login"
+							]
+						},
+						"description": "Login Normal para autentificacion se requere dos campos email y password"
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Prueba",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "prueba@correo.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "pa$$word",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register"
+							]
+						},
+						"description": "Registro de usarios se mandan como parametros name,email,passwrod"
+					},
+					"response": []
+				},
+				{
+					"name": "Login Redes Sociales",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "guslopezcallejas@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/LoginGoogle",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"LoginGoogle"
+							]
+						},
+						"description": "Login Redes Sociales se obtiene el email de las ventanas emergentes y despues de pasar la validacion"
+					},
+					"response": []
+				},
+				{
+					"name": "Recuperar Password Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/password/create?email=developerlokkl@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"password",
+								"create"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "developerlokkl@gmail.com"
+								}
+							]
+						},
+						"description": "Se envia un email para restablecer la contrase se pide como paramatro el email al cual enviar"
+					},
+					"response": []
+				},
+				{
+					"name": "Verificacion token recuperar password",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "k0F84YdTGTiFptKj5fUtjemw76n2tL3tyhUMTQbxRVRGwxBWchHIVu99oLIA",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/password/find/k0F84YdTGTiFptKj5fUtjemw76n2tL3tyhUMTQbxRVRGwxBWchHIVu99oLIA",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"password",
+								"find",
+								"k0F84YdTGTiFptKj5fUtjemw76n2tL3tyhUMTQbxRVRGwxBWchHIVu99oLIA"
+							]
+						},
+						"description": "Verificamos que el token sea valido exista en los registros y que no se alla usado antes"
+					},
+					"response": []
+				},
+				{
+					"name": "Recuperar Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/password/reset",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"password",
+								"reset"
+							]
+						},
+						"description": "Restablecemos la contraseña pasamos la nueva contraseña y el token de validacion para asegurar la seguridad "
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Emails",
+			"item": [
+				{
+					"name": "Mail Contacto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/emailContacto?name&email&textomensaje",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"emailContacto"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": ""
+								},
+								{
+									"key": "email",
+									"value": ""
+								},
+								{
+									"key": "textomensaje",
+									"value": ""
+								}
+							]
+						},
+						"description": "Proporciona mail a travez de la pagina de contacto de la web y nos envia un mail con la duda del cliente se manda como parametros 'name,email,textomensaje'"
+					},
+					"response": []
+				},
+				{
+					"name": "Verificar cuenta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/users/verify/snKDNJs9ds8asd90dsds08",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"verify",
+								"snKDNJs9ds8asd90dsds08"
+							]
+						},
+						"description": "Se envia un email donde se verifica la cuenta a travez de un token valido cuando es valido se borra el token para que no siga validando"
+					},
+					"response": []
+				},
+				{
+					"name": "Reenviar mail verificacion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/users/1/resend",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"1",
+								"resend"
+							]
+						},
+						"description": "Reenviamos un email en caso de que no llegara o quiera volver a pedirlo si ya esta verificado no saldra el email"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Publico",
+			"item": [
+				{
+					"name": "Perfil publico ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/users/perfil/perfilpublico/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"perfil",
+								"perfilpublico",
+								"1"
+							]
+						},
+						"description": "Obtenemos el perfil publico del guia donde veremos sus tours e informacion basica"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tours",
+			"item": [
+				{
+					"name": "Obtener tours de Ciudad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/tours/ObtenerPorCiudad/ksmsnuas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tours",
+								"ObtenerPorCiudad",
+								"ksmsnuas"
+							]
+						},
+						"description": "Obtenemos los tours de las ciudad que el cliente busca y devuelve toda la informacion e imagenes"
+					},
+					"response": []
+				},
+				{
+					"name": "obtener Tour especifico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/tours/ObtenerTour/city-tour-gastronomico-y-cultural-santiago-de-queretaro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tours",
+								"ObtenerTour",
+								"city-tour-gastronomico-y-cultural-santiago-de-queretaro"
+							]
+						},
+						"description": "Obtenemos tour necesitamos el slug del tour que se genero automaticamente y asi podemos nos devuelve toda su informacion"
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerToursNuevos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/tours/ObtenerToursNuevos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tours",
+								"ObtenerToursNuevos"
+							]
+						},
+						"description": "Obtenemos Tours Nuevos "
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenemosTourPorCiudad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/tours/ObtenerToursCiudad/Mexico",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tours",
+								"ObtenerToursCiudad",
+								"Mexico"
+							]
+						},
+						"description": "Obtenemos Tour Por ciudad de cada pais ylos mostramos en la pagina principal es necesario mandar el pais como parametro de GET"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Update Foto Perfil",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/perfil/foto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"perfil",
+								"foto"
+							]
+						},
+						"description": "Actualizar foto de perfil del usuario se manda como parametro photo en un form-data"
+					},
+					"response": []
+				},
+				{
+					"name": "Cambiar contraseña",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "new_password",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/perfil/changepassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"perfil",
+								"changepassword"
+							]
+						},
+						"description": "Actualizamos la contraseña del usuario ya logeado pasamos como parametro password "
+					},
+					"response": []
+				},
+				{
+					"name": "Refrescar Perfil",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "developerlokkl@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/refreshProfile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"refreshProfile"
+							]
+						},
+						"description": "Refrescamos el perfil del usuario si da f5 y dandamos de nuevo la info si quiere obtener mas info"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Prospectos",
+			"item": [
+				{
+					"name": "Prospectos Empresa",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "TipoProspecto",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "nameContacto",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "emailContacto",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "telefonoContacto",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "edad",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "ciudad",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "preguntasGuia",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "comoNosConociste",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "document_identificacion",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "document_comprobantedomicilio",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "document_cedulafiscal",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "document_certificacion",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "nameempresa",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "nombreempresaLegal",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "sitioweb",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "ciudadContacto",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "CP",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "dirección",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "nombreContacto",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "puestoTrabajo",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "telefonocontacto",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/prospectosEmpresa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"prospectosEmpresa"
+							]
+						},
+						"description": "Metodo de registro de usuario a programa de guias para empresas o tour operedoras es necesario mandar todos estos datos para completar su registro"
+					},
+					"response": []
+				},
+				{
+					"name": "Validar Identidad",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "campo",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "iduser",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/perfil/documentGuide",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"perfil",
+								"documentGuide"
+							]
+						},
+						"description": "Validamos identidad de los archivos solicitados para mostrarlos en la plataforma administrativa\n\nnecesitas pasar 3 parametros\nel archivo \nel campo\ny el id"
+					},
+					"response": []
+				},
+				{
+					"name": "VerificarRegistro",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/users/prospectos/prospectoRegistrado/developerlokkl@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"prospectos",
+								"prospectoRegistrado",
+								"developerlokkl@gmail.com"
+							]
+						},
+						"description": "Verificamos si el usuario ya se a registradoa el programa de guias y elegir si mandarle avisos de registro aun."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "PagoGuias",
+			"item": [
+				{
+					"name": "Datos de pago Guia ",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_id\n",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "pais",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "tipomoneda",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "clabeInterbancaria",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "numeroCuenta",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "RFC",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "CURP",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/guias/datosPago",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"guias",
+								"datosPago"
+							]
+						},
+						"description": "Datos Pago Guia esta rutaalmancena la informacion bancaria de los usuarios tanto si es la primera como si edita su informacion"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Datos Guia",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/guias/datosPago/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"guias",
+								"datosPago",
+								"1"
+							]
+						},
+						"description": "Mostramos los datos de pago del guia si existen pasando el id del usario y devolviendo un objeto si se encuentra relacion"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "AdministracionTours",
+			"item": [
+				{
+					"name": "Crear Tours",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "cuidad",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "Pais",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "placeID",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "mapaGoogle",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "puntoInicio",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "schedulle",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "itinerary",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "whatsIncluded",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "categories",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "duration",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "idiomas",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "moneda",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/tours",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tours"
+							]
+						},
+						"description": "Administracion Tours el guia despues de rellenar su registro y obtener sus datos.\n\nCon el name genereamos un Slug unico para general la url del sitio esto para seo\n\nCon el precio lo multiplicamos por el 20% para obtener el precioConConmision y lo guardamos en otro campo llamado precioFinal"
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Tour",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "aut",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "cuidad",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "Pais",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "placeID",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "mapaGoogle",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "puntoInicio",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "schedulle",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "itinerary",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "whatsIncluded",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "categories",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "duration",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "idiomas",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "moneda",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/tours",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tours"
+							]
+						},
+						"description": "Administracion Tours el guia despues de rellenar su registro y obtener sus datos.\n\nCon el name genereamos un Slug unico para general la url del sitio esto para seo\n\nCon el precio lo multiplicamos por el 20% para obtener el precioConConmision y lo guardamos en otro campo llamado precioFinal"
+					},
+					"response": []
+				},
+				{
+					"name": "Cargar Imagenes Tour",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Photostour",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/tours/uploadFiles/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tours",
+								"uploadFiles",
+								"1"
+							]
+						},
+						"description": "Despues de que se crea el tour y se guarda la informacion del texto viene un form data con las imagenes del tuor y las cargamos mediante un foreach guardando la ruta de la imagen y el id del tour\n\nLas imagenes se guardan en S3 de Amazon"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener mis Tours",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/tours/misTours/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tours",
+								"misTours",
+								"1"
+							]
+						},
+						"description": "Obtenemos los tours del usuario pasando como parametro el id del usuario y su token "
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar foto tour",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/tours/borrarFotoTour/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tours",
+								"borrarFotoTour",
+								"12"
+							]
+						},
+						"description": "Eliminar foto se pasa el id de la foto y se elimina de la base de datos al igual de S3"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c2d93641-b363-4b9d-a790-e58627b53011",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "724055f8-d93b-46ea-8547-5be7d5fda2c9",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ReservasPagos",
+			"item": [
+				{
+					"name": "Reserva Pagando con Stripe",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "order_nr",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "stripeToken",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "telephone",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "name_tour",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "moneda",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "fecha",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "cantidadTurtias",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "NumTarjeta",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_tour",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_user",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_vendedor",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/transactions/paymentStripe'",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"transactions",
+								"paymentStripe'"
+							]
+						},
+						"description": "Reserva del tour pagando con tarjeta se valida la tarjeta y se valida la tarjeta antes que nada si es validaa y se realiza el cargo guardamos el registro en la BD para guardar la reserva notificamos al usuario y al guia de la realizacion de la reserva para su validacion"
+					},
+					"response": []
+				},
+				{
+					"name": "Reserva Pagando con Paypal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "order_nr",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "stripeToken",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "telephone",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "name_tour",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "moneda",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "fecha",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "cantidadTurtias",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "NumTarjeta",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_tour",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_user",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_vendedor",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/transactions/paymentStripe'",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"transactions",
+								"paymentStripe'"
+							]
+						},
+						"description": "Reserva del tour pagando con paypal en este caso se valida y se hace cargo desde la api de paypal desde el frontend una vez que se realiza un manda un token de verificacion y lo guardamos para el registro en la BD para guardar la reserva notificamos al usuario y al guia de la realizacion de la reserva para su validacion"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Reservaciones",
+			"item": [
+				{
+					"name": "Reservaciones",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/reservaciones/obtenerReservaciones/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reservaciones",
+								"obtenerReservaciones",
+								"1"
+							]
+						},
+						"description": "Obtenemos las reservacion activad del dia actual a futuro igual nos muestra el estado de la reserva e informacion basica "
+					},
+					"response": []
+				},
+				{
+					"name": "ReservacionesCalendario",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/reservaciones/obtenerReservacionesCalendario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reservaciones",
+								"obtenerReservacionesCalendario",
+								"1"
+							]
+						},
+						"description": "Obtenemos las reservacion del guia para obtener un objeto que mandamos a fronted y poder visualizar en un calendario "
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerMisViajes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/reservaciones/obtenerMisViajes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reservaciones",
+								"obtenerMisViajes",
+								"1"
+							]
+						},
+						"description": "Obtenemos los viajes que el cliente tiene activas actualmente obtenemos el estado de la reservacion y poder mandar mensaje al usuario"
+					},
+					"response": []
+				},
+				{
+					"name": "ReservacionesHistorial",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/reservaciones/obtenerHistorialReservaciones/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reservaciones",
+								"obtenerHistorialReservaciones",
+								"1"
+							]
+						},
+						"description": "Obtenemos las reservacion ya realizadas es un historico donde vemos nuestros tours realizadas y con quien fue solo pasamos el id del usuario sobre el metodo GET"
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerMisViajes Historial",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/reservaciones/obtenerHistorialMisViajes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reservaciones",
+								"obtenerHistorialMisViajes",
+								"1"
+							]
+						},
+						"description": "Obtenemos los viajes que el cliente a realizado pasando el id del usuario mediante el metodo GET obtenemos informacion basica de los tours que a realizado"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "AceptarCancelarReservacion",
+			"item": [
+				{
+					"name": "Aceptar Tour",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_comprador",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_guia",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/reservaciones/aceptarTour",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reservaciones",
+								"aceptarTour"
+							]
+						},
+						"description": "Una vez que e cliente paga el tour el guia tiene que aceptarlo cuenta con 24 horas para realizarlo  al aceptar el tour pasa el id de la reservacion y el id de comprador y el guia y se les manda unc correo de notificacion al guia como al cliente que fue activada la reservacion"
+					},
+					"response": []
+				},
+				{
+					"name": "CancelarTourCliente.",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "pedido",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "order_nr",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "ModoPago",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "Monto",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "Moneda",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "Fechareserva",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "motivo",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "NumTarjeta",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "EstadoDinero",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_tour",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_comprador",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_guia",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/reservaciones/cancelarReservacionCliente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reservaciones",
+								"cancelarReservacionCliente"
+							]
+						},
+						"description": "Se llama este metodo cuando el cliente cancela el tour cuenta con 48 horas antes del tour para hacerlo es necesario mandar todos estos cambios ya que se genera un registro en la tabla de cancelaciones para la devolucion del dinero.\n\nSe manda un correo al cliente y al guia informando de la cancelacion "
+					},
+					"response": []
+				},
+				{
+					"name": "CancelarTourGuia",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "pedido",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "order_nr",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "ModoPago",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "Monto",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "Moneda",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "Fechareserva",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "motivo",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "NumTarjeta",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "EstadoDinero",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_tour",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_comprador",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id_guia",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/reservaciones/cancelarReservacionGuia",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reservaciones",
+								"cancelarReservacionGuia"
+							]
+						},
+						"description": "Se llama este metodo cuando el guia cancela el tour cuenta con 48 horas antes del tour para hacerlo es necesario mandar todos estos cambios ya que se genera un registro en la tabla de cancelaciones para la devolucion del dinero.\n\nSe manda un correo al cliente y al guia informando de la cancelacion "
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8000/api/reservaciones/obtenerDiferenciasDias/000000001",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQwNDhjODMzMDQ0NmMxY2YyMTNkMmZhNmFlOTcxMmRhZWIxMjU3MTM3N2ViMjgzODdjZjk2Y2NmN2Q3YzlmODgxYzU1MzFmOGZmMjZmYmU5In0.eyJhdWQiOiIxIiwianRpIjoiNDA0OGM4MzMwNDQ2YzFjZjIxM2QyZmE2YWU5NzEyZGFlYjEyNTcxMzc3ZWIyODM4N2NmOTZjY2Y3ZDdjOWY4ODFjNTUzMWY4ZmYyNmZiZTkiLCJpYXQiOjE1ODAyNDU5NzgsIm5iZiI6MTU4MDI0NTk3OCwiZXhwIjoxNjExODY4Mzc4LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VmoOLjqArCk56bC7QmimefuEJaMAWgKSTPEySv0-VV0569ROFeN8kIbc9zbJdZyhNgdpgJhwh8uDrP7dACHNSQM_H88HAVUYEqiDSrVoRv3uRUJQgt0c8X4MxkgTeZAboVqJMZs0vi_mi1p_FpSacYOq7OGwde_oRcw_ea7mnkpGM9ykwZpP48_i-Eb7Kg1gkft8YC9_ukdZJQvGVMLKwOvo2Haos-c4oRzBN0JLuV1fBZb90zcPOAmYB2sbtqOamNFkW2JVknFDXVrJke0qvEjVSXwAAWkdNlVvqAqGcg3TyYNoL2jk20hCMXeA8fhuV7MF9wGLuc9pwTEDR9Uyk8Wl2wWSK9Owmq2I3X37kTaONpGe5HR6OucC1tUL7B7jKacpw_ho5ob3KMOUd05DAobxywx7j_KN5wo005EaUT-egIsYKVemCIjNHpoWSzZCWPrMp5tTMLJdx8VjAMY_Aj3ZEg1DrUzRU7mPnCfDD9AC8h29fLjz2YtdOteB3nKSJCt-Gjfng6w7Yyx-SY1UdqJtDW-f7gggoAcWxTKtkbY8SDl8IGglc84uOF1IkoLDChRaZ-1GGr6h4goPyvY5GLL8rmZrBvn-sQnHkpZICzcIL72BG4yq9-gxTjZ8aPXiH_k1Db36DgGJKPu29F7IP8x1PhUXCRJBHpFEDuqMsgI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/reservaciones/obtenerDiferenciasDias/000000001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reservaciones",
+								"obtenerDiferenciasDias",
+								"000000001"
+							]
+						},
+						"description": "Esta peticion nos devuelve las horas restantes para la cancelacion si es psobile o no realizar la cancelacion de la compra"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -40,8 +40,6 @@ class PassportController extends Controller
 
     public function LoginGoogle(Request $request)
     {
-        error_log($request);
-
         if ($busquedausuario = User::where('email', $request->email)->first()) {
 
             if ($busquedausuario->email == $request->email) {

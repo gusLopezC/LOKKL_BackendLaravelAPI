@@ -105,8 +105,8 @@ class PaymentController extends Controller
 
             $payment->getComprador;
             $payment->getGuia;
-            //Mail::to($user->email)->send(new ReservaClienteMail($payment));
-            //Mail::to($guia->email)->send(new ReservaVendedorMail($payment));
+            Mail::to($user->email)->send(new ReservaClienteMail($payment));
+            Mail::to($guia->email)->send(new ReservaVendedorMail($payment));
 
 
             return response()->json(['Cargo' => $payment], 201);
@@ -149,8 +149,8 @@ class PaymentController extends Controller
             $payment->getComprador;
             $payment->getGuia;
 
-            //Mail::to($user->email)->send(new ReservaClienteMail($payment));
-            //Mail::to($guia->email)->send(new ReservaVendedorMail($payment));
+            Mail::to($user->email)->send(new ReservaClienteMail($payment));
+            Mail::to($guia->email)->send(new ReservaVendedorMail($payment));
 
             return response()->json(['Cargo' => $payment], 201);
         } catch (\Exception $ex) {
