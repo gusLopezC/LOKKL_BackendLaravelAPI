@@ -55,6 +55,7 @@ Route::resource('tour/comentarios', 'Tours\ComentariosController');
 Route::get('tours/ObtenerToursNuevos', 'Tours\ToursCiudad\ToursCiudad@ObtenerToursNuevos')->name('tours.ObtenerToursNuevos');
 Route::get('tours/ObtenerToursCiudad/{ciudad}', 'Tours\ToursCiudad\ToursCiudad@ObtenerToursCiudad')->name('tours.ObtenerToursCiudad');
 
+Route::get('tours/ObtenerTourInfiniteScroll', 'Tours\ToursCiudad\ToursCiudad@ObtenerTourInfiniteScroll')->name('tours.ObtenerTourInfiniteScroll');
 
 
 Route::get('reservaciones/obtenertourRealizado', 'Reservas\ReservasController@obtenertourRealizado');

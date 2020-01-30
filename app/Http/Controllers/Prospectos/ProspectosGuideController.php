@@ -50,6 +50,8 @@ class ProspectosGuideController extends Controller
 
     public function registrarProspectoEmpresa(Request $request)
     {
+        error_log($request);
+        error_log($request->ciudad);
         $rules = [
             'nameempresa' => 'required',
             'emailContacto' => 'required|email|unique:prospectos_guides',

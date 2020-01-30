@@ -34,5 +34,13 @@ class ToursCiudad extends Controller
         return response()->json(['Tour' => $tour,  200]);
     }
 
+    public function ObtenerTourInfiniteScroll()
+    {
+        $tour = Tours::with('getPhotos')
+            ->where('verificado', 'Si')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(5);
 
+        return response()->json(['Tour' => $tour,  200]);
+    }
 }
