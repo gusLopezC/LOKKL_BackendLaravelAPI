@@ -62,16 +62,16 @@ class ProspectosGuideController extends Controller
 
             'TipoProspecto' => $request->TipoProspecto,
             'nameContacto' => $request->nameempresa,
-            'emailContacto'=> $request->emailContacto,
+            'emailContacto' => $request->emailContacto,
             'telefonoContacto' => $request->telefono,
-            'edad'  =>  null,
+            'edad'  =>  '0',
             'ciudad' => $request->ciudad,
             'preguntasGuia'  =>  null,
             'comoNosConociste'  =>  null,
-            'document_identificacion' => null,
-            'document_comprobantedomicilio'  => null,
-            'document_cedulafiscal' => null,
-            'document_certificacion' => null,
+            'document_identificacion' => '',
+            'document_comprobantedomicilio'  => '',
+            'document_cedulafiscal' => '',
+            'document_certificacion' => '',
             'estado' => 'Nuevo',
             'nameempresa' => $request->nameempresa,
             'nombreempresaLegal' => $request->nombreempresaLegal,
@@ -85,7 +85,7 @@ class ProspectosGuideController extends Controller
         //     ->cc(['developerlokkl@gmail.com', 'lokklmx@gmail.com'])
         //     ->send(new NewProspectRegister($prospecto));
 
-         return response()->json(['Prospecto' => $guia], 201);
+        return response()->json(['Prospecto' => $guia], 201);
     }
 
     /**
@@ -153,11 +153,14 @@ class ProspectosGuideController extends Controller
     public function AceptarProspecto($prospectos)
     {
 
+
+       
+
         $prospectos = ProspectosGuide::findOrFail($prospectos);
+
 
         $prospectos->estado = "Aceptado";
         $prospectos->save();
-        //Mail::to($prospectos)->send(new ProspectoAcept($prospectos));
 
         $user = User::where('id', $prospectos->user_id)->first();
 
@@ -179,6 +182,10 @@ class ProspectosGuideController extends Controller
             'user_id' => $prospectos->user_id,
 
         ]);
+
+
+        Mail::to($prospectos->emailContacto)->send(new ProspectoAcept($prospectos));
+
 
         //  $prospectos->delete();
         return redirect('/prospectos');
