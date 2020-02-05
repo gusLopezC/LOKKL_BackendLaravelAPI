@@ -55,7 +55,6 @@ Route::resource('tour/comentarios', 'Tours\ComentariosController');
  */
 Route::get('tours/ObtenerToursNuevos', 'Tours\ToursCiudad\ToursCiudad@ObtenerToursNuevos')->name('tours.ObtenerToursNuevos');
 Route::get('tours/ObtenerToursCiudad/{ciudad}', 'Tours\ToursCiudad\ToursCiudad@ObtenerToursCiudad')->name('tours.ObtenerToursCiudad');
-
 Route::get('tours/ObtenerTourInfiniteScroll', 'Tours\ToursCiudad\ToursCiudad@ObtenerTourInfiniteScroll')->name('tours.ObtenerTourInfiniteScroll');
 
 
@@ -113,7 +112,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('transactions/paymentPaypal', 'Payment\PaymentController@pagoPaypal');
 
     /**
-     * transaction
+     * Reservaciones
      */
     Route::get('reservaciones/obtenerReservaciones/{id}', 'Reservas\ReservasController@obtenerReservaciones');
     Route::get('reservaciones/obtenerHistorialReservaciones/{id}', 'Reservas\ReservasController@obtenerHistorialReservaciones');
@@ -126,4 +125,16 @@ Route::middleware('auth:api')->group(function () {
     Route::post('reservaciones/cancelarReservacionGuia', 'Cancelations\CancelationsController@cancelarReservacionGuia');
 
     Route::get('reservaciones/obtenerDiferenciasDias/{order}', 'Cancelations\CancelationsController@obtenerDiferenciasDias');
+
+    /**
+     *  Mensajes 
+     */
+
+    Route::resource('mensajes', 'Mensajes\MensajesController');
+    Route::get('mensajes/obtenerChatsTurista/{id}', 'Mensajes\MensajesController@obtenerChatsTurista');
+    Route::get('mensajes/obtenerChatsGuia/{id}', 'Mensajes\MensajesController@obtenerChatsGuia');
+    Route::get('mensajes/obteneSalaMensajesTurista/{id}', 'Mensajes\MensajesController@obteneSalaMensajesTurista');
+    Route::get('mensajes/obteneSalaMensajesGuia/{id}', 'Mensajes\MensajesController@obteneSalaMensajesGuia');
+    Route::post('mensajes/postearMensajeTurista', 'Mensajes\MensajesController@postearMensajeTurista');
+    Route::post('mensajes/postearMensajeGuia', 'Mensajes\MensajesController@postearMensajeGuia');
 });

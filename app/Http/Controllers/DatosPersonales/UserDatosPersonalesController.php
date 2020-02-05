@@ -13,11 +13,7 @@ class UserDatosPersonalesController extends Controller
     //
     public function index()
     {
-        //
         $datospersonales = UserDatosPersonales::all();
-
-        //return $guias;
-
         return response()->json(['guia' => $datospersonales], 201);
     }
 
