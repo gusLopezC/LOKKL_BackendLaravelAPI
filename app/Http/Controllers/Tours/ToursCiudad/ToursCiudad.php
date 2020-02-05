@@ -39,7 +39,7 @@ class ToursCiudad extends Controller
         $tour = Tours::with('getPhotos')
             ->where('verificado', 'Si')
             ->orderBy('created_at', 'DESC')
-            ->paginate(5);
+            ->paginate(10);
 
         return response()->json(['Tour' => $tour,  200]);
     }

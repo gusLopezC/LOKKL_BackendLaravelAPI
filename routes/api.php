@@ -40,6 +40,7 @@ Route::get('users/{user}/resend', 'PassportController@resend')->name('users.rese
  */
 Route::get('users/perfil/perfilpublico/{id}', 'PassportController@ObtenerPerfilPublico')->name('users.ObtenerPerfilPublico');
 
+
 /**
  * Tours
  */
@@ -73,6 +74,12 @@ Route::middleware('auth:api')->group(function () {
     Route::post('users/perfil/foto', 'PassportController@updatePhoto')->name('users.updatePhoto');
     Route::post('users/perfil/changepassword', 'PassportController@changePassword')->name('users.changePassword');
     Route::post('users/refreshProfile', 'PassportController@refreshUser')->name('users.refreshProfile');
+
+
+    Route::resource('users/contactoEmergencia', 'DatosPersonales\UserDatosPersonalesController');
+    Route::post('users/guardarcontactoEmergencia', 'DatosPersonales\UserDatosPersonalesController@guardarInfoPersonal');
+    Route::post('users/archivovalidacion', 'DatosPersonales\UserDatosPersonalesController@updatePhotoValidacion');
+
 
     /**
      * Prospectos
@@ -119,6 +126,4 @@ Route::middleware('auth:api')->group(function () {
     Route::post('reservaciones/cancelarReservacionGuia', 'Cancelations\CancelationsController@cancelarReservacionGuia');
 
     Route::get('reservaciones/obtenerDiferenciasDias/{order}', 'Cancelations\CancelationsController@obtenerDiferenciasDias');
-
-
 });

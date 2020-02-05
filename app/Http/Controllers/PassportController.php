@@ -29,6 +29,8 @@ class PassportController extends Controller
             'role' => 'USER_ROLE',
             'verified' => false,
             'img' => 'avatar3.png',
+            'sexo' => '',
+            'archivovalidacion' => '',
             'verification_token' => User::generarToken(),
 
         ]);
@@ -64,6 +66,8 @@ class PassportController extends Controller
         $datos['role'] = 'USER_ROLE';
         $datos['verified'] = false;
         $datos['img'] = $request->photoUrl;
+        $datos['sexo'] = '';
+        $datos['archivovalidacion'] = '';
         $datos['verification_token'] = User::generarToken();
 
         $usuario = User::create($datos);
@@ -146,6 +150,7 @@ class PassportController extends Controller
         $user->telephone = $request->telephone;
         $user->infopersonal = $request->infopersonal;
         $user->email = $request->email;
+        $user->sexo = $request->sexo;
 
         if (!$user->isDirty()) {
 
