@@ -27,6 +27,9 @@ class UserDatosPersonalesController extends Controller
 
     public function guardarInfoPersonal(Request $request)
     {
+
+        error_log($request);
+
         $datospersonales = UserDatosPersonales::where('user_id', '=', $request->user_id)
             ->first();
 
@@ -52,12 +55,12 @@ class UserDatosPersonalesController extends Controller
 
     public function updatePhotoValidacion(Request $request)
     {
-        error_log( $request->file('photo'));
+        error_log($request->file('photo'));
         if ($request->hasFile('photo')) {
 
             $file = $request->file('photo');
             $name = time() . $file->getClientOriginalName();
-            $filePath = '/images/profile/' . $name;
+            $filePath = '/images/validationUserDocumento/' . $name;
 
             Storage::disk('s3')->put($filePath, file_get_contents($file));
 
@@ -67,12 +70,30 @@ class UserDatosPersonalesController extends Controller
 
             $token = auth()->user()->createToken('dadirugesedevalclkkol')->accessToken;
             return response()->json(['token' => $token, 'user' => $user, 200]);
-        }else{
+        } else {
 
             $user = auth()->user();
             $token = auth()->user()->createToken('dadirugesedevalclkkol')->accessToken;
             return response()->json(['token' => $token, 'user' => $user, 400]);
-
         }
+    }
+
+    public function updatePhotoValidacionApp(Request $request)
+    {
+        $image = $request->archivo;
+        $image = str_replace('data:image/png;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = str_random(10) . '.' . 'png';
+
+        $filePath = '/images/validationUserDocumento/' . $imageName;
+
+        Storage::disk('s3')->put($filePath, file_get_contents($image));
+
+        $user = auth()->user();
+        $user->archivovalidacion = $imageName;
+        $user->save();
+
+        $token = auth()->user()->createToken('dadirugesedevalclkkol')->accessToken;
+        return response()->json(['token' => $token, 'user' => $user, 200]);
     }
 }

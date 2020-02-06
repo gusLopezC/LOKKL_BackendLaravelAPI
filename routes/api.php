@@ -78,6 +78,7 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('users/contactoEmergencia', 'DatosPersonales\UserDatosPersonalesController');
     Route::post('users/guardarcontactoEmergencia', 'DatosPersonales\UserDatosPersonalesController@guardarInfoPersonal');
     Route::post('users/archivovalidacion', 'DatosPersonales\UserDatosPersonalesController@updatePhotoValidacion');
+    Route::post('users/archivovalidacionApp', 'DatosPersonales\UserDatosPersonalesController@updatePhotoValidacionApp');
 
 
     /**
