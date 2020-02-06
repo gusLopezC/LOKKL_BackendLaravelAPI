@@ -81,8 +81,12 @@ class UserDatosPersonalesController extends Controller
     public function updatePhotoValidacionApp(Request $request)
     {
         $image = $request->archivo;
+
         $image = str_replace('data:image/png;base64,', '', $image);
+
         $image = str_replace(' ', '+', $image);
+        error_log($image);
+        
         $imageName = str_random(10) . '.' . 'png';
 
         $filePath = '/images/validationUserDocumento/' . $imageName;
