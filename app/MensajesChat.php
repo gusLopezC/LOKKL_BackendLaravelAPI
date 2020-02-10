@@ -25,4 +25,8 @@ class MensajesChat extends Model
     {
         return $this->hasMany('App\User', 'id', 'id_guia');
     }
+    public function getReserva()
+    {
+        return $this->hasMany('App\Payments', 'id', 'id_reservacion');
+    }
 }

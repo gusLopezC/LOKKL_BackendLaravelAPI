@@ -134,8 +134,7 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('mensajes', 'Mensajes\MensajesController');
     Route::get('mensajes/obtenerChatsTurista/{id}', 'Mensajes\MensajesController@obtenerChatsTurista');
     Route::get('mensajes/obtenerChatsGuia/{id}', 'Mensajes\MensajesController@obtenerChatsGuia');
-    Route::get('mensajes/obteneSalaMensajesTurista/{id}', 'Mensajes\MensajesController@obteneSalaMensajesTurista');
-    Route::get('mensajes/obteneSalaMensajesGuia/{id}', 'Mensajes\MensajesController@obteneSalaMensajesGuia');
-    Route::post('mensajes/postearMensajeTurista', 'Mensajes\MensajesController@postearMensajeTurista');
-    Route::post('mensajes/postearMensajeGuia', 'Mensajes\MensajesController@postearMensajeGuia');
+    Route::get('mensajes/obtenerChatReservacion/{id}', 'Mensajes\MensajesController@obtenerChatReservacion');
+    Route::get('mensajes/obtenerChatReservacionGuia/{id}', 'Mensajes\MensajesController@obtenerChatReservacionGuia');
+    Route::post('mensajes/sendMessage', 'Mensajes\MensajesController@sendMessage');
 });

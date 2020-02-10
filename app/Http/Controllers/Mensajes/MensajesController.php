@@ -6,6 +6,9 @@ use App\User;
 use App\MensajesChat;
 use App\Payments;
 
+use Mail;
+use App\Mail\RecibidoMensaje\RecibidoMensaje;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -23,8 +26,12 @@ class MensajesController extends Controller
 
     public function obtenerChatsTurista($id)
     {
-        $mensajes = MensajesChat::where('id_comprador', '=', $id)
-            //->groupBy('id_reservacion')
+        $mensajes = MensajesChat::with('getGuia')
+            ->with('getReserva')
+            ->where('id_comprador', '=', $id)
+            ->groupBy('id_comprador', 'id_reservacion')
+            ->orderBy('mensaje', 'ASC')
+
             ->get();
 
         return response()->json(['Mensajes' => $mensajes], 201);
@@ -40,7 +47,7 @@ class MensajesController extends Controller
         return response()->json(['Mensajes' => $mensajes], 201);
     }
 
-    public function obteneSalaMensajesTurista($id)
+    public function obtenerChatReservacion($id)
     {
         $mensajes = MensajesChat::where('id_reservacion', '=', $id)
             //->orderBy('updated_at', 'ASC')
@@ -49,7 +56,7 @@ class MensajesController extends Controller
         return response()->json(['Mensajes' => $mensajes], 201);
     }
 
-    public function obteneSalaMensajesGuia($id)
+    public function obtenerChatReservacionGuia($id)
     {
 
         $mensajes = MensajesChat::where('id_reservacion', '=', $id)
@@ -59,24 +66,30 @@ class MensajesController extends Controller
         return response()->json(['Mensajes' => $mensajes], 201);
     }
 
-    public function postearMensajeTurista(Request $request)
+    public function sendMessage(Request $request)
     {
+        error_log($request);
+        $guia = User::where('id', $request->id_guia)->first();
+        
         try {
-            $user = User::where('id', $request->id_user)->first();
-            $guia = User::where('id', $request->id_vendedor)->first();
-            $reserva = Payments::where('id', $request->id_vendedor)->first();
-
-
             $mensajes = MensajesChat::create([
-                'mensaje' => $request->stripeToken,
-                'escribio' => $request->escribio,
+                'mensaje' => $request->mensaje,
+                'escribio' => null,
                 'id_reservacion' => $request->id_reservacion,
                 'id_comprador' => $request->id_comprador,
                 'id_guia' => $request->id_guia,
             ]);
 
-            // Mail::to($guia->email)->send(new ReservaClienteMail($mensajes));
+            $mensajes->getGuia;
+            $mensajes->getReserva;
 
+             Mail::to($guia->email)->send(new RecibidoMensaje($mensajes));
+           // Mail::to('guslopezcallejas@gmail.com')->send(new RecibidoMensaje($mensajes));
+
+
+            $mensajes = MensajesChat::where('id_reservacion', '=', $request->id_reservacion)
+                //->orderBy('updated_at', 'ASC')
+                ->get();
             return response()->json(['Mensajes' => $mensajes], 201);
         } catch (\Exception $ex) {
             return $ex->getMessage();

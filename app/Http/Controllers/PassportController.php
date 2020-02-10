@@ -136,6 +136,14 @@ class PassportController extends Controller
      */
     public function update(Request $request, $id)
     {
+        error_log($request);
+
+        if ($request->sexo = null) {
+            $request->sexo = ' ';
+            error_log('No cambio sexo');
+
+        }
+
 
         $user = User::findOrFail($id);
 
