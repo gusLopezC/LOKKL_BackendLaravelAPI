@@ -31,7 +31,6 @@ class MensajesController extends Controller
             ->where('id_comprador', '=', $id)
             ->groupBy('id_comprador', 'id_reservacion')
             ->orderBy('mensaje', 'ASC')
-
             ->get();
 
         return response()->json(['Mensajes' => $mensajes], 201);
@@ -40,9 +39,13 @@ class MensajesController extends Controller
 
     public function obtenerChatsGuia($id)
     {
-        $mensajes = MensajesChat::where('id_guia', '=', $id)
-            ->groupBy('id_reservacion')
+        $mensajes = MensajesChat::with('getGuia')
+            ->with('getReserva')
+            ->where('id_guia', '=', $id)
+            ->groupBy('id_comprador', 'id_reservacion')
+            ->orderBy('mensaje', 'ASC')
             ->get();
+
 
         return response()->json(['Mensajes' => $mensajes], 201);
     }
@@ -70,7 +73,7 @@ class MensajesController extends Controller
     {
         error_log($request);
         $guia = User::where('id', $request->id_guia)->first();
-        
+
         try {
             $mensajes = MensajesChat::create([
                 'mensaje' => $request->mensaje,
@@ -82,8 +85,8 @@ class MensajesController extends Controller
             $mensajes->getGuia;
             $mensajes->getReserva;
 
-             Mail::to($guia->email)->send(new RecibidoMensaje($mensajes));
-           // Mail::to('guslopezcallejas@gmail.com')->send(new RecibidoMensaje($mensajes));
+            Mail::to($guia->email)->send(new RecibidoMensaje($mensajes));
+            // Mail::to('guslopezcallejas@gmail.com')->send(new RecibidoMensaje($mensajes));
 
 
             $mensajes = MensajesChat::where('id_reservacion', '=', $request->id_reservacion)
