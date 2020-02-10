@@ -74,7 +74,6 @@ class MensajesController extends Controller
         try {
             $mensajes = MensajesChat::create([
                 'mensaje' => $request->mensaje,
-                'escribio' => null,
                 'id_reservacion' => $request->id_reservacion,
                 'id_comprador' => $request->id_comprador,
                 'id_guia' => $request->id_guia,
