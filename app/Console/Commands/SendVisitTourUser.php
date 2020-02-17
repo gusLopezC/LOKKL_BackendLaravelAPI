@@ -45,7 +45,7 @@ class SendVisitTourUser extends Command
      */
     public function handle()
     {
-
+/*
         $ultimosTours = \DB::table('tours')
             ->select(
                 'tours.id',
@@ -140,6 +140,6 @@ class SendVisitTourUser extends Command
             } //end else
         } //end foreach
 
-        Log::info('Tarea realizacion de tours y mandado correos de recordatorio');
+        Log::info('Tarea realizacion de tours y mandado correos de recordatorio');*/
     }
 }
