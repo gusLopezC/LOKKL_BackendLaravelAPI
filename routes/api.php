@@ -35,6 +35,14 @@ Route::get('/send/email', 'HomeController@mail');
 Route::get('users/verify/{token}', 'PassportController@verify')->name('users.verify');
 Route::get('users/{user}/resend', 'PassportController@resend')->name('users.resend');
 
+
+/**
+ * Mini algoritmo guardar visitas  y mandar mails
+ */
+Route::post('visitas/guardarVisita', 'VisitasToursCache\VisitasToursCacheController@guardarVisita');
+Route::get('visitas/sendCorreosRecordatorio', 'VisitasToursCache\VisitasToursCacheController@sendCorreosRecordatorio');
+
+
 /**
  * UsuarioPublico
  */

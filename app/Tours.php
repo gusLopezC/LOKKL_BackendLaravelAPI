@@ -25,33 +25,33 @@ class Tours extends Model
         'puntoInicio',
 
         'schedulle',
- 
+
 
         'itinerary',
         'whatsIncluded',
 
-        'categories',        
+        'categories',
         'duration',
         'calification',
         'lenguajes',
         'price',
         'priceFinal',
         'moneda',
-        
+
         'user_guide',
         'user_id'
     ];
-  public function getPhotos()
+    public function getPhotos()
     {
         return $this->hasMany('App\PhotosTours', 'tour_id');
     }
 
     public function getUser()
     {
-        return $this->hasMany('App\User', 'id' , 'user_id');
+        return $this->hasMany('App\User', 'id', 'user_id');
     }
 
-        /**
+    /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
@@ -64,7 +64,4 @@ class Tours extends Model
             ]
         ];
     }
-  
-
-  
 }

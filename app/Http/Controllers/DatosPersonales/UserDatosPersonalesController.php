@@ -37,6 +37,7 @@ class UserDatosPersonalesController extends Controller
             $datospersonales->NameContactoEmergencia = $request->NameContactoEmergencia;
             $datospersonales->NumContactoEmergencia = $request->NumContactoEmergencia;
             $datospersonales->EmailContactoEmergencia = $request->EmailContactoEmergencia;
+            $datospersonales->ParentescoEmergencia = $request->ParentescoEmergencia;
 
             $datospersonales->save();
             return response()->json(['datospersonales' => $datospersonales], 201);
@@ -46,6 +47,7 @@ class UserDatosPersonalesController extends Controller
                 'NameContactoEmergencia' => $request->NameContactoEmergencia,
                 'NumContactoEmergencia' => $request->NumContactoEmergencia,
                 'EmailContactoEmergencia' => $request->EmailContactoEmergencia,
+                'ParentescoEmergencia' => $request->ParentescoEmergencia,
                 'user_id' => $request->user_id
             ]);
         }

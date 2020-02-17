@@ -80,11 +80,9 @@ class TourCancelNoRespuesta extends Command
             $compradores = $reservacion->getComprador;
             $guias = $reservacion->getGuia;
             foreach ($compradores as $comprador) {
-                error_log($comprador->email);
                 Mail::to($comprador->email)->send(new GuiaRechazarTourCliente($reservacion));
             }
             foreach ($guias as $guia) {
-                error_log($guia->email);
                 Mail::to($guia->email)->send(new GuiaRechazarTourGuia($reservacion));
             }
         }

@@ -11,6 +11,7 @@ class UserDatosPersonales extends Model
         'NameContactoEmergencia',
         'NumContactoEmergencia',
         'EmailContactoEmergencia',
+        'ParentescoEmergencia',
         'user_id'
     ];
 }

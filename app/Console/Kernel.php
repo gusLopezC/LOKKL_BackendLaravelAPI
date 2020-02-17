@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
         //
         //Commands\LogTest::class,
         'App\Console\Commands\UpdateTourRealizado',
-        'App\Console\Commands\TourCancelNoRespuesta'
+        'App\Console\Commands\TourCancelNoRespuesta',
+        'App\Console\Commands\SendVisitTourUser'
     ];
 
     /**
@@ -31,6 +32,8 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->command('tour:realizado')->daily();
         $schedule->command('tour:noRespuesta')->daily();
+        $schedule->command('sendVisitTour:User')->dailyAt('09:00');
+
     }
 
     /**
