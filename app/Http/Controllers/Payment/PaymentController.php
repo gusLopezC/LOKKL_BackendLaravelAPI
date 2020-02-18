@@ -95,6 +95,7 @@ class PaymentController extends Controller
                 'Monto' => $request->price,
                 'Moneda' => $request->moneda,
                 'Fechareserva' => Carbon::createFromFormat('Y-m-d', $request->fecha),
+                'hora' => $request->hora,
                 'CantidadTuristas' => $request->cantidadTurtias,
                 'NumTarjeta' => $request->NumTarjeta,
                 'EstadoDinero' => 'Almacenado en cuenta',

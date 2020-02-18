@@ -18,6 +18,7 @@ class Payments extends Model
         'Monto',
         'Moneda',
         'Fechareserva',
+        'hora',
         'CantidadTuristas',
         'status',
         'NumTarjeta',

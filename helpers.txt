@@ -1,5 +1,11 @@
 #Correr despues de hacer migraciones
 
+
+STRIPE_KEY=pk_live_MFjCYjJg6B1jNNx5mUaSwFRY00q1xLT3gH
+STRIPE_SECRET=sk_live_Zr7YG0S7L3l7AgtUMduTeBLS0079k3Popi
+
+
+
 php artisan passport:install
 php artisan passport:client --personal 
 = lokkl
