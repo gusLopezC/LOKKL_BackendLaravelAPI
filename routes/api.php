@@ -54,6 +54,7 @@ Route::get('users/perfil/perfilpublico/{id}', 'PassportController@ObtenerPerfilP
  */
 Route::get('tours/ObtenerPorCiudad/{ciudad}', 'Tours\ToursController@ObtenerPorCiudad')->name('tours.ObtenerPorCiudad');
 Route::get('tours/ObtenerTour/{slug}', 'Tours\ToursController@ObtenerTour')->name('tours.ObtenerTour');
+Route::get('revisarDisponibilidad/{id}', 'revisarDisponibilidad\revisarDisponibilidadControler@revisarDisponibilidad');
 
 Route::resource('tour/comentarios', 'Tours\ComentariosController');
 
