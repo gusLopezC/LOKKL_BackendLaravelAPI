@@ -46,7 +46,7 @@ class SendVisitTourUser extends Command
     public function handle()
     {
 
-        $ultimosTours = \DB::table('tours')
+       $ultimosTours = \DB::table('tours')
             ->select(
                 'tours.id',
                 'tours.name',
@@ -59,8 +59,7 @@ class SendVisitTourUser extends Command
                 'tours.price',
                 'tours.moneda',
                 'tours.created_at',
-                'photos_tours.photo',
-            )
+                'photos_tours.photo')
             ->join('photos_tours', 'tours.id', '=', 'photos_tours.tour_id')
             ->take(4)
             ->groupBy('tours.created_at')
