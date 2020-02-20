@@ -38,6 +38,6 @@ class MailRecodatorio extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.MailRecordatorio.MailRecordatorio')->subject('Prueba');
+        return $this->markdown('emails.MailRecordatorio.MailRecordatorio')->subject('Encuentra tu tour ideal');
     }
 }
