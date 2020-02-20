@@ -101,8 +101,7 @@ class VisitasToursCacheController extends Controller
                     'tours.calification',
                     'tours.price',
                     'tours.moneda',
-                    'photos_tours.photo',
-                )
+                    'photos_tours.photo')
                 ->join('tours', 'visitas_tours_caches.id_tour', '=', 'tours.id')
                 ->join('users', 'visitas_tours_caches.user_id', '=', 'users.id')
                 ->join('photos_tours', 'tours.id', '=', 'photos_tours.tour_id')
