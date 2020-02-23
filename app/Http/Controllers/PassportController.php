@@ -159,7 +159,7 @@ class PassportController extends Controller
         }
         $user->save();
 
-        
+
         $token = auth()->user()->createToken('dadirugesedevalclkkol')->accessToken;
         return response()->json(['token' => $token, 'user' => $user, 200]);
     }
@@ -261,6 +261,12 @@ class PassportController extends Controller
             ->where('user_id', $id)
             ->get();
 
-        return response()->json(['Usuario' => $usuarios, 'Tours' => $tour, 200]);
+        $CantidadTour = $tour->count();
+
+        return response()->json([
+            'Usuario' => $usuarios,
+            'Tours' => $tour,
+            'CantidadTours' => $CantidadTour, 200
+        ]);
     }
 }
