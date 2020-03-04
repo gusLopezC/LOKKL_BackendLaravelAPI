@@ -37,6 +37,7 @@ class Tours extends Model
         'price',
         'priceFinal',
         'moneda',
+        'lenguaje',
 
         'user_guide',
         'user_id'

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\DB;
 
+use Google\Cloud\Translate\V2\TranslateClient;
 
 class ToursController extends Controller
 {
@@ -114,29 +115,7 @@ class ToursController extends Controller
      */
     public function EditarTours(Request $request)
     {
-        /*'cuidad' => $request->cuidad,
-        'pais' => $request->Pais,
-        'placeID' => $request->placeID,
 
-        'name' => $request->name,
-        'slug' => $request->$slug,
-
-        'mapaGoogle' => $request->mapaGoogle,
-        'puntoInicio' => $request->puntoInicio,
-
-        'schedulle' => $request->schedulle,
-
-        'itinerary' => $request->itinerary,
-        'whatsIncluded' => $request->whatsIncluded,
-
-        'categories' => $request->categories,
-        'duration' => $request->duration,
-        'lenguajes' => $request->idiomas,
-        'price' => $request->price,
-        'priceFinal' => $request->price + ($request->price * .20),
-        'moneda' => $request->moneda,
-
-        'user_id' => $request->user_id,*/
         $tour = Tours::where('id', $request->id)->first();
         $tour->cuidad  = $request->cuidad;
         $tour->pais  = $request->pais;
@@ -152,7 +131,7 @@ class ToursController extends Controller
         $tour->categories  = $request->categories;
         $tour->duration  = $request->duration;
         $tour->lenguajes  = $request->lenguajes;
-        
+
         $tour->price  = $request->price;
         $tour->priceFinal  = $request->price + ($request->price * .20);
         $tour->moneda = $request->moneda;
@@ -245,21 +224,58 @@ class ToursController extends Controller
 
 
 
-    public function ObtenerTour($slug)
+    public function ObtenerTour($slug, $lenguaje)
     {
+        /**
+         * Obtener tour y su traduccion
+         */
         $tour = Tours::with('getPhotos')
             ->where('slug', $slug)->first();
 
-        $guia = DB::table('users')->select('id', 'name', 'infopersonal', 'img')
-            ->where('id', '=', $tour->user_id)
-            ->get();
+        if ($tour->lenguaje == $lenguaje) {
+            $guia = DB::table('users')->select('id', 'name', 'infopersonal', 'img')
+                ->where('id', '=', $tour->user_id)
+                ->get();
 
-        $comentarios = Comentarios::with('getUser:id,name')
-            ->where('tour_id', '=', $tour->id)->get();
+            $comentarios = Comentarios::with('getUser:id,name')
+                ->where('tour_id', '=', $tour->id)->get();
+
+            return response()->json(['Tour' => $tour, "Guia" => $guia, "Comentarios" => $comentarios, 200]);
+        } else {
+            $translate = new TranslateClient([
+                'key' => 'AIzaSyDCzUElgJv_LpGRv6XXhUNyoBv-HD4ABPo'
+            ]);
+
+            $content = [
+                'name' => $tour->name,
+                'cuidad' => $tour->cuidad,
+                'schedulle' => $tour->schedulle,
+                'puntoInicio' => $tour->puntoInicio,
+                'whatsIncluded' => $tour->whatsIncluded,
+                'itinerary' => $tour->itinerary,
+            ];
+            // Translate text .
+
+            foreach ($content as $key => $text) {
+                $result = $translate->translate($text, [
+                    'target' => $lenguaje
+                ]);
+                $tour->{$key} = $result['text'];
+            }
+
+            $tour->whatsIncluded = str_replace("&quot;", "\"", $tour->whatsIncluded);
+            $tour->itinerary = str_replace("&quot;", "\"", $tour->itinerary);
 
 
+            $guia = DB::table('users')->select('id', 'name', 'infopersonal', 'img')
+                ->where('id', '=', $tour->user_id)
+                ->get();
 
-        return response()->json(['Tour' => $tour, "Guia" => $guia, "Comentarios" => $comentarios, 200]);
+            $comentarios = Comentarios::with('getUser:id,name')
+                ->where('tour_id', '=', $tour->id)->get();
+
+            return response()->json(['Tour' => $tour, "Guia" => $guia, "Comentarios" => $comentarios, 200]);
+        }
     }
 
     /**
