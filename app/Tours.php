@@ -19,6 +19,7 @@ class Tours extends Model
         'placeID',
 
         'name',
+        'nameIngles',
         'slug',
 
         'mapaGoogle',

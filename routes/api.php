@@ -56,6 +56,9 @@ Route::get('tours/ObtenerPorCiudad/{ciudad}', 'Tours\ToursController@ObtenerPorC
 Route::get('tours/ObtenerTour/{slug}/{lenguaje}', 'Tours\ToursController@ObtenerTour')->name('tours.ObtenerTour');
 Route::get('revisarDisponibilidad/{id}', 'revisarDisponibilidad\revisarDisponibilidadControler@revisarDisponibilidad');
 
+Route::get('tours/CambiarNombres', 'Tours\ToursController@nameIngles')->name('tours.nameIngles');
+
+
 Route::resource('tour/comentarios', 'Tours\ComentariosController');
 
 

@@ -353,4 +353,25 @@ class ToursController extends Controller
             return "A ocurrido un error" + $e;
         }
     }
+
+    public function nameIngles()
+    {
+        $tours = Tours::all();
+
+        $translate = new TranslateClient([
+            'key' => 'AIzaSyDCzUElgJv_LpGRv6XXhUNyoBv-HD4ABPo'
+        ]);
+
+
+        foreach ($tours as $tour) {
+
+            $result = $translate->translate($tour->name, [
+                'target' => 'en'
+            ]);
+
+            $tour->nameIngles = $result['text'];
+            $tour->save();
+        }
+        $tour->save();
+    }
 }
