@@ -419,16 +419,65 @@ class ToursController extends Controller
             'key' => 'AIzaSyDCzUElgJv_LpGRv6XXhUNyoBv-HD4ABPo'
         ]);
 
-
+        $content = [];
         foreach ($tours as $tour) {
 
-            $result = $translate->translate($tour->name, [
-                'target' => 'en'
-            ]);
+            $content = [
+                'name' => $tour->name,
+                'cuidad' => $tour->cuidad,
+                'pais' => $tour->pais,
+                'schedulle' => $tour->schedulle,
+                'puntoInicio' => $tour->puntoInicio,
+                'whatsIncluded' => $tour->whatsIncluded,
+                'itinerary' => $tour->itinerary,
+                'lenguajes' => $tour->lenguajes,
 
-            $tour->nameIngles = $result['text'];
-            $tour->save();
+            ];
+
+
+            // Translate text .
+            foreach ($content as $key => $value) {
+                $result = $translate->translate($value, [
+                    'target' => 'en'
+                ]);
+
+                // ACA pisamos el valor de la propiedad
+                $tour->{$key} = $result['text'];
+                $tour->lenguaje = 'en';
+            }
+
+            $tour->whatsIncluded = str_replace("&quot;", "\"",  $tour->whatsIncluded);
+            $tour->itinerary = str_replace("&quot;", "\"", $tour->itinerary);
+
+
+            $tour = ToursIngles::create([
+                'id' => $tour->id,
+                'cuidad' => $tour->cuidad,
+                'pais' => $tour->pais,
+                'placeID' => $tour->placeID,
+
+                'name' => $tour->name,
+                'slug' => $tour->slug,
+
+                'mapaGoogle' => $tour->mapaGoogle,
+                'puntoInicio' => $tour->puntoInicio,
+
+                'schedulle' => $tour->schedulle,
+
+                'itinerary' => $tour->itinerary,
+                'whatsIncluded' => $tour->whatsIncluded,
+
+                'categories' => $tour->categories,
+                'duration' => $tour->duration,
+                'lenguajes' => $tour->lenguajes,
+                'price' => $tour->price,
+                'priceFinal' => $tour->price + ($tour->price * .20),
+                'moneda' => $tour->moneda,
+                'lenguaje' => $tour->lenguaje,
+
+                'user_id' => $tour->user_id,
+
+            ]);
         }
-        $tour->save();
     }
 }
