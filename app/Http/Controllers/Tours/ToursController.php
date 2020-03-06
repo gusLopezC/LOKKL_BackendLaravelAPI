@@ -6,6 +6,7 @@ use Alert;
 use App\Comentarios;
 use App\Http\Controllers\Controller;
 use App\Tours;
+use App\ToursIngles;
 use App\PhotosTours;
 use App\TourExtra;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ use Google\Cloud\Translate\V2\TranslateClient;
 
 class ToursController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -35,16 +37,6 @@ class ToursController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -52,43 +44,126 @@ class ToursController extends Controller
      */
     public function store(Request $request)
     {
+        $lenguaje = $request->lenguaje;
 
         $slug = SlugService::createSlug(Tours::class, 'slug', $request->name, ['unique' => false]);
 
-        $tour = Tours::create([
-            'cuidad' => $request->cuidad,
-            'pais' => $request->Pais,
-            'placeID' => $request->placeID,
+        if ($lenguaje == 'es') {
+            $tour = Tours::create([
+                'cuidad' => $request->cuidad,
+                'pais' => $request->Pais,
+                'placeID' => $request->placeID,
 
-            'name' => $request->name,
-            'slug' => $request->$slug,
+                'name' => $request->name,
+                'slug' => $request->$slug,
 
-            'mapaGoogle' => $request->mapaGoogle,
-            'puntoInicio' => $request->puntoInicio,
+                'mapaGoogle' => $request->mapaGoogle,
+                'puntoInicio' => $request->puntoInicio,
 
-            'schedulle' => $request->schedulle,
+                'schedulle' => $request->schedulle,
 
-            'itinerary' => $request->itinerary,
-            'whatsIncluded' => $request->whatsIncluded,
+                'itinerary' => $request->itinerary,
+                'whatsIncluded' => $request->whatsIncluded,
 
-            'categories' => $request->categories,
-            'duration' => $request->duration,
-            'lenguajes' => $request->idiomas,
-            'price' => $request->price,
-            'priceFinal' => $request->price + ($request->price * .20),
-            'moneda' => $request->moneda,
+                'categories' => $request->categories,
+                'duration' => $request->duration,
+                'lenguajes' => $request->idiomas,
+                'price' => $request->price,
+                'priceFinal' => $request->price + ($request->price * .20),
+                'moneda' => $request->moneda,
+                'lenguaje' => $request->lenguaje,
 
-            'user_id' => $request->user_id,
+                'user_id' => $request->user_id,
 
-        ]);
+            ]);
+
+            $translate = new TranslateClient([
+                'key' => 'AIzaSyDCzUElgJv_LpGRv6XXhUNyoBv-HD4ABPo'
+            ]);
+
+            $content = [
+                'name' => $tour->name,
+                'cuidad' => $tour->cuidad,
+                'schedulle' => $tour->schedulle,
+                'puntoInicio' => $tour->puntoInicio,
+                'whatsIncluded' => $tour->whatsIncluded,
+                'itinerary' => $tour->itinerary,
+                'lenguajes' => $tour->lenguajes,
+            ];
+            // Translate text .
+            $array = array();
+
+            foreach ($content as $key => $text) {
+                $result = $translate->translate($text, [
+                    'target' => 'en'
+                ]);
+                $array = array_add($array, $key, $result['text']);
+            }
+            $tour->whatsIncluded = str_replace("&quot;", "\"", $array['whatsIncluded']);
+            $tour->itinerary = str_replace("&quot;", "\"", $array['itinerary']);
 
 
+            $tourIngles = ToursIngles::create([
+                'id' => $tour->id,
+                'cuidad' => $tour->cuidad,
+                'pais' => $tour->pais,
+                'placeID' => $tour->placeID,
 
-        return response()->json(['Tour' => $tour], 200);
+                'name' => $array['puntoInicio'],
+                'slug' => $tour->$slug,
 
-            // }
+                'mapaGoogle' => $tour->mapaGoogle,
+                'puntoInicio' => $array['name'],
 
-        ;
+                'schedulle' =>  $array['schedulle'],
+
+                'itinerary' => $tour->itinerary,
+                'whatsIncluded' => $tour->whatsIncluded,
+
+                'categories' => $tour->categories,
+                'duration' => $tour->duration,
+                'lenguajes' => $array['lenguajes'],
+                'price' => $tour->price,
+                'priceFinal' => $tour->price + ($tour->price * .20),
+                'moneda' => $tour->moneda,
+                'lenguaje' => 'en',
+                'user_id' => $tour->user_id,
+
+            ]);
+        } //end inf
+
+        if ($lenguaje != 'en') {
+            $tour = ToursIngles::create([
+                'cuidad' => $request->cuidad,
+                'pais' => $request->Pais,
+                'placeID' => $request->placeID,
+
+                'name' => $request->name,
+                'slug' => $request->$slug,
+
+                'mapaGoogle' => $request->mapaGoogle,
+                'puntoInicio' => $request->puntoInicio,
+
+                'schedulle' => $request->schedulle,
+
+                'itinerary' => $request->itinerary,
+                'whatsIncluded' => $request->whatsIncluded,
+
+                'categories' => $request->categories,
+                'duration' => $request->duration,
+                'lenguajes' => $request->idiomas,
+                'price' => $request->price,
+                'priceFinal' => $request->price + ($request->price * .20),
+                'moneda' => $request->moneda,
+                'lenguaje' => $request->lenguaje,
+
+                'user_id' => $request->user_id,
+
+            ]);
+        }
+
+
+        return response()->json(['Tour' => $tour, 'tourIngles' => $tourIngles], 200);
     }
     /**
      * Display the specified resource.
@@ -96,9 +171,13 @@ class ToursController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($lenguaje, $id)
     {
-        $tour = Tours::find($id);
+        if ($lenguaje == 'es') {
+            $tour = Tours::find($id);
+        } else {
+            $tour = ToursIngles::find($id);
+        }
 
         foreach ($tour->getPhotos as $photos) {
             $potos = ($photos->photo);
@@ -153,6 +232,8 @@ class ToursController extends Controller
         try {
             $tour = Tours::findOrFail($id);
 
+            $tourIngles = ToursIngles::findOrFail($id);
+
             $Photostour = PhotosTours::where('tour_id', $tour->id)->get();
 
             foreach ($Photostour as $photos) {
@@ -162,6 +243,7 @@ class ToursController extends Controller
             }
 
             $tour->delete();
+            $tourIngles->delete();
 
             return response()->json(['Tour' => $Photostour, 200]);
         } catch (PDOException $e) {
@@ -199,17 +281,20 @@ class ToursController extends Controller
     /**
      * Obtener por cuidad
      */
-    public function ObtenerPorCiudad($placeID)
+    public function ObtenerPorCiudad($lenguaje, $placeID)
     {
+        if ($lenguaje == 'es') {
+            $tour = Tours::with('getPhotos')
+                ->where('placeID', $placeID)
+                ->where('verificado', 'Si')
+                ->get();
+        } else {
+            $tour = ToursIngles::with('getPhotos')
+                ->where('placeID', $placeID)
+                ->where('verificado', 'Si')
+                ->get();
+        }
 
-        $tour = Tours::with('getPhotos')
-            ->where('placeID', $placeID)
-            ->where('verificado', 'Si')
-            ->get();
-
-        //$tour->price =  $tour->price + ($tour->price * .20);
-
-        // $tourextra = TourExtra::where('ciudad', $ciudad)->first();
         $tourextra = TourExtra::where('ciudad', 'default')->first();
         if (!$tourextra) {
 
@@ -226,56 +311,28 @@ class ToursController extends Controller
 
     public function ObtenerTour($slug, $lenguaje)
     {
+
         /**
          * Obtener tour y su traduccion
          */
-        $tour = Tours::with('getPhotos')
-            ->where('slug', $slug)->first();
 
-        if ($tour->lenguaje == $lenguaje) {
-            $guia = DB::table('users')->select('id', 'name', 'infopersonal', 'img')
-                ->where('id', '=', $tour->user_id)
-                ->get();
+        if ($lenguaje = 'es') {
 
-            $comentarios = Comentarios::with('getUser:id,name')
-                ->where('tour_id', '=', $tour->id)->get();
-
-            return response()->json(['Tour' => $tour, "Guia" => $guia, "Comentarios" => $comentarios, 200]);
+            $tour = Tours::with('getPhotos')
+                ->where('slug', $slug)->first();
         } else {
-            $translate = new TranslateClient([
-                'key' => 'AIzaSyDCzUElgJv_LpGRv6XXhUNyoBv-HD4ABPo'
-            ]);
-
-            $content = [
-                'name' => $tour->name,
-                'cuidad' => $tour->cuidad,
-                'schedulle' => $tour->schedulle,
-                'puntoInicio' => $tour->puntoInicio,
-                'whatsIncluded' => $tour->whatsIncluded,
-                'itinerary' => $tour->itinerary,
-            ];
-            // Translate text .
-
-            foreach ($content as $key => $text) {
-                $result = $translate->translate($text, [
-                    'target' => $lenguaje
-                ]);
-                $tour->{$key} = $result['text'];
-            }
-
-            $tour->whatsIncluded = str_replace("&quot;", "\"", $tour->whatsIncluded);
-            $tour->itinerary = str_replace("&quot;", "\"", $tour->itinerary);
-
-
-            $guia = DB::table('users')->select('id', 'name', 'infopersonal', 'img')
-                ->where('id', '=', $tour->user_id)
-                ->get();
-
-            $comentarios = Comentarios::with('getUser:id,name')
-                ->where('tour_id', '=', $tour->id)->get();
-
-            return response()->json(['Tour' => $tour, "Guia" => $guia, "Comentarios" => $comentarios, 200]);
+            $tour = ToursIngles::with('getPhotos')
+                ->where('slug', $slug)->first();
         }
+
+        $guia = DB::table('users')->select('id', 'name', 'infopersonal', 'img')
+            ->where('id', '=', $tour->user_id)
+            ->get();
+
+        $comentarios = Comentarios::with('getUser:id,name')
+            ->where('tour_id', '=', $tour->id)->get();
+
+        return response()->json(['Tour' => $tour, "Guia" => $guia, "Comentarios" => $comentarios, 200]);
     }
 
     /**

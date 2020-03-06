@@ -7,6 +7,7 @@ use App\PhotosTours;
 use App\TourExtra;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\ToursIngles;
 
 class ToursCiudad extends Controller
 {
@@ -34,12 +35,22 @@ class ToursCiudad extends Controller
         return response()->json(['Tour' => $tour,  200]);
     }
 
-    public function ObtenerTourInfiniteScroll()
+    public function ObtenerTourInfiniteScroll($lenguage)
     {
-        $tour = Tours::with('getPhotos')
-            ->where('verificado', 'Si')
-            ->orderBy('created_at', 'DESC')
-            ->paginate(10);
+
+        if ($lenguage == 'es') {
+            $tour = Tours::select('id', 'name', 'slug', 'price', 'duration', 'calification', 'categories')
+                ->with('getPhotos')
+                ->where('verificado', 'Si')
+                ->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        } else {
+            $tour = ToursIngles::select('id', 'name', 'slug', 'price', 'duration', 'calification', 'categories')
+                ->with('getPhotos')
+                ->where('verificado', 'Si')
+                ->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        }
 
         return response()->json(['Tour' => $tour,  200]);
     }
