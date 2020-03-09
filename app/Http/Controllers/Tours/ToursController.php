@@ -316,7 +316,7 @@ class ToursController extends Controller
          * Obtener tour y su traduccion
          */
 
-        if ($lenguaje = 'es') {
+        if ($lenguaje == 'es') {
 
             $tour = Tours::with('getPhotos')
                 ->where('slug', $slug)->first();
