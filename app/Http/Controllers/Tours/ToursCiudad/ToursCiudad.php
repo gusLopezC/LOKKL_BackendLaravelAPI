@@ -38,13 +38,17 @@ class ToursCiudad extends Controller
     public function ObtenerTourInfiniteScroll($lenguage)
     {
 
-        if ($lenguage == 'es') {
+        if ($lenguage = 'es') {
             $tour = Tours::select('id', 'name', 'slug', 'price', 'duration', 'calification', 'categories')
                 ->with('getPhotos')
                 ->where('verificado', 'Si')
                 ->orderBy('created_at', 'DESC')
                 ->paginate(10);
-        } else {
+   
+        }
+        if ($lenguage = 'en') {
+
+         
             $tour = ToursIngles::select('id', 'name', 'slug', 'price', 'duration', 'calification', 'categories')
                 ->with('getPhotos')
                 ->where('verificado', 'Si')
