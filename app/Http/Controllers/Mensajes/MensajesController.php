@@ -42,7 +42,6 @@ class MensajesController extends Controller
         $mensajes = MensajesChat::with('getComprador')
             ->with('getReserva')
             ->where('id_guia', '=', $id)
-            ->orwhere('id_comprador', '=', $id)
             ->groupBy('id_comprador', 'id_reservacion')
             ->orderBy('mensaje', 'ASC')
             ->get();
