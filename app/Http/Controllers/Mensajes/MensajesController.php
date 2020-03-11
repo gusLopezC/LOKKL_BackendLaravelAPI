@@ -71,8 +71,7 @@ class MensajesController extends Controller
 
     public function sendMessage(Request $request)
     {
-        error_log($request);
-        $guia = User::where('id', $request->id_guia)->first();
+        $receptor = User::where('id', $request->id_guia)->first();
 
         try {
             $mensajes = MensajesChat::create([
@@ -83,14 +82,13 @@ class MensajesController extends Controller
             ]);
 
             $mensajes->getGuia;
+            $mensajes->getComprador;
             $mensajes->getReserva;
 
-            Mail::to($guia->email)->send(new RecibidoMensaje($mensajes));
-            // Mail::to('guslopezcallejas@gmail.com')->send(new RecibidoMensaje($mensajes));
-
+            Mail::to($receptor->email)->send(new RecibidoMensaje($mensajes, $receptor));
+            //Mail::to($receptor->email)->send(new RecibidoMensaje($mensajes,$receptor));
 
             $mensajes = MensajesChat::where('id_reservacion', '=', $request->id_reservacion)
-                //->orderBy('updated_at', 'ASC')
                 ->get();
             return response()->json(['Mensajes' => $mensajes], 201);
         } catch (\Exception $ex) {

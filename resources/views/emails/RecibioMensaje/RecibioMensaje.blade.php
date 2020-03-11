@@ -6,7 +6,7 @@
         <tr>
             <td style="text-align: center;">
                 
-                <img src="https://lokkl.s3.us-east-2.amazonaws.com/images/profile/{{$mensaje->getGuia[0]->img}}" alt="" style="    width: 50px;
+                <img src="{{$receptor->img}}" alt="" style="    width: 50px;
                 height: 50px;
                 border-radius: 150px;
                 position: absolute;
